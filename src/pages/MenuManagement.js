@@ -1,10 +1,9 @@
 import React from 'react';
 
-export default function Main() {
+export default function Menu() {
     return (
         <div>
-            Mainpage
-
+            MenuManagement
         </div>
       );
   }

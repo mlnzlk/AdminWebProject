@@ -1,10 +1,9 @@
 import React from 'react';
 
-export default function Main() {
+export default function CleaningMode() {
     return (
         <div>
-            Mainpage
-
+            CleaningMode
         </div>
       );
   }
