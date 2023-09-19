@@ -34,7 +34,13 @@ font-size: 32px;
 height: 75px;
 width: 384px;
 margin: 30px 0 0 0;
-border: none
+border: none;
+transition: 0.5s;
+
+&:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
 
 `;
 

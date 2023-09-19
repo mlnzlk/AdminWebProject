@@ -8,8 +8,7 @@ const Side = styled.div`
   font-size: 20px;
   background-color: #D9D9D9;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
   width: 172px;
   height: 882px;
   `;
@@ -53,6 +52,7 @@ const Side = styled.div`
   flex-direction: column;
   align-items: center; 
   font-size:20px; 
+  
   `;
 
   const StyledNavLink = styled(Link)`
@@ -69,6 +69,8 @@ const Side = styled.div`
     height: 40px;
     color: black;
     background-color: white; // 여기에서 원하는 배경색으로 설정하세요.
+    transition: 0.5s;
+
   }
 `;
 
