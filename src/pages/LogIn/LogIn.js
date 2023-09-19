@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import image from '../assets/BTY_logo.png';
+import image from './BTY_logo.png';
 
 const Container = styled.div`
   flex-direction: column;
@@ -52,7 +52,7 @@ export default function LogIn() {
     // ...
 
     // Main 페이지로 리디렉션
-    navigate('/main');
+    navigate('/CleaningMode');
   };
 
   return (

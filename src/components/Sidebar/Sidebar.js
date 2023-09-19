@@ -1,7 +1,7 @@
 import React from "react";
 import SidebarItem from "./SidebarItem";
 
-import { NavLink } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Side = styled.div`
@@ -10,15 +10,15 @@ const Side = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 240px;
-  height: 960px;
+  width: 172px;
+  height: 882px;
   `;
 
   const Box1 = styled.div`
   display:flex; 
   justify-content:center; 
   align-items:center; 
-  width: 240px;
+  width: 172px;
   height: 88px;
   background-color: #989898;
   `;
@@ -28,7 +28,7 @@ const Side = styled.div`
   display:flex; 
   justify-content:center; 
   align-items:center; 
-  width: 240px;
+  width: 172px;
   height: 60px;
   `;
 
@@ -43,15 +43,34 @@ const Side = styled.div`
 
   const Label = styled.label`
    font-size:32px; 
-   font-weight: Bold; 
   `;
 
   const Menu = styled.div`
   color: black;
-  width: 200px;
+  width: 172px;
+  height: 40px;
   display: flex;
   flex-direction: column;
+  align-items: center; 
+  font-size:20px; 
   `;
+
+  const StyledNavLink = styled(Link)`
+  font-size:20px; 
+  color: black;
+  text-decoration: none;
+  display: block; // 항목 전체에 배경색이 적용되도록 block으로 설정
+
+  &.active {
+    display: flex; // 항목 전체에 배경색이 적용되도록 flex로 설정
+    align-items: center; // 세로 방향 중앙 정렬
+    justify-content: center; // 가로 방향 중앙 정렬
+    width: 172px;
+    height: 40px;
+    color: black;
+    background-color: white; // 여기에서 원하는 배경색으로 설정하세요.
+  }
+`;
 
   function Sidebar() {
 
@@ -70,20 +89,19 @@ const Side = styled.div`
           </Select>    
            </Box2>
 
-            <Menu>
+           <Menu>
                 {menus.map((menu, index) => {
                 return (
-                    <NavLink
+                    <StyledNavLink
                     exact
-                    style={{color: "gray", textDecoration: "none"}}
                     to={menu.path}
                     key={index}
-                    activeStyle={{color: "black"}}
+                    activeClassName="active"
                     >
                     <SidebarItem
                         menu={menu}
                     />
-                    </NavLink>
+                    </StyledNavLink>
                 );
                 })}
             </Menu>
