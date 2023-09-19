@@ -22,6 +22,9 @@ const Side = styled.div`
   background-color: #989898;
   `;
 
+  const Label = styled.label`
+   font-size:32px; 
+  `;
 
   const Box2 = styled.div`
   display:flex; 
@@ -38,10 +41,6 @@ const Side = styled.div`
   font-size: 20px;
   background-color: #D9D9D9;
   border: none
-  `;
-
-  const Label = styled.label`
-   font-size:32px; 
   `;
 
   const Menu = styled.div`
