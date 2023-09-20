@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
 import FaucetTab from "./Faucet_Tab";
+import CITTab from "./C.I.T_Tab";
 
 
 
@@ -62,17 +63,13 @@ width: 1046px;
 height: 4px;
 `;
 
-const menuArr = styled.div`
-background-color: #F0F0F0;
-
-`;
 
 export const TabLayout = () => {
     const [currentTab, clickTab] = useState(0);
 
   const menuArr = [
     { name: '수전', content: <FaucetTab/> },
-    { name: 'CUP / ICE CREAM / TOPPING', content: 'Tab menu TWO' },
+    { name: 'CUP / ICE CREAM / TOPPING', content: <CITTab/> },
   ];
 
   const selectMenuHandler = (index) => {

@@ -22,6 +22,8 @@ const Button1 = styled.button`
   transition: 0.5s;
   background-color:${props => props.clicked ? '#FFF8F6' : '#FFFFFF'};
   border:${props => props.clicked ? '1px solid #F84D27' : 'none'};
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  font-weight:${props => props.clicked ? 'bold' : 'normal'};
 
   &:hover {
     background-color: lightgray;
@@ -40,6 +42,8 @@ const Button2 = styled.button`
   width: 936px;
   height: 108px;
   transition: 0.5s;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  font-weight:${props => props.clicked ? 'bold' : 'normal'};
 
   &:hover {
     background-color: lightgray;

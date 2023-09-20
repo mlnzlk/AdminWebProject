@@ -37,7 +37,7 @@ const Side = styled.div`
   `;
 
   const Select = styled.select`
-  padding: 5px;
+  padding-left: 5px;
   display:flex; 
   color: #A6A6A6;
   justify-content:center; 
@@ -46,7 +46,7 @@ const Side = styled.div`
   background-color: #1E1E1E;
   border: 1px solid #818181;
   border-radius: 8px;
-  width: 127px;
+  width: 134px;
   height: 40px;
     `;
 
