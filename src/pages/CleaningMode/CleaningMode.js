@@ -1,5 +1,6 @@
 import React from 'react';
 import LeftContainer from './LeftContainer';
+
 import { TabLayout, TabMenu } from './TabLayout';
 
 export default function App() {
@@ -7,6 +8,7 @@ export default function App() {
         <div style={{ display:'flex' }}>
             <LeftContainer />
             <TabLayout />
+            
         </div>
     );
 }

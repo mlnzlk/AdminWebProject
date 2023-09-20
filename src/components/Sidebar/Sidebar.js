@@ -67,6 +67,7 @@ const Side = styled.div`
   display: block; // 항목 전체에 배경색이 적용되도록 block으로 설정
   align-items: center; // 세로 방향 중앙 정렬
   justify-content : flex-end;	
+  z-index:1; 
   &.active {
     display: flex; // 항목 전체에 배경색이 적용되도록 flex로 설정
     align-items: center; // 세로 방향 중앙 정렬
@@ -77,7 +78,7 @@ const Side = styled.div`
     background-color: #171717; // 여기에서 원하는 배경색으로 설정하세요.
     transition: 0.5s;
     padding: 7px;
-ㅤ
+ㅤ    z-index:1; 
   }
 `;
 
@@ -91,7 +92,7 @@ const StyledImage = styled.img`
 
     const menus = [
         { name: "Cleaning Mode", path: "/cleaningmode" },
-        { name: "Manuㅤ", path: "/menumanagement" }
+        { name: "Menuㅤ", path: "/menumanagement" }
       ];
 
       return (
@@ -120,6 +121,7 @@ const StyledImage = styled.img`
                 );
                 })}
             </Menu>
+            
             <StyledImage src={Limage} /> 
 
         </Side>

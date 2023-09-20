@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
+import FaucetTab from "./Faucet_Tab";
 
 
 
 export const TabMenu = styled.div`
-  background-color: #45474E;
-  color: #585E72;
+  background-color: #FDFDFD;
   display: flex;
   list-style: none;
   cursor: pointer;
   margin-right: 11.5rem;
   top: 1rem;
   width:1046px; 
-  height:71px; 
+  height:65px; 
 
 .submenu {
     display:flex ;
@@ -22,6 +22,10 @@ export const TabMenu = styled.div`
     width :50% ; ;
     height:auto ; 
     font-size :24px ;
+    font-weight: bold;
+    color: #D9D9D9;
+    border-radius: 10px 10px 0px 0px;
+
     padding-left :0.32rem ;
     padding-right :0.32rem ;
     transition :0.5s ;
@@ -37,26 +41,37 @@ export const TabMenu = styled.div`
  }
 
 .focused {
-   background-color:#4E63AE ;
-   color:white ;  
+   background-color:#D9D9D9 ;
+   color:black;
+   font-size: 24px ;  
+   font-weight: bold;
    text-align:center ; 
    width :50% ;  
 }
 `;
 
-
-
 const Desc = styled.div`
 width: 1046px;
 height: 811px;
-background-color: ;444444;
+background-color: #444444;
+`;
+
+const Box = styled.div`
+background-color: #3D3D3D;
+width: 1046px;
+height: 4px;
+`;
+
+const menuArr = styled.div`
+background-color: #F0F0F0;
+
 `;
 
 export const TabLayout = () => {
     const [currentTab, clickTab] = useState(0);
 
   const menuArr = [
-    { name: '수전 1,2,3', content: 'Tab menu ONE' },
+    { name: '수전', content: <FaucetTab/> },
     { name: 'CUP / ICE CREAM / TOPPING', content: 'Tab menu TWO' },
   ];
 
@@ -83,9 +98,12 @@ export const TabLayout = () => {
               );
             })}
         </TabMenu>
+        <Box></Box>
+
         <div>
             <div>{menuArr[currentTab].content}</div>
           </div>
+
       </div>
     </>
   );
