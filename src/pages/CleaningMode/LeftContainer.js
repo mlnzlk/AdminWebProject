@@ -28,12 +28,14 @@ const Button1 = styled.button`
 `;
 
 const Box = styled.div`
-   width:210px; 
-   height:273px; 
+   width:170px; 
+   height:233px; 
    background-color:#D9D9D9; 
    margin: 0 5px 5px 5px;
    border-radius: 8px;
    transition: 0.5s;
+   padding: 20px;
+   font-size: 16px;
 
 `;
 
@@ -67,6 +69,8 @@ const Button3 = styled.button`
   width:210px; 
   height:202px; 
   transition: 0.5s;
+  font-weight: bold;
+  font-size: 36px;
 
   &:hover {
     background-color: lightgray;
@@ -87,12 +91,11 @@ const Button3 = styled.button`
 export default function LeftContainer() {
     return (
         <Container>
-            <Button1>일시정지 <br /> (로봇멈춤)</Button1>
-            <Box>아이스크림 추출중</Box>
+            <Button1>일시정지</Button1>
+            <Box>ICECREAM...<br />ICECREAM...<br />ICECREAM...</Box>
             <Button2>로봇리셋</Button2>
             <Button3>
-              <span className="bold-text">긴급정지</span><br />
-              <span className="emergency-text">EMERGENCY STOP</span>
+              <span className>긴급정지</span><br />
             </Button3>
         </Container>
     );
