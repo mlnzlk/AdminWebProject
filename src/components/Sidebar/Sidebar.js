@@ -1,12 +1,13 @@
 import React from "react";
 import SidebarItem from "./SidebarItem";
+import Limage from '../../assets/Logo.png';
 
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Side = styled.div`
   font-size: 20px;
-  background-color: #D9D9D9;
+  background-color: #3D3D3D;
   flex-direction: column;
 
   width: 172px;
@@ -18,12 +19,12 @@ const Side = styled.div`
   justify-content:center; 
   align-items:center; 
   width: 172px;
-  height: 88px;
-  background-color: #989898;
+  height: 80px;
   `;
 
   const Label = styled.label`
    font-size:32px; 
+   color: white;
   `;
 
   const Box2 = styled.div`
@@ -31,17 +32,23 @@ const Side = styled.div`
   justify-content:center; 
   align-items:center; 
   width: 172px;
-  height: 60px;
+  height: 65px;
+  margin: 0 0 10px 0;
   `;
 
   const Select = styled.select`
+  padding: 5px;
   display:flex; 
+  color: #A6A6A6;
   justify-content:center; 
   align-items:center; 
-  font-size: 20px;
-  background-color: #D9D9D9;
-  border: none
-  `;
+  font-size: 18px;
+  background-color: #1E1E1E;
+  border: 1px solid #818181;
+  border-radius: 8px;
+  width: 127px;
+  height: 40px;
+    `;
 
   const Menu = styled.div`
   color: black;
@@ -49,40 +56,47 @@ const Side = styled.div`
   height: 40px;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items:center; 
   font-size:20px; 
-  
   `;
 
   const StyledNavLink = styled(Link)`
   font-size:20px; 
-  color: black;
+  color: #B9B9B9;
   text-decoration: none;
   display: block; // 항목 전체에 배경색이 적용되도록 block으로 설정
-
+  align-items: center; // 세로 방향 중앙 정렬
+  justify-content : flex-end;	
   &.active {
     display: flex; // 항목 전체에 배경색이 적용되도록 flex로 설정
     align-items: center; // 세로 방향 중앙 정렬
-    justify-content: center; // 가로 방향 중앙 정렬
-    width: 172px;
-    height: 40px;
-    color: black;
-    background-color: white; // 여기에서 원하는 배경색으로 설정하세요.
+    justify-content: right; // 가로 방향 중앙 정렬
+    width: 157.5px;
+    height: 66px;
+    color: white;
+    background-color: #171717; // 여기에서 원하는 배경색으로 설정하세요.
     transition: 0.5s;
-
+    padding: 7px;
+ㅤ
   }
+`;
+
+const StyledImage = styled.img` 
+    width: 70px;
+    height: 34px;
+  margin: 610px 0 0 50px;
 `;
 
   function Sidebar() {
 
     const menus = [
-        { name: "청소모드", path: "/cleaningmode" },
-        { name: "메뉴관리", path: "/menumanagement" }
+        { name: "Cleaning Mode", path: "/cleaningmode" },
+        { name: "Manuㅤ", path: "/menumanagement" }
       ];
 
       return (
         <Side>
-          <Box1> <Label>관리자</Label> </Box1>
+          <Box1> <Label>Manager</Label> </Box1>
           <Box2> 
           <Select>
             <option value="option1">성수 1호점ㅤ</option>
@@ -106,6 +120,8 @@ const Side = styled.div`
                 );
                 })}
             </Menu>
+            <StyledImage src={Limage} /> 
+
         </Side>
       )
   }

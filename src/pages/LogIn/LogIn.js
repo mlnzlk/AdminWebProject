@@ -1,27 +1,38 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import image from './BTY_logo.png';
+import Limage from '../../assets/Logo.png';
+import Bimage from '../../assets/Background.png';
 
 const Container = styled.div`
   flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0 0 528px;
+  height: 882px;
+  width: 1440px;
+  background-image: url(${Bimage});
+`;
+const FormContainer = styled.div`
+flex-direction: column;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 140px ;
+
 `;
 
 const StyledInput = styled.input`
-  font-size: 32px;
-  color: black;
-  background-color: #D9D9D9; 
+  font-size: 24px;
+  background-color: white; 
   height: 75px;
   width: 368px;
-  margin: 5px auto;
+  margin: 7.5px auto;
   padding-left :15px; 
+  border-radius: 12px;
 
   &::placeholder { /* Chrome, Firefox, Opera, Safari */
-  color: black;
+  color: lightgray;
  }
  
   border: none
@@ -29,13 +40,16 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-background-color: #989898; 
+background-color: #F84D27; 
+color: white; 
 font-size: 32px;
 height: 75px;
 width: 384px;
-margin: 30px 0 0 0;
+margin: 25px 0 0 0;
 border: none;
 transition: 0.5s;
+border-radius: 12px;
+font-weight: bold;
 
 &:hover {
   background-color: lightgray;
@@ -45,9 +59,8 @@ transition: 0.5s;
 `;
 
 const StyledImage = styled.img` 
-  width: 286px; 
-  height: auto; 
-  margin: 60px 0 0 60px;
+
+  margin: 234px 0 0 0px;
 `;
 
 export default function LogIn() {
@@ -63,12 +76,14 @@ export default function LogIn() {
 
   return (
     <Container>
-        <StyledInput type="text" placeholder="아이디" />
-        <StyledInput type="password" placeholder="비밀번호" />
+    <FormContainer>
+        <StyledInput type="text" placeholder="ID" />
+        <StyledInput type="password" placeholder="Password" />
         <StyledButton onClick={handleLogin}>
-           로그인
+            LOGIN
         </StyledButton>
-        <StyledImage src={image} /> 
+    </FormContainer>
+    <StyledImage src={Limage} /> 
     </Container>
   );
 }
