@@ -59,6 +59,7 @@ background-color: #444444;
 
 const Box = styled.div`
 background-color: #3D3D3D;
+opacity:0.5;
 width: 1046px;
 height: 4px;
 `;

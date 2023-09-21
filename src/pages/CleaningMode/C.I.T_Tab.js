@@ -77,7 +77,23 @@ transition: 0.5s;
     cursor: pointer;
   }
 `;
+const Button4 = styled.button`
+width: 240px;
+height: 112px;
+background-color:${props => props.clicked ? '#FFF8F6' : '#FFFFFF'};
+border:${props => props.clicked ? '1px solid #F84D27' : 'none'};
 
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+border-radius: 8px;
+font-size: 28px;
+color: black;
+transition: 0.5s;
+
+  &:hover {
+    background-color: lightgray;
+    cursor: pointer;
+  }
+`;
 function GridButton({ onClick, value, clicked }) {
     return <Button1 clicked={clicked} onClick={onClick}>{value}</Button1>;
 }
@@ -89,6 +105,9 @@ function MyComponent() {
     ];
 
     const [clickedButton, setClickedButton] = useState(null);
+        const [clickedButton2, setClickedButton2] = useState(false);
+    const [clickedButton3, setClickedButton3] = useState(false);
+    const [clickedButton4, setClickedButton4] = useState(false);
 
      const createGrid = (buttonValues, ) =>
       buttonValues.map((rowValues, rowIndex) =>
@@ -113,9 +132,9 @@ function MyComponent() {
      </div>
      <Box2 style={{marginTop:"26px"}}> ICE CREAM </Box2>
      <div>
-            <Button2 style={{marginTop:"10px"}}>아이스크림 뽑기</Button2>
-            <Button3 style={{margin:"10px"}}>OPEN</Button3>
-            <Button3>CLOSE</Button3>
+          <Button2 style={{marginTop:"10px"}} clicked={clickedButton2} onClick={() => setClickedButton2(!clickedButton2)}>아이스크림 뽑기</Button2>
+            <Button3 style={{margin:"10px"}} clicked={clickedButton3} onClick={() => setClickedButton3(!clickedButton3)}>OPEN</Button3>
+            <Button4 style={{margin:"10px"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>OPEN</Button4>
      </div>
      <Box2 style={{marginTop:"26px"}}> TOPPING </Box2>
    </Box1>

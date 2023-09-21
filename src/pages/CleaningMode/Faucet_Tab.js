@@ -20,16 +20,16 @@ const Button1 = styled.button`
   height: 108px;
   border-radius: 8px;
   transition: 0.5s;
-  background-color:${props => props.clicked ? '#FFF8F6' : '#FFFFFF'};
-  border:${props => props.clicked ? '1px solid #F84D27' : 'none'};
+  background-color:#FFFFFF;
+  border:none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-  font-weight:${props => props.clicked ? 'bold' : 'normal'};
 
   &:hover {
-    background-color: lightgray;
     cursor: pointer;
+    font-weight: bold;
+    background-color:#FFF8F6;
+    border:1px solid #F84D27;
   }
-
 `;
 
 const Button2 = styled.button`
@@ -43,11 +43,13 @@ const Button2 = styled.button`
   height: 108px;
   transition: 0.5s;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-  font-weight:${props => props.clicked ? 'bold' : 'normal'};
+  font-weight: normal;
 
   &:hover {
-    background-color: lightgray;
     cursor: pointer;
+    font-weight: bold;
+    background-color:#FFF8F6;
+    border:1px solid #F84D27;
   }
 `;
 

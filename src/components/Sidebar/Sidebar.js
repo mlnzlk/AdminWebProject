@@ -33,9 +33,12 @@ const Side = styled.div`
   align-items:center; 
   width: 172px;
   height: 65px;
-  margin: 0 0 10px 0;
-  `;
+  height: ${props => (props.isExpanded ? "105px" : "65px")};
+  margin-bottom: ${props => (props.isExpanded ? "10px" : "")};
+  transition: height .5s ease-in-out, margin-bottom .5s ease-in-out;
+    `;
 
+    
   const Select = styled.select`
   padding-left: 5px;
   display:flex; 
@@ -92,7 +95,9 @@ const StyledImage = styled.img`
 
     const menus = [
         { name: "Cleaning Mode", path: "/cleaningmode" },
-        { name: "Menuㅤ", path: "/menumanagement" }
+        { name: "Menuㅤ", path: "/menumanagement" },
+        { name: "Add Menu", path: "/addmenu" }
+
       ];
 
       return (
@@ -114,9 +119,7 @@ const StyledImage = styled.img`
                     key={index}
                     activeClassName="active"
                     >
-                    <SidebarItem
-                        menu={menu}
-                    />
+                    <SidebarItem menu={menu}/>
                     </StyledNavLink>
                 );
                 })}
