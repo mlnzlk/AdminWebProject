@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 
+import ice8 from '../../assets/CIT_CUP/ice8.png';
+import ice14 from '../../assets/CIT_CUP/ice14.png';
+import ice20 from '../../assets/CIT_CUP/ice20.png';
+import hot12 from '../../assets/CIT_CUP/hot12.png';
+import hot12_C from '../../assets/CIT_CUP/hot12_C.png';
+import hot16 from '../../assets/CIT_CUP/hot16.png';
+import hot16_C from '../../assets/CIT_CUP/hot16_C.png';
+
+
 const Box1 = styled.div`
   display: flex;
   justify-content:center;
@@ -32,14 +41,17 @@ const Button1 = styled.button`
   height: 112px;
   border-radius: 8px;
   transition: 0.5s;
-  background-color:${props => props.clicked ? '#FFF8F6' : '#FFFFFF'};
-  border:${props => props.clicked ? '1px solid #F84D27' : 'none'};
-  font-weight:${props => props.clicked ? 'bold' : 'normal'};
+  background-color: #FFFFFF;
+  border: none;
+  font-weight:normal;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 
+  background-image: url(${props => props.imageUrl});
+  background-size: cover;
+
   &:hover {
-    background-color: lightgray;
     cursor: pointer;
+    border:1px solid #F84D27;
   }
 
 `;
@@ -47,24 +59,26 @@ const Button1 = styled.button`
 const Button2 = styled.button`
 width: 490px;
 height: 112px;
-background-color:${props => props.clicked ? '#FFF8F6' : '#FFFFFF'};
-border:${props => props.clicked ? '1px solid #F84D27' : 'none'};
+background-color: #FFFFFF;
+border:none;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 border-radius: 8px;
 font-size: 28px;
 color: black;
 transition: 0.5s;
 
-  &:hover {
-    background-color: lightgray;
-    cursor: pointer;
-  }
+&:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color:#FFF8F6;
+  border:1px solid #F84D27;
+}
 `;
 const Button3 = styled.button`
 width: 240px;
 height: 112px;
-background-color:${props => props.clicked ? '#FFF8F6' : '#FFFFFF'};
-border:${props => props.clicked ? '1px solid #F84D27' : 'none'};
+background-color:#FFFFFF;
+border:none;
 
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 border-radius: 8px;
@@ -72,16 +86,18 @@ font-size: 28px;
 color: black;
 transition: 0.5s;
 
-  &:hover {
-    background-color: lightgray;
-    cursor: pointer;
-  }
+&:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color:#FFF8F6;
+  border:1px solid #F84D27;
+}
 `;
 const Button4 = styled.button`
 width: 240px;
 height: 112px;
-background-color:${props => props.clicked ? '#FFF8F6' : '#FFFFFF'};
-border:${props => props.clicked ? '1px solid #F84D27' : 'none'};
+background-color:#FFFFFF;
+border:none;
 
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 border-radius: 8px;
@@ -89,20 +105,29 @@ font-size: 28px;
 color: black;
 transition: 0.5s;
 
-  &:hover {
-    background-color: lightgray;
-    cursor: pointer;
-  }
+&:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color:#FFF8F6;
+  border:1px solid #F84D27;
+}
 `;
 function GridButton({ onClick, value, clicked }) {
-    return <Button1 clicked={clicked} onClick={onClick}>{value}</Button1>;
+  return (
+    <Button1
+        clicked={clicked}
+        onClick={onClick}
+        imageUrl={value} // value는 이미지 경로
+    />
+);
 }
 
 function MyComponent() {
-    const buttonValues1 = [
-        ['20', '20', '14', '8'],
-        ['16', '16', '12', '12'],
-    ];
+  const buttonValues1 = [
+    [require('../../assets/CIT_CUP/ice20.png'), require('../../assets/CIT_CUP/ice20.png'), require('../../assets/CIT_CUP/ice14.png'), require('../../assets/CIT_CUP/ice8.png')],
+    [require('../../assets/CIT_CUP/hot16_C.png'), require('../../assets/CIT_CUP/hot16.png'), require('../../assets/CIT_CUP/hot12_C.png'), require('../../assets/CIT_CUP/hot12.png')]
+  ];
+    
 
     const [clickedButton, setClickedButton] = useState(null);
         const [clickedButton2, setClickedButton2] = useState(false);

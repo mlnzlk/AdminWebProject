@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 
-import BackIcon from '../../assets/ion_chevron-back.png';
 import Photoupload from '../../assets/photoupload.png';
 
 const Container = styled.div`
@@ -11,15 +10,6 @@ const Container = styled.div`
   margin: 43px 51px 0 13px;
 `;
 
-const Button1 = styled.button`
-  background-color: white;
-  border: none;
-  margin: 5px 5px 5px 5px;
-  border-radius: 8px;
-  width: 52px;
-  height: 52px;
-  transition: 0.5s;
-`;
 
 const StyledInput = styled.input`
   font-size: 20px;
@@ -62,7 +52,7 @@ const Box1 = styled.div`
   margin-left: 10px;
   `;
 
-  const Button2 = styled.button`
+  const Button1 = styled.button`
   font-size:20px; 
   display:flex; 
   justify-content:center; 
@@ -77,7 +67,7 @@ const Box1 = styled.div`
 
   `;
 
-  const Button3 = styled.button`
+  const Button2 = styled.button`
   font-size:20px; 
   display:flex; 
   justify-content:center; 
@@ -92,26 +82,28 @@ const Box1 = styled.div`
 
   `;
 
-  const Button4 = styled.button`
+  const Button3 = styled.button`
   width: 400px;
   height: 62px;
   background: #D9D9D9;
   border-radius: 16px;  border: none;
   transition: 0.5s;
   margin-left: 10px;
-  padding: 0 21px 0 51px;
 `;
 const Label = styled.label`
 font-size:20px; 
 color: black;
-`;
+margin-bottom: 5px;
 
+`;
+const Img = styled.img`
+margin-top: 10px;
+`;
 export default function AddMenu() {
     const navigate = useNavigate();
 
     return (
         <Container>
-            <Button1 onClick={() => navigate('/menumanagement')}> <img src={BackIcon} /> </Button1>
             <StyledInput type="text" placeholder="메뉴명 입력" />
             <Select>
             <option value="category1">커피ㅤ</option>
@@ -119,10 +111,10 @@ export default function AddMenu() {
             <option value="category3">아이스크림ㅤ</option>
             </Select> 
             <Box1>
-                <Button2 onClick={() => console.log("아이스 버튼 클릭")}>아이스</Button2>  
-                <Button3 onClick={() => console.log("핫 버튼 클릭")}>핫</Button3>  
+                <Button1 onClick={() => console.log("아이스 버튼 클릭")}>아이스</Button1>  
+                <Button2 onClick={() => console.log("핫 버튼 클릭")}>핫</Button2>  
             </Box1>
-            <Button4> <Label>메뉴사진등록</Label> <img src={Photoupload} /> </Button4>
+            <Button3> <Label>메뉴사진등록</Label> <Img src={Photoupload} /> </Button3>
 
         </Container>
       );

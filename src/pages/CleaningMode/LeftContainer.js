@@ -21,8 +21,9 @@ const Button1 = styled.button`
   transition: 0.5s;
 
   &:hover {
-    background-color: lightgray;
+    background-color: #71EF5C;
     cursor: pointer;
+    border:1px solid #000000;
   }
 
 `;
@@ -54,8 +55,10 @@ const Button2 = styled.button`
   transition: 0.5s;
 
   &:hover {
-    background-color: lightgray;
+    background-color: #FFE6E0;
     cursor: pointer;
+    border:1px solid #F84D27;
+    color: #F84D27;
   }
 `;
 
@@ -73,17 +76,10 @@ const Button3 = styled.button`
   font-size: 36px;
 
   &:hover {
-    background-color: lightgray;
+    background-color: #D03310;
     cursor: pointer;
-  }
-
-  span.bold-text {
-    font-weight:bold;
-    font-size:36px; 
-  }
-
-  span.emergency-text {
-    font-size:25px; 
+    border:1px solid #000000;
+    color: #FFFFFF;
   }
 `;
 
@@ -94,9 +90,7 @@ export default function LeftContainer() {
             <Button1>일시정지</Button1>
             <Box>ICECREAM...<br />ICECREAM...<br />ICECREAM...</Box>
             <Button2>로봇리셋</Button2>
-            <Button3>
-              <span className>긴급정지</span><br />
-            </Button3>
+            <Button3>긴급정지</Button3>
         </Container>
     );
 }
