@@ -96,21 +96,11 @@ transition: 0.5s;
 const Button4 = styled.button`
 width: 240px;
 height: 112px;
-background-color:#FFFFFF;
+background-color:#F3F3F3;
 border:none;
 
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 border-radius: 8px;
-font-size: 28px;
-color: black;
-transition: 0.5s;
-
-&:hover {
-  cursor: pointer;
-  font-weight: bold;
-  background-color:#FFF8F6;
-  border:1px solid #F84D27;
-}
 `;
 function GridButton({ onClick, value, clicked }) {
   return (
@@ -124,29 +114,29 @@ function GridButton({ onClick, value, clicked }) {
 
 function MyComponent() {
   const buttonValues1 = [
-    [require('../../assets/CIT_CUP/ice20.png'), require('../../assets/CIT_CUP/ice20.png'), require('../../assets/CIT_CUP/ice14.png'), require('../../assets/CIT_CUP/ice8.png')],
-    [require('../../assets/CIT_CUP/hot16_C.png'), require('../../assets/CIT_CUP/hot16.png'), require('../../assets/CIT_CUP/hot12_C.png'), require('../../assets/CIT_CUP/hot12.png')]
+    [{ id: 'ice20_1', image: ice20 }, { id: 'ice20_2', image: ice20 }, { id: 'ice14', image: ice14 }, { id: 'ice8', image: ice8 }],
+    [{ id: 'hot16_C', image: hot16_C }, { id: 'hot16', image: hot16 }, { id:'hot12_C',image : hot12_C },{id:'hot12' ,image : hot12 }]
   ];
     
-
     const [clickedButton, setClickedButton] = useState(null);
         const [clickedButton2, setClickedButton2] = useState(false);
     const [clickedButton3, setClickedButton3] = useState(false);
     const [clickedButton4, setClickedButton4] = useState(false);
 
-     const createGrid = (buttonValues, ) =>
-      buttonValues.map((rowValues, rowIndex) =>
-                   <div key={rowIndex}>
-             {rowValues.map((value, colIndex) =>
-                 <GridButton
-                     key={colIndex}
-                     value={value}
-                     onClick={() => setClickedButton(value)}
-                     clicked={clickedButton === value}
-                 />
-             )}
-          </div>
-      );
+const createGrid = (buttonValues) =>
+    buttonValues.map((rowValueArray, rowIndex) => 
+        <div key={rowIndex}>
+            {rowValueArray.map((valueObject, colIndex) => 
+                <GridButton
+                    key={colIndex}
+                    value={valueObject.image}
+                    onClick={() => setClickedButton(valueObject)}
+                    clicked={clickedButton === valueObject}
+                />
+            )}
+        </div>
+    );
+
 
       
  return (
@@ -155,14 +145,30 @@ function MyComponent() {
      <div style={{display:"flex", marginTop:"6px"}}>
      <div>{createGrid(buttonValues1)}</div>
      </div>
-     <Box2 style={{marginTop:"26px"}}> ICE CREAM </Box2>
+     <Box2 style={{marginTop:"20px"}}> ICE CREAM </Box2>
      <div>
-          <Button2 style={{marginTop:"10px"}} clicked={clickedButton2} onClick={() => setClickedButton2(!clickedButton2)}>아이스크림 뽑기</Button2>
-            <Button3 style={{margin:"10px"}} clicked={clickedButton3} onClick={() => setClickedButton3(!clickedButton3)}>OPEN</Button3>
-            <Button4 style={{margin:"10px"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>OPEN</Button4>
+          <Button2 style={{margin:"10px 10px 0 -10px"}} clicked={clickedButton2} onClick={() => setClickedButton2(!clickedButton2)}>아이스크림 뽑기</Button2>
+          <Button3 style={{margin:"-10px 10px 0 0"}} clicked={clickedButton3} onClick={() => setClickedButton3(!clickedButton3)}>OPEN</Button3>
+          <Button3 style={{margin:"-10px 0 0 0"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>CLOSE</Button3>
      </div>
      <Box2 style={{marginTop:"26px"}}> TOPPING </Box2>
+     <div>
+          <Button3 style={{margin:"10px 10px 10px -10px"}} clicked={clickedButton3} onClick={() => setClickedButton3(!clickedButton3)}>오레오</Button3>
+          <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>로투스</Button3>
+          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>ㅤ</Button4>
+          <Button4 style={{margin:"-10px 0 10px 0"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>ㅤ</Button4>
+    </div>
+    <div>
+          <Button4 style={{margin:"-10px 10px 10px 0px"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>ㅤ</Button4>
+          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>ㅤ</Button4>
+          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>ㅤ</Button4>
+          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} onClick={() => setClickedButton4(!clickedButton4)}>ㅤ</Button4>
+    </div>
    </Box1>
+   
+
+
+
  );
 }
 

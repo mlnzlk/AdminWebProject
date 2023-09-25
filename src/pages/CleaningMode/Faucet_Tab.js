@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
 const Box = styled.div`;
@@ -53,29 +53,29 @@ border:1px solid #F84D27;
 `;
 
 function GridButton({ onClick, value, clicked }) {
-return <Button1 clicked={clicked} onClick={onClick}>{value}</Button1>;
-}
+    return <Button1 clicked={clicked} onClick={onClick}>{value.name}</Button1>;
+  }
 
 function MyComponent() {
 const buttonValues1 = [
-['민트', '홍차'],
-['바닐라', '메론'],
-['딸기', '클래식'],
-['녹차', '블루'],
-['레몬','탄산수 좌'],
+[{ id:'mint', name:'민트' },{ id:'hongcha', name:'홍차' }],
+[{ id:'vanilla', name:'바닐라' },{ id:'melon', name:'메론' }],
+[{ id:'strawberry', name:'딸기' },{ id:'classic', name:'클래식' }],
+[{ id:'green', name:'녹차' },{ id:'blue', name:'블루' }],
+[{ id:'lemon', name:'레몬' },{ id:'sparkleft', name:'탄산수 좌' }]
 ];
 
 const buttonValues2 = [
-    ['콜드브루', '디카페인'],
-    ['연유', 'ㅤ'],
-    ['초코', 'ㅤ'],
-    ['ㅤ', 'ㅤ'],
-    ['ㅤ','탄산수 우'],
+    [{ id:'coldbrew', name:'콜드브루' },{ id:'decaf', name:'디카페인' }],
+    [{ id:'condensedmilk', name:'연유' },{ id:'none', name:'ㅤ' }],
+    [{ id:'strawberry', name:'초코' },{ id:'none1', name:'ㅤ' }],
+    [{ id:'none2', name:'ㅤ' },{ id:'none3', name:'ㅤ' }],
+    [{ id:'none4', name:'ㅤ' },{ id:'sparkright', name:'탄산수 우' }]
 ];
 
 const [clickedButton, setClickedButton] = useState(null);
 
- const createGrid = (buttonValues, ) =>
+ const createGrid = (buttonValues) =>
   buttonValues.map((rowValues, rowIndex) =>
                <div key={rowIndex}>
          {rowValues.map((value, colIndex) =>

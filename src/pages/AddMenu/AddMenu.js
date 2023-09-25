@@ -89,6 +89,7 @@ const Box1 = styled.div`
   border-radius: 16px;  border: none;
   transition: 0.5s;
   margin-left: 10px;
+  padding: 0 21px 0 51px;
 `;
 const Label = styled.label`
 font-size:20px; 
@@ -97,7 +98,7 @@ margin-bottom: 5px;
 
 `;
 const Img = styled.img`
-margin-top: 10px;
+margin-top: 5px;
 `;
 export default function AddMenu() {
     const navigate = useNavigate();
