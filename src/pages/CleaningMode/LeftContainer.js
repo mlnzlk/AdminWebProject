@@ -42,7 +42,7 @@ const Box = styled.div`
 
 
 const Button2 = styled.button`
-  background-color: #FF8A70;
+  background-color: #FDCABE;
   color: black;
   padding: 10px;
   border: none;
@@ -101,7 +101,6 @@ export default function LeftContainer() {
     // 메시지 수신 이벤트 리스너
     socketInstance.onmessage = function (event) {
       console.log(`Received message from server : ${event.data}`);
-      setMessage(event.data); // 받은 메시지 상태 업데이트
     };
 
     return () => {
