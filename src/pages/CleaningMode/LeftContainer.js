@@ -114,7 +114,7 @@ export default function LeftContainer() {
 }, []);
 
 const handleButton1Click = () => {
-    const data1 = { "Pause" : 1 }; // 버튼1 클릭시 보내줄 json
+    const data1 = { "PauseRobot" : 1 }; // 버튼1 클릭시 보내줄 json
     
     if (socket && socket.readyState === WebSocket.OPEN) { 
       socket.send(JSON.stringify(data1));

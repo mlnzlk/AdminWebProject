@@ -58,19 +58,19 @@ function GridButton({ onClick, value, clicked }) {
 
 function MyComponent() {
 const buttonValues1 = [
-[{ id:'mint', name:'민트' },{ id:'hongcha', name:'홍차' }],
-[{ id:'vanilla', name:'바닐라' },{ id:'melon', name:'메론' }],
-[{ id:'strawberry', name:'딸기' },{ id:'classic', name:'클래식' }],
-[{ id:'green', name:'녹차' },{ id:'blue', name:'블루' }],
-[{ id:'lemon', name:'레몬' },{ id:'sparkleft', name:'탄산수 좌' }]
+[{ id:'Mint', name:'민트' },{ id:'Blacktea', name:'홍차' }],
+[{ id:'Vanilla', name:'바닐라' },{ id:'Melon', name:'메론' }],
+[{ id:'Strawberry', name:'딸기' },{ id:'Classic', name:'클래식' }],
+[{ id:'Greentea', name:'녹차' },{ id:'Blue', name:'블루' }],
+[{ id:'Lemon', name:'레몬' },{ id:'Sparkleft', name:'탄산수 좌' }]
 ];
 
 const buttonValues2 = [
-    [{ id:'coldbrew', name:'콜드브루' },{ id:'decaf', name:'디카페인' }],
-    [{ id:'condensedmilk', name:'연유' },{ id:'none', name:'ㅤ' }],
-    [{ id:'strawberry', name:'초코' },{ id:'none1', name:'ㅤ' }],
+    [{ id:'Coldbrew', name:'콜드브루' },{ id:'Decaf', name:'디카페인' }],
+    [{ id:'Condensedmilk', name:'연유' },{ id:'none', name:'ㅤ' }],
+    [{ id:'Choco', name:'초코' },{ id:'none1', name:'ㅤ' }],
     [{ id:'none2', name:'ㅤ' },{ id:'none3', name:'ㅤ' }],
-    [{ id:'none4', name:'ㅤ' },{ id:'sparkright', name:'탄산수 우' }]
+    [{ id:'none4', name:'ㅤ' },{ id:'Sparkright', name:'탄산수 우' }]
 ];
 
 const [clickedButton, setClickedButton] = useState(null);
