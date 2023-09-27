@@ -1,107 +1,23 @@
-import React from 'react';
-import styled from "styled-components";
+import React, { useState } from 'react';
+import { Container, StyledInput, Select, Container2, Button1, Button2, Button3 } from './AddMenuStyles';
 import { useNavigate } from 'react-router-dom';
 
 import Photoupload from '../../assets/photoupload.png';
 
-const Container = styled.div`
-  width: 70%;
-  display: flex;
-  margin: 43px 51px 0 13px;
-`;
-
-
-const StyledInput = styled.input`
-  font-size: 20px;
-  background-color: #F6F6F6; 
-  height: 62px;
-  width: 441px;
-  padding-left :29px; 
-  border: 1px solid #CCCCCC;
-  border-radius: 16px;
-
-  &::placeholder { /* Chrome, Firefox, Opera, Safari */
-  color: gray;
- }
-`;
-
-const Select = styled.select`
-margin-left: 8px;
-padding-left: 5px;
-display:flex; 
-color: black;
-justify-content:center; 
-align-items: center; 
-font-size: 20px;
-background-color: white;
-border: 1px solid #CCCCCC;
-border-radius: 16px;
-width: 197px;
-height: 62px;
-padding-left :15px; 
-  `;
-
-const Box1 = styled.div`
-  display:flex; 
-  justify-content:center; 
-  align-items:center; 
-  width: 260px;
-  height: 62px;
-  border: 1px solid #CCCCCC;
-  border-radius: 16px;
-  margin-left: 10px;
-  `;
-
-  const Button1 = styled.button`
-  font-size:20px; 
-  display:flex; 
-  justify-content:center; 
-  align-items:center; 
-  width: 130px;
-  height: 62px;
-  border: none;
-  margin-left: 44px;
-  background-color:${props => props.clicked ? '#F0F2FB' : '#FFFFFF'};
-  border-radius: 16px;
-  transition: 0.5s;
-
-  `;
-
-  const Button2 = styled.button`
-  font-size:20px; 
-  display:flex; 
-  justify-content:center; 
-  align-items:center; 
-  width: 130px;
-  height: 62px;
-  border: none;
-  margin-left: 44px;
-  background-color:${props => props.clicked ? '#FDE9E5' : '#FFFFFF'};
-  border-radius: 16px;
-  transition: 0.5s;
-
-  `;
-
-  const Button3 = styled.button`
-  width: 400px;
-  height: 62px;
-  background: #D9D9D9;
-  border-radius: 16px;  border: none;
-  transition: 0.5s;
-  margin-left: 10px;
-  padding: 0 21px 0 51px;
-`;
-const Label = styled.label`
-font-size:20px; 
-color: black;
-margin-bottom: 5px;
-
-`;
-const Img = styled.img`
-margin-top: 5px;
-`;
 export default function AddMenu() {
     const navigate = useNavigate();
+    const [isButton1Clicked, setButton1Clicked] = useState(true);
+    const [isButton2Clicked, setButton2Clicked] = useState(false);
+
+    const handleButton1Click = () => {
+      setButton1Clicked(true);
+      setButton2Clicked(false);
+  };
+
+  const handleButton2Click = () => {
+      setButton1Clicked(false);
+      setButton2Clicked(true);
+  };
 
     return (
         <Container>
@@ -111,11 +27,15 @@ export default function AddMenu() {
             <option value="category2">티&라떼ㅤ</option>
             <option value="category3">아이스크림ㅤ</option>
             </Select> 
-            <Box1>
-                <Button1 onClick={() => console.log("아이스 버튼 클릭")}>아이스</Button1>  
-                <Button2 onClick={() => console.log("핫 버튼 클릭")}>핫</Button2>  
-            </Box1>
-            <Button3> <Label>메뉴사진등록</Label> <Img src={Photoupload} /> </Button3>
+            <Container2>
+                <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>아이스</Button1>
+                <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>핫</Button2>  
+            </Container2>
+            <Button3 style={{ display: 'flex', alignItems: 'center', fontSize: '20px' }}> 메뉴사진등록 
+            <div style={{marginTop: "5px", marginLeft: "52px"}}>
+              <img src={Photoupload} /> 
+            </div>
+            </Button3>
 
         </Container>
       );

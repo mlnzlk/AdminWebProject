@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
-import FaucetTab from "./Faucet_Tab";
-import CITTab from "./C.I.T_Tab";
+import Tab1 from "./Tab1";
+import Tab2 from "./Tab2";
+import Tab3 from "./Tab3";
 
 
 
@@ -13,14 +14,12 @@ export const TabMenu = styled.div`
   cursor: pointer;
   margin-right: 11.5rem;
   top: 1rem;
-  width:1046px; 
   height:65px; 
 
 .submenu {
     display:flex ;
     justify-content:center ;
     align-items:center ;
-    width :50% ; ;
     height:auto ; 
     font-size :24px ;
     font-weight: bold;
@@ -33,11 +32,9 @@ export const TabMenu = styled.div`
 
 &::first-child {
       border-right :0.02rem solid black ;
-      width :1.1rem ;
    }
 
 &::last-child {
-     width :2rem ;
    }
  }
 
@@ -47,7 +44,6 @@ export const TabMenu = styled.div`
    font-size: 24px ;  
    font-weight: bold;
    text-align:center ; 
-   width :50% ;  
 }
 `;
 
@@ -68,10 +64,12 @@ height: 4px;
 export const TabLayout = () => {
     const [currentTab, clickTab] = useState(0);
 
-  const menuArr = [
-    { name: '수전', content: <FaucetTab/> },
-    { name: 'CUP / ICE CREAM / TOPPING', content: <CITTab/> },
-  ];
+    const menuArr = [
+      { name: '수전', content: <Tab1/>, width: '230px' },
+      { name: 'CUP / ICE CREAM / TOPPING', content: <Tab2/>, width: '463px' },
+      { name: 'TOPPING / DRIZZLE', content: <Tab3/>, width: '347px' },
+    ];
+  
 
   const selectMenuHandler = (index) => {
     // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
@@ -90,6 +88,7 @@ export const TabLayout = () => {
                   className={currentTab === index ? 'submenu focused'
                              : 'submenu'}
                   onClick={() => selectMenuHandler(index)}
+                  style={{width: tap.width}}
                 >
                   {tap.name}
                 </div>

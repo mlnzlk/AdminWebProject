@@ -221,7 +221,7 @@ return (
     onChange={e => {
         const value = parseInt(e.target.value);
         if (value < 1 || value > 15) {
-            alert("1~15 사이의 정수만 입력해 주세요...( •̀ω•́ )و✧");
+            alert("1~15 사이의 정수만 입력해 주세요..! ( •̀ω•́ )و✧");
             e.target.value = '';
             return;
         }

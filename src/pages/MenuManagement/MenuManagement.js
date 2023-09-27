@@ -17,6 +17,8 @@ height: 40px;
 width: 134px;
 margin: 100px 0 0 30px;
 border: none;
+transition: 0.5s;
+
 `;
 const Button2 = styled.button`
 background-color: #E6E6E6; 
@@ -26,6 +28,8 @@ height: 40px;
 width: 134px;
 margin: 100px 0 0 13px;
 border: none;
+transition: 0.5s;
+
 `;
 
 const Button3 = styled.button`
@@ -36,6 +40,8 @@ height: 40px;
 width: 134px;
 margin: 100px 0 0 13px;
 border: none;
+transition: 0.5s;
+
 `;
 
 const Button4 = styled.button`
@@ -46,6 +52,8 @@ height: 90px;
 width: 240px;
 margin: 50px 0 0 460px;
 border: none;
+transition: 0.5s;
+
 `;
 
 export default function Menu() {
