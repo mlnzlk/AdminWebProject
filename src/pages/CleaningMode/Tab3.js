@@ -241,10 +241,10 @@ const createGrid = (buttonValues) =>
     </div>
     <Box2 style={{marginTop:"20px", marginBottom:"6px"}}> DRIZZLE </Box2>
     <div>
-          <Button3 style={{margin:"0px 10px 10px 0px"}} clicked={clickedButton3} >원점으로</Button3>
-          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3}>계속 뽑기</Button3>
-          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} >1회 뽑기</Button3>
-          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} >멈추기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleOREOClick} >원점으로</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleOREOClick}>계속 뽑기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleOREOClick}>1회 뽑기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleOREOClick}>멈추기</Button3>
 
     </div>
     <Box2 style={{marginTop:"26px"}}> </Box2>
