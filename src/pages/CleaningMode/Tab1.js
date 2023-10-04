@@ -69,7 +69,7 @@ font-weight: normal;
 cursor: pointer;
 font-weight: bold;
 background-color:#FBA693;
-border:1px solid #000000;
+border:2px solid #000000;
 }
 `;
 

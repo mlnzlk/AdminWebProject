@@ -82,7 +82,7 @@ border:none;
 
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 border-radius: 8px;
-font-size: 28px;
+font-size: 24px;
 color: black;
 transition: 0.5s;
 
@@ -189,24 +189,41 @@ const handleCLOSEClick = () => {
     }
 };
 
-const handleOREOClick = () => {
-  const data1 = { "Oreo" : 1 }; // 클릭시 보내줄 json
+const handleMixieGripperOpenClick = () => {
+  const data1 = { "MixieGripperOpen" : 1 }; // 클릭시 보내줄 json
   
   if (socket && socket.readyState === WebSocket.OPEN) { 
     socket.send(JSON.stringify(data1));
-      setMessage("오레오 추출중..."); // 클릭시 전송할 메시지 업데이트
+      setMessage("Mixie Gripper Open..."); // 클릭시 전송할 메시지 업데이트
     }
 };
 
-const handleROTUSClick = () => {
-  const data1 = { "Rotus" : 1 }; // 클릭시 보내줄 json
+const handleMixieGripperCloseClick = () => {
+  const data1 = { "MixieGripperClose" : 1 }; // 클릭시 보내줄 json
   
   if (socket && socket.readyState === WebSocket.OPEN) { 
     socket.send(JSON.stringify(data1));
-      setMessage("로투스 추출중..."); // 클릭시 전송할 메시지 업데이트
+      setMessage("Mixie Gripper Close..."); // 클릭시 전송할 메시지 업데이트
     }
 };
 
+const handlePortyGripperOpenClick = () => {
+  const data1 = { "PortyGripperOpen" : 1 }; // 클릭시 보내줄 json
+  
+  if (socket && socket.readyState === WebSocket.OPEN) { 
+    socket.send(JSON.stringify(data1));
+      setMessage("Porty Gripper Open..."); // 클릭시 전송할 메시지 업데이트
+    }
+};
+
+const handlePortyGripperCloseClick = () => {
+  const data1 = { "PortyGripperClose" : 1 }; // 클릭시 보내줄 json
+  
+  if (socket && socket.readyState === WebSocket.OPEN) { 
+    socket.send(JSON.stringify(data1));
+      setMessage("Porty Gripper Close..."); // 클릭시 전송할 메시지 업데이트
+    }
+};
 const createGrid = (buttonValues) =>
     buttonValues.map((rowValueArray, rowIndex) => 
         <div key={rowIndex}>
@@ -233,22 +250,21 @@ const createGrid = (buttonValues) =>
      <Box2 style={{marginTop:"20px"}}> ICE CREAM </Box2>
      <div>
           <Button2 style={{margin:"10px 10px 0 -10px"}} clicked={clickedButton2} onClick={handleICEClick} >아이스크림 뽑기</Button2>
-          <Button3 style={{margin:"-10px 10px 0 0"}} clicked={clickedButton3} onClick={handleOPENClick}>OPEN</Button3>
-          <Button3 style={{margin:"-10px 0 0 0"}} clicked={clickedButton4} onClick={handleCLOSEClick}>CLOSE</Button3>
+          <Button3 style={{margin:"10px 10px 0 0"}} clicked={clickedButton3} onClick={handleOPENClick}>OPEN</Button3>
+          <Button3 style={{margin:"10px 0 0 0"}} clicked={clickedButton3} onClick={handleCLOSEClick}>CLOSE</Button3>
      </div>
      <Box2 style={{marginTop:"26px"}}> GRIPPER </Box2>
      <div>
-          <Button3 style={{margin:"10px 10px 10px -10px"}} clicked={clickedButton3} onClick={handleOREOClick}>MIXIE GRIPPER OPEN</Button3>
-          <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>MIXIE GRIPPER CLOSE</Button3>
-          <Button3 style={{margin:"10px 10px 10px -10px"}} clicked={clickedButton3} onClick={handleOREOClick}>PORTY GRIPPER OPEN</Button3>
-          <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>PORTY GRIPPER CLOSE</Button3>
+          <Button3 style={{margin:"10px 10px 10px 25px"}} clicked={clickedButton3} onClick={handleMixieGripperOpenClick}>MIXIE GRIPPER OPEN</Button3>
+          <Button3 style={{margin:"10px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleMixieGripperCloseClick}>MIXIE GRIPPER CLOSE</Button3>
+          <Button3 style={{margin:"10px 10px 10px 0px"}} clicked={clickedButton3} onClick={handlePortyGripperOpenClick}>PORTY GRIPPER OPEN</Button3>
+          <Button3 style={{margin:"10px 10px 10px 0px"}} clicked={clickedButton3} onClick={handlePortyGripperCloseClick}>PORTY GRIPPER CLOSE</Button3>
+          <Button4 style={{margin:"0px 10px 10px 25px"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 0 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
     </div>
-    <div>
-          <Button4 style={{margin:"-10px 10px 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4}>ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-    </div>
+
    </Box1>
    
 

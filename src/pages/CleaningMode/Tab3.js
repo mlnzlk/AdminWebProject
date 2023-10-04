@@ -241,21 +241,22 @@ const createGrid = (buttonValues) =>
     </div>
     <Box2 style={{marginTop:"20px", marginBottom:"6px"}}> DRIZZLE </Box2>
     <div>
-          <Button4 style={{margin:"-10px 10px 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4}>ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4}>ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button3 style={{margin:"0px 10px 10px 0px"}} clicked={clickedButton3} >원점으로</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3}>계속 뽑기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} >1회 뽑기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} >멈추기</Button3>
+
     </div>
     <Box2 style={{marginTop:"26px"}}> </Box2>
     <div>
-    <Button4 style={{margin:"-10px 10px 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4}>ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+    <Button4 style={{margin:"10px 10px 10px 24px"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4}>ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 24px"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4}>ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
      </div>
    </Box1>
    

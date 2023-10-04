@@ -23,14 +23,14 @@ const Button1 = styled.button`
   &:hover {
     background-color: #71EF5C;
     cursor: pointer;
-    border:1px solid #000000;
+    border:2px solid #000000;
   }
 
 `;
 
 const Box = styled.div`
    width:170px; 
-   height:233px; 
+   height:236px; 
    background-color:#D9D9D9; 
    margin: 0 5px 5px 5px;
    border-radius: 8px;
@@ -57,7 +57,7 @@ const Button2 = styled.button`
   &:hover {
     background-color: #FFE6E0;
     cursor: pointer;
-    border:1px solid #F84D27;
+    border:2px solid #F84D27;
     color: #F84D27;
   }
 `;
@@ -78,7 +78,7 @@ const Button3 = styled.button`
   &:hover {
     background-color: #D03310;
     cursor: pointer;
-    border:1px solid #000000;
+    border:2px solid #000000;
     color: #FFFFFF;
   }
 `;

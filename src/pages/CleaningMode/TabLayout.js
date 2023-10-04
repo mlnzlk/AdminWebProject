@@ -65,15 +65,18 @@ export const TabLayout = () => {
     const [currentTab, clickTab] = useState(0);
 
     const menuArr = [
-      { name: '수전', content: <Tab1/>, width: '230px' },
-      { name: 'CUP / ICE CREAM / TOPPING', content: <Tab2/>, width: '463px' },
-      { name: 'TOPPING / DRIZZLE', content: <Tab3/>, width: '347px' },
+      { name: '수전', content: <Tab1/>, width: '225px' },
+      { name: 'CUP / ICE CREAM / GRIPPER', content: <Tab2/>, width: '458.5px' },
+      { name: 'TOPPING / DRIZZLE', content: <Tab3/>, width: '332px'  },
     ];
   
 
   const selectMenuHandler = (index) => {
     // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
     // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
+
+
+
     clickTab(index);
   };
 
