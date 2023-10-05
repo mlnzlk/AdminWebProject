@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Container1, ContainerI, ContainerH, ContainerList, StyledInput, Select, Container2, Button1, Button2, Button3, Button4 } from './AddMenuStyles';
+import { Container1, ContainerI, ContainerH, ContainerList, InputWrapper, CurrencyLabel, Input1, Input2, Select, Container2, Button1, Button2, Button3, Button4 } from './AddMenuStyles';
 import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
 
 import Photoupload from '../../assets/photoupload.png';
 import Plus from '../../assets/plus.png';
 
-import ModalIngredient from './ModalIngredient';
+import ModalIngredient from '../../components/Modal/ModalIngredient';
 
 export default function AddMenu() {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function AddMenu() {
     return (
       <div>
         <Container1>
-            <StyledInput type="text" placeholder="메뉴명 입력" />
+            <Input1 type="text" placeholder="메뉴명 입력" />
             <Select>
             <option value="category1">커피ㅤ</option>
             <option value="category2">티&라떼ㅤ</option>
@@ -66,20 +67,32 @@ export default function AddMenu() {
         <ContainerList>
         
         </ContainerList>
-
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         <div>
           <Button4 onClick={() => setModalHandle(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
               <img style={{margin: "0px 12px 0px 46px"}} src={Plus} /> 
-              <label style={{margin: "0px 0px 0px 0px", fontSize: '20px' }}> 재료추가 </label>
+              <label style={{margin: "0px 0px 0px 0px", fontSize: '20px', }}> 재료추가 </label>
             </div>
           </Button4>
           {modalHandle  && <ModalIngredient closeModal={setModalHandle} />}
-
         </div>
+        <label style={{margin: "10px 20px 0px 196px", fontSize: '20px', }}> 판매가 </label>
+        <div>
+          <Button4 onClick={() => setModalHandle(true)}> 
+            <div style={{ display: 'flex', alignItems: 'center'}}>
+              <img style={{margin: "0px 12px 0px 46px"}} src={Plus} /> 
+              <label style={{margin: "0px 0px 0px 0px", fontSize: '20px', }}> 재료추가 </label>
+            </div>
+          </Button4>
+          {modalHandle  && <ModalIngredient closeModal={setModalHandle} />}
+        </div>
+  
 
+      </div>
 
       </div>
 
       );
   }
+

@@ -34,7 +34,7 @@ export const ContainerList = styled.div`
   height: 444px;
 `;
 
-export const StyledInput = styled.input`
+export const Input1 = styled.input`
   font-size: 20px;
   background-color: #F6F6F6; 
   height: 62px;
@@ -125,5 +125,11 @@ margin-left : 24px;
 background:#D9D9D9 ;
 border-radius :16px ; 
 border:none ;
+display:flex; 
+align-items:center; 
 
+&:hover {
+  cursor:pointer; 
+ }
 `;
+
