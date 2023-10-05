@@ -80,8 +80,8 @@ border :1.0px solid #CCCCCC;
 export const Button1 = styled.button`
 font-size :20px;
 display:flex ;
-justify-content:center 
-;align-items :center;
+justify-content:center ;
+align-items :center;
 width :123.5px;
 height :62px;
 border:none;
@@ -133,3 +133,18 @@ align-items:center;
  }
 `;
 
+export const Button5 = styled.button`
+height: 47px;
+width: 192px;
+transition:.5s;
+margin: 15px 10px 0 0;
+background-color: #D9D9D9; 
+border-radius: 8px;
+border:none ;
+display:flex; 
+align-items:center; 
+
+&:hover {
+  cursor:pointer; 
+ }
+`;

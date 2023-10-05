@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container1, ContainerI, ContainerH, ContainerList, InputWrapper, CurrencyLabel, Input1, Input2, Select, Container2, Button1, Button2, Button3, Button4 } from './AddMenuStyles';
+import { Container1, ContainerI, ContainerH, ContainerList, Input1, Select, Container2, Button1, Button2, Button3, Button4, Button5 } from './AddMenuStyles';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
@@ -7,13 +7,16 @@ import Photoupload from '../../assets/photoupload.png';
 import Plus from '../../assets/plus.png';
 
 import ModalIngredient from '../../components/Modal/ModalIngredient';
+import ModalNumber_Won from '../../components/Modal/ModalNumber_Won';
+import ModalNumber_ml from '../../components/Modal/ModalNumber_ml';
 
 export default function AddMenu() {
     const navigate = useNavigate();
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
-    const [modalHandle,setModalHandle] = useState(false);
-
+    const [ingredientModalOpen, setIngredientModalOpen] = useState(false);
+    const [numberWonModalOpen, setNumberWonModalOpen] = useState(false);
+    
     const handleButton1Click = () => {
       setButton1Clicked(true);
       setButton2Clicked(false);
@@ -69,23 +72,44 @@ export default function AddMenu() {
         </ContainerList>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div>
-          <Button4 onClick={() => setModalHandle(true)}> 
+          <Button4 onClick={() => setIngredientModalOpen(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
               <img style={{margin: "0px 12px 0px 46px"}} src={Plus} /> 
               <label style={{margin: "0px 0px 0px 0px", fontSize: '20px', }}> 재료추가 </label>
             </div>
           </Button4>
-          {modalHandle  && <ModalIngredient closeModal={setModalHandle} />}
+          {ingredientModalOpen && <ModalIngredient closeModal={setIngredientModalOpen} />}
         </div>
+
         <label style={{margin: "10px 20px 0px 196px", fontSize: '20px', }}> 판매가 </label>
-        <div>
-          <Button4 onClick={() => setModalHandle(true)}> 
+
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Button5  style={{ marginRight: "10px"}} // 판매가1
+          onClick={() => setNumberWonModalOpen(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
-              <img style={{margin: "0px 12px 0px 46px"}} src={Plus} /> 
-              <label style={{margin: "0px 0px 0px 0px", fontSize: '20px', }}> 재료추가 </label>
+              <label style={{textAlign: "center", fontSize: '20px', }}> </label>
+              <label style={{ fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
             </div>
-          </Button4>
-          {modalHandle  && <ModalIngredient closeModal={setModalHandle} />}
+          </Button5>
+          {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
+
+          <Button5  style={{ marginRight: "10px"}} // 판매가2
+          onClick={() => setNumberWonModalOpen(true)}> 
+            <div style={{ display: 'flex', alignItems: 'center'}}>
+              <label style={{textAlign: "center", fontSize: '20px', }}> </label>
+              <label style={{ fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+            </div>
+          </Button5>
+          {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
+
+          <Button5  style={{ marginRight: "10px"}} // 판매가3
+          onClick={() => setNumberWonModalOpen(true)}> 
+            <div style={{ display: 'flex', alignItems: 'center'}}>
+              <label style={{textAlign: "center", fontSize: '20px', }}> </label>
+              <label style={{ fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+            </div>
+          </Button5>
+          {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
         </div>
   
 
