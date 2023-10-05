@@ -1,90 +1,79 @@
 import { React, useState } from 'react';
 import styled from 'styled-components';
 
-import Close from '../../assets/close.png';
 
-const ModalIngredient = ({ closeModal }) => {
+const ModalNumber_Won = ({ closeModal }) => {
 
-    const [isButton1Clicked, setButton1Clicked] = useState(true);
-    const [isButton2Clicked, setButton2Clicked] = useState(false);
-    const [isButton3Clicked, setButton3Clicked] = useState(false);
+  const handleOutsideClick = (e) => {  // 모달창 외부 누르면 모달창 닫히게 해주는 이벤트
+    if (e.target.id === 'background') {
+      closeModal(false);
+    }
+  }
 
+  const [calc, setCalc] = useState("");
 
-    const handleButton1Click = () => {
-      if (!isButton1Clicked) {
-        setButton1Clicked(true);
-        setButton2Clicked(false);
-        setButton3Clicked(false);
-    }};
-  
-  const handleButton2Click = () => {
-    if (!isButton2Clicked) {
-      setButton1Clicked(false);
-      setButton2Clicked(true);
-      setButton3Clicked(false);
-  }};
-  
-  const handleButton3Click = () => {
-    if (!isButton3Clicked) {
-      setButton1Clicked(false);
-      setButton2Clicked(false);
-      setButton3Clicked(true);
-  }};
-  
+  const getNum = (e) => {
+    setCalc((prev) => prev + e.target.value);
+  };
+
 
     return (
       <>
         
-        <Container1>
+        <Container1 onClick={handleOutsideClick}>
           <ModalBlock>
-            <Button4 onClick={() => closeModal(false)}> 
-                <img style={{width: "36px", height: "36px", margin: "-10px 0px 0px 690px"}} src={Close} />
-            </Button4> 
-            <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>베이스 {isButton1Clicked && <Box1/>} </Button1>
-            <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}> 시럽 {isButton2Clicked && <Box1/>} </Button2>          
-            <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>토핑 {isButton3Clicked && <Box1/>} </Button3>          
-         
-            <Box2></Box2>
-
-            <Container2></Container2>    {/* Container2 : 체크박스 들어있는 컨테이너, 여기에 체크박스부분 구현 */}
-                
-            <Container3>    {/*  Container3 : 체크박스 박스들, 확인버튼 들어가는 컨테이너*/} 
-                <Container4></Container4>   {/*  Container4 : 체크박스 체크시 하단에 뜨는 박스들 들어가는 컨테이너*/} 
-                <Button5 onClick={() => closeModal(false)} >확인</Button5>       {/* 체크박스 선택 하나라도 하면 버튼,글씨색상 변화되도록 */} 
-            </Container3>
           
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          <MainContainer> 
+          <InputBar readOnly value={calc} />
+            <ButtonContainer>
+              <ButtonNumber value={1} onClick={getNum}>1</ButtonNumber>
+              <ButtonNumber value={2} onClick={getNum}>2</ButtonNumber>
+              <ButtonNumber value={3} onClick={getNum}>3</ButtonNumber>
+              <ButtonNumber value={4} onClick={getNum}>4</ButtonNumber>
+              <ButtonNumber value={5} onClick={getNum}>5</ButtonNumber>
+              <ButtonNumber value={6} onClick={getNum}>6</ButtonNumber>
+              <ButtonNumber value={7} onClick={getNum}>7</ButtonNumber>
+              <ButtonNumber value={8} onClick={getNum}>8</ButtonNumber>
+              <ButtonNumber value={9} onClick={getNum}>9</ButtonNumber>
+              <ZeroButton value={0} onClick={getNum}>0</ZeroButton>
+
+              <ButtonDEL> ← </ButtonDEL>
+
+            </ButtonContainer>
+          </MainContainer>
+      
+            <ButtonClose onClick={() => closeModal(false)}> 확인 </ButtonClose> 
+          </div>
+
           </ModalBlock>
 
+          <Background id="background" />
 
-          <Background />
-        </Container1>
+        </Container1>          
+
       </>
     );
   }
 
 const Container1 = styled.div`
     position: fixed;
-    width: 1440px;
-    height: 882px;
+    width: 454px;
+    height: 600px;
     z-index: 100;
-    top: 10px;
-    left: 10px;
 
-    right: 0;
-    bottom: 0;
+    top: 163px;
+    left: 200px;
+    right: 0px;
+    bottom: 0px;
+
     display: flex;
-    justify-content: center;    
-    align-items: center;
-    
 `;
 
 const Background = styled.div`
     position: fixed;
     width: 1440px;
     height: 882px;
-    background-color: rgba(255,255,255,0.15);
-    background: #383838;
-    opacity: 0.5;
 
 `;
 
@@ -93,124 +82,121 @@ const ModalBlock = styled.div`
     position: absolute;
     top: 6.5rem;
     border-radius: 20px;
-    padding: 1.5rem;
     background-color: white;
     color: black;
-    width: 730px;
-    height: 615px;    
-    box-shadow: 1px 1px 1px 1px gray;
+
+    width: 454px;
+    height: 600px;
+
+    border :5px solid #DEDEDE;
     z-index:101;
 `;
 
-const Button1 = styled.button`
-font-size: 24px;
-background: none;
-height: 65px;
-width: 123px;
-margin: -8px 0 0 11px;
-border: none;
- &:hover {
-  cursor:pointer; 
- }
-`;
-const Button2 = styled.button`
-font-size: 24px;
-background: none;
-height: 65px;
-width: 123px;
-margin: -8px 0 0 11px;
-border: none;
- &:hover {
-  cursor:pointer; 
- }
-`;
-const Button3 = styled.button`
-font-size: 24px;
-background: none;
-height: 65px;
-width: 123px;
-margin: -8px 0 0 11px;
-border: none;
- &:hover {
-  cursor:pointer; 
- }
-`;
 
-const Box1 = styled.div`
-display:flex; 
-justify-content:center; 
-align-items:center; 
-width: 123px;
-height: 8px;
-background: #808080;
-margin: 10px 0 0 -5px;
-  `;
+  const ButtonClose = styled.button`
+  background: #D9DFF6;
+  width: 454px;
+  height: 111px;
+  border-radius: 0px 0px 20px 20px;
+  font-size: 32px;
+  font-weight: 600;
+  font-family: 'Pretendard';
 
-  const Button4 = styled.button`
-  background: none;
-
-  margin: 0px 0 0 11px;
   border: none;
+
    &:hover {
     cursor:pointer; 
+
    }
   `;
 
-  const Box2 = styled.div`
-display:flex; 
-justify-content:center; 
-align-items:center; 
-width: 778px;
-height: 2px;
-background: #D9D9D9;
-margin: -7px 0 0 -24px;
+  const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
+  width: 454px;
+  height: 489px;
+  border-radius: 20px 20px 0px 0px ;
   `;
 
+  const ButtonContainer = styled.div 
+  `
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, auto));
+  grid-template-rows: repeat(4, minmax(0, auto));
+  gap: .5rem;
 
-  export const Container2 = styled.div`
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction: column; 
-  width: 778px;
-  height: 390px;
-  margin: -2px 0 0 -24px;
+  grid-template-areas:
+    "one two three"
+    "four five six"
+    "seven eight nine"
+    "zero zero del";
+  `;
+
+  const ButtonNumber = styled.button`
+  font-size: 36px;
+  font-family: 'Pretendard';
+
+  color: #646464;
+  background: #F8F8F8;
+  height: 68px;
+  width: 128px;
+  border: 1px solid #E6E6E6;
+  border-radius: 8px;   
+  margin: 1px;
+
+  &[value="1"] { grid-area: one; }
+  &[value="2"] { grid-area: two; }
+  &[value="3"] { grid-area: three; }
+  &[value="4"] { grid-area: four; }
+  &[value="5"] { grid-area: five; }
+  &[value="6"] { grid-area: six; }
+  &[value="7"] { grid-area: seven; }
+  &[value="8"] { grid-area: eight; }
+  &[value="9"] { grid-area: nine; }
+
+  &:hover {
+    cursor:pointer; 
+   }
+  `;
   
+  const ZeroButton = styled(ButtonNumber)`
+  grid-area: zero;
+  width: 265px;
+
+  `;
+  
+  const ButtonDEL = styled(ButtonNumber)`
+  grid-area: del;
+  background: #EBEBEB;
+  font-weight: bold;
+  font-family: 'Pretendard';
+
   `;
 
-  export const Container3 = styled.div`
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction: column; 
+  const InputBar = styled.input`
+  width: 382px;
+  height: 101px;
+  background: #F0F0F0;
+  border-radius: 8px;
 
-  width: 778px;
-  height: 190px;
-  margin: -2px 0 0 -24px;
-  background: #F6F6F6;
-  border-radius: 0 0 20px 20px;
-  `;
+  margin-bottom: 10px;
+  font-family: 'Pretendard';
 
-  export const Container4 = styled.div`
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  width: 778px;
-  height: 93px;
-  `;
+  font-size: 48px;
+  font-weight: 600;
 
-  const Button5 = styled.button`
-  font-size: 24px;
-  background: #D9D9D9;
-  height: 82px;
-  width: 720px;
-  margin: -10px 0 0 0;
+  color: black;
+
   border: none;
-  border-radius: 16px;
-   &:hover {
-    cursor:pointer; 
-   }
-  `;
+  text-align: right;
+  padding-right: 20px;
 
-export default ModalIngredient
+  &:focus {
+    outline: none;
+  }
+`;
+
+export default ModalNumber_Won

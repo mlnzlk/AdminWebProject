@@ -10,6 +10,22 @@ const ModalNumber_Won = ({ closeModal }) => {
     }
   }
 
+  const [calc, setCalc] = useState("");
+  const [operCheck, setOperCheck] = useState(true);
+  const [pointCheck, setPointCheck] = useState(true);
+  
+  const getNum = (e) => {
+    setCalc((prev) => prev + e.target.value);
+  };
+
+  const delCalc = () => {
+    setPointCheck(true);
+    setOperCheck(true);
+    let str = String(calc).slice(0, -1);
+    setCalc((prev) => str);
+  };
+
+
     return (
       <>
         
@@ -18,20 +34,20 @@ const ModalNumber_Won = ({ closeModal }) => {
           
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <MainContainer> 
-            <InputBar></InputBar>
+          <InputBar readOnly value={calc} />
             <ButtonContainer>
-              <ButtonNumber value={1}>1</ButtonNumber>
-              <ButtonNumber value={2}>2</ButtonNumber>
-              <ButtonNumber value={3}>3</ButtonNumber>
-              <ButtonNumber value={4}>4</ButtonNumber>
-              <ButtonNumber value={5}>5</ButtonNumber>
-              <ButtonNumber value={6}>6</ButtonNumber>
-              <ButtonNumber value={7}>7</ButtonNumber>
-              <ButtonNumber value={8}>8</ButtonNumber>
-              <ButtonNumber value={9}>9</ButtonNumber>
-              <ZeroButton value={0}>0</ZeroButton>
+              <ButtonNumber value={1} onClick={getNum}>1</ButtonNumber>
+              <ButtonNumber value={2} onClick={getNum}>2</ButtonNumber>
+              <ButtonNumber value={3} onClick={getNum}>3</ButtonNumber>
+              <ButtonNumber value={4} onClick={getNum}>4</ButtonNumber>
+              <ButtonNumber value={5} onClick={getNum}>5</ButtonNumber>
+              <ButtonNumber value={6} onClick={getNum}>6</ButtonNumber>
+              <ButtonNumber value={7} onClick={getNum}>7</ButtonNumber>
+              <ButtonNumber value={8} onClick={getNum}>8</ButtonNumber>
+              <ButtonNumber value={9} onClick={getNum}>9</ButtonNumber>
+              <ZeroButton value={0} onClick={getNum}>0</ZeroButton>
 
-              <ButtonDEL> ← </ButtonDEL>
+              <ButtonDEL onClick={delCalc}> ← </ButtonDEL>
 
             </ButtonContainer>
           </MainContainer>
@@ -93,6 +109,7 @@ const ModalBlock = styled.div`
   border-radius: 0px 0px 20px 20px;
   font-size: 32px;
   font-weight: 600;
+  font-family: 'Pretendard';
 
   border: none;
 
@@ -129,6 +146,8 @@ const ModalBlock = styled.div`
 
   const ButtonNumber = styled.button`
   font-size: 36px;
+  font-family: 'Pretendard';
+
   color: #646464;
   background: #F8F8F8;
   height: 68px;
@@ -162,18 +181,24 @@ const ModalBlock = styled.div`
   grid-area: del;
   background: #EBEBEB;
   font-weight: bold;
+  font-family: 'Pretendard';
 
   `;
 
   const InputBar = styled.input`
   width: 382px;
   height: 101px;
-  background: #D9D9D9;
-  opacity: 0.4;
+  background: #F0F0F0;
   border-radius: 8px;
 
   margin-bottom: 10px;
-  font-size: 30px;
+  font-family: 'Pretendard';
+
+  font-size: 48px;
+  font-weight: 600;
+
+  color: black;
+
   border: none;
   text-align: right;
   padding-right: 20px;

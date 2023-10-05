@@ -36,6 +36,8 @@ export const ContainerList = styled.div`
 
 export const Input1 = styled.input`
   font-size: 20px;
+  font-family: 'Pretendard';
+
   background-color: #F6F6F6; 
   height: 62px;
   width: 430px;
@@ -57,6 +59,7 @@ color:black;
 justify-content:center;
 align-items:center;
 font-size:20px;
+font-family: 'Pretendard';
 background-color:white;
 border-radius:16px;
 width:197px;
@@ -79,6 +82,7 @@ border :1.0px solid #CCCCCC;
 
 export const Button1 = styled.button`
 font-size :20px;
+font-family: 'Pretendard';
 display:flex ;
 justify-content:center ;
 align-items :center;
@@ -114,6 +118,7 @@ margin-left : 10px;
 padding-left: 24px;
 text-align:left;
 font-size: 20px ;
+font-family: 'Pretendard';
 `;
 
 export const Button4 = styled.button`

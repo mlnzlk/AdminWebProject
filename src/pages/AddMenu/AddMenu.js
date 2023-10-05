@@ -75,7 +75,7 @@ export default function AddMenu() {
           <Button4 onClick={() => setIngredientModalOpen(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
               <img style={{margin: "0px 12px 0px 46px"}} src={Plus} /> 
-              <label style={{margin: "0px 0px 0px 0px", fontSize: '20px', }}> 재료추가 </label>
+              <label style={{margin: "0px 0px 0px 0px", fontFamily: "Pretendard", fontSize: '20px', }}> 재료추가 </label>
             </div>
           </Button4>
           {ingredientModalOpen && <ModalIngredient closeModal={setIngredientModalOpen} />}
@@ -87,8 +87,8 @@ export default function AddMenu() {
           <Button5  style={{ marginRight: "10px"}} // 판매가1
           onClick={() => setNumberWonModalOpen(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
-              <label style={{textAlign: "center", fontSize: '20px', }}> </label>
-              <label style={{ fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+              <label style={{textAlign: "center", fontFamily: "Pretendard", fontSize: '20px', }}> </label>  {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 여기에 표시되도록 */}
+              <label style={{fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
             </div>
           </Button5>
           {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
@@ -96,8 +96,8 @@ export default function AddMenu() {
           <Button5  style={{ marginRight: "10px"}} // 판매가2
           onClick={() => setNumberWonModalOpen(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
-              <label style={{textAlign: "center", fontSize: '20px', }}> </label>
-              <label style={{ fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+              <label style={{textAlign: "center", fontFamily: "Pretendard", fontSize: '20px', }}> </label>  {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 여기에 표시되도록 */}
+              <label style={{fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
             </div>
           </Button5>
           {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
@@ -105,8 +105,8 @@ export default function AddMenu() {
           <Button5  style={{ marginRight: "10px"}} // 판매가3
           onClick={() => setNumberWonModalOpen(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
-              <label style={{textAlign: "center", fontSize: '20px', }}> </label>
-              <label style={{ fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+              <label style={{textAlign: "center", fontSize: '20px', }}> </label>   {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 여기에 표시되도록 */}
+              <label style={{ fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
             </div>
           </Button5>
           {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
