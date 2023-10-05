@@ -15,7 +15,16 @@ export default function AddMenu() {
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
     const [ingredientModalOpen, setIngredientModalOpen] = useState(false);
-    const [numberWonModalOpen, setNumberWonModalOpen] = useState(false);
+    
+    // 각 판매가 버튼에 대해 별도의 모달 상태값 todtjd
+    const [numberWonModalOpen1, setNumberWonModalOpen1] = useState(false);
+    const [numberWonModalOpen2, setNumberWonModalOpen2] = useState(false);
+    const [numberWonModalOpen3, setNumberWonModalOpen3] = useState(false);
+
+    //각 가격에 대한 상태값을 생성
+    const [price1, setPrice1] = useState("");
+    const [price2, setPrice2] = useState("");
+    const [price3, setPrice3] = useState("");
     
     const handleButton1Click = () => {
       setButton1Clicked(true);
@@ -85,31 +94,40 @@ export default function AddMenu() {
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Button5  style={{ marginRight: "10px"}} // 판매가1
-          onClick={() => setNumberWonModalOpen(true)}> 
-            <div style={{ display: 'flex', alignItems: 'center'}}>
-              <label style={{textAlign: "center", fontFamily: "Pretendard", fontSize: '20px', }}> </label>  {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 여기에 표시되도록 */}
-              <label style={{fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+          onClick={() => setNumberWonModalOpen1(true)}> 
+          <div style={{ display: 'flex', alignItems: 'center'}}>
+
+            {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 price1에 표시되도록 */}
+            <label style={{textAlign: "center", fontFamily: "Pretendard", fontSize: '20px', marginLeft: "70px"}}> {price1} </label>  
+              
+              <label style={{fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 20px" }}> 원 </label>
             </div>
           </Button5>
-          {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
+          {numberWonModalOpen1 && <ModalNumber_Won closeModal={setNumberWonModalOpen1} setValue={setPrice1}/>}
 
           <Button5  style={{ marginRight: "10px"}} // 판매가2
-          onClick={() => setNumberWonModalOpen(true)}> 
+          onClick={() => setNumberWonModalOpen2(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
-              <label style={{textAlign: "center", fontFamily: "Pretendard", fontSize: '20px', }}> </label>  {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 여기에 표시되도록 */}
-              <label style={{fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+              
+              {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 price2에 표시되도록 */}
+              <label style={{textAlign: "center", fontFamily: "Pretendard", fontSize: '20px', marginLeft: "70px"}}> {price2}  </label>  
+              
+              <label style={{fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 20px" }}> 원 </label>
             </div>
           </Button5>
-          {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
+          {numberWonModalOpen2 && <ModalNumber_Won closeModal={setNumberWonModalOpen2} setValue={setPrice2}/>}
 
           <Button5  style={{ marginRight: "10px"}} // 판매가3
-          onClick={() => setNumberWonModalOpen(true)}> 
+          onClick={() => setNumberWonModalOpen3(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
-              <label style={{textAlign: "center", fontSize: '20px', }}> </label>   {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 여기에 표시되도록 */}
-              <label style={{ fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 133px" }}> 원 </label>
+               
+               {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 price3에 표시되도록 */}
+               <label style={{textAlign: "center", fontSize: '20px', marginLeft: "70px"}}>  {price3} </label>  
+
+              <label style={{ fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 20px" }}> 원 </label>
             </div>
           </Button5>
-          {numberWonModalOpen && <ModalNumber_Won closeModal={setNumberWonModalOpen} />}
+          {numberWonModalOpen3 && <ModalNumber_Won closeModal={setNumberWonModalOpen3} setValue={setPrice3}/>}
         </div>
   
 
