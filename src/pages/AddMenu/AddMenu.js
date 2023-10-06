@@ -9,6 +9,7 @@ import Plus from '../../assets/plus.png';
 import ModalIngredient from '../../components/Modal/ModalIngredient';
 import ModalNumber_Won from '../../components/Modal/ModalNumber_Won';
 import ModalNumber_ml from '../../components/Modal/ModalNumber_ml';
+import ModalCancelRegisterMenu from '../../components/Modal/ModalCancelRegisterMenu';
 
 export default function AddMenu() {
     const navigate = useNavigate();
@@ -25,16 +26,18 @@ export default function AddMenu() {
     const [price1, setPrice1] = useState("");
     const [price2, setPrice2] = useState("");
     const [price3, setPrice3] = useState("");
-    
+
+    const [ModalCancelRegisterMenuOpen, setModalCancelRegisterMenu] = useState(false);
+
     const handleButton1Click = () => {
       setButton1Clicked(true);
       setButton2Clicked(false);
-  };
+    };
 
-  const handleButton2Click = () => {
+    const handleButton2Click = () => {
       setButton1Clicked(false);
       setButton2Clicked(true);
-  };
+    };
 
 
     return (
@@ -153,7 +156,8 @@ export default function AddMenu() {
         ) : null }
         
         <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Button8> 취소하기 </Button8> 
+        <Button8 onClick={() => setModalCancelRegisterMenu(true)}> 취소하기 </Button8> 
+        {ModalCancelRegisterMenuOpen && <ModalCancelRegisterMenu closeModal={setModalCancelRegisterMenu} />}
 
         { isButton1Clicked ? (
           <Button9 > 테스트 </Button9> 

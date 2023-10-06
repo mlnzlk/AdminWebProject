@@ -82,6 +82,9 @@ border: none;
 transition: 0.5s;
 border-radius:8px;
 
+&:hover {
+  cursor:pointer; 
+ }
 `;
 
 export default function Menu() {
