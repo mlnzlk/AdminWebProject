@@ -153,3 +153,103 @@ align-items:center;
   cursor:pointer; 
  }
 `;
+
+export const Button6 = styled.button`
+background-color: #D7DFFF;
+width: 192px;
+height: 68px;
+color: black;
+transition:.5s;
+margin-top: 20px;
+border-radius: 8px;
+border:none ;
+display:flex; 
+align-items:center; 
+font-family: Pretendard;
+font-Size: 20px;
+justify-content:center ;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Button7 = styled.button`
+background-color: #FFB6A6;
+width: 192px;
+height: 68px;
+color: black;
+transition:.5s;
+margin-top: 20px;
+border-radius: 8px;
+border:none ;
+display:flex; 
+align-items:center; 
+font-family: Pretendard;
+font-Size: 20px;
+justify-content:center ;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Button8 = styled.button`
+display:flex; 
+align-items:center; 
+justify-content:center ;
+font-family: Pretendard;
+font-Size: 32px;
+background: #F6F6F6;
+width: 236px;
+height: 85px;
+color: black;
+transition:.5s;
+border-radius: 21px;
+border:none ;
+margin: 16px 0 0  25px;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Button9 = styled.button`
+display:flex; 
+align-items:center; 
+justify-content:center ;
+font-family: Pretendard;
+font-Size: 32px;
+background: #BDC8F0;
+width: 935px;
+height: 85px;
+color: black;
+transition:.5s;
+border-radius: 21px;
+border:none ;
+margin: 16px 0 0 24px;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Button10 = styled.button`
+display:flex; 
+align-items:center; 
+justify-content:center ;
+font-family: Pretendard;
+font-Size: 32px;
+background: #FEDBD4;
+width: 935px;
+height: 85px;
+color: black;
+transition:.5s;
+border-radius: 21px;
+border:none ;
+margin: 16px 0 0 24px;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
