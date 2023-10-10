@@ -10,6 +10,7 @@ import ModalIngredient from '../../components/Modal/ModalIngredient';
 import ModalNumber_Won from '../../components/Modal/ModalNumber_Won';
 import ModalNumber_ml from '../../components/Modal/ModalNumber_ml';
 import ModalCancelRegisterMenu from '../../components/Modal/ModalCancelRegisterMenu';
+import ModalDeleteMenu from '../../components/Modal/ModalDeleteMenu';
 
 export default function AddMenu() {
     const navigate = useNavigate();
@@ -22,12 +23,16 @@ export default function AddMenu() {
     const [numberWonModalOpen2, setNumberWonModalOpen2] = useState(false);
     const [numberWonModalOpen3, setNumberWonModalOpen3] = useState(false);
 
-    //각 가격에 대한 상태값을 생성
+    // 각 가격에 대한 상태값을 생성
     const [price1, setPrice1] = useState("");
     const [price2, setPrice2] = useState("");
     const [price3, setPrice3] = useState("");
-
+    
+    // 재료추가 모달창 상태값 생성
     const [ModalCancelRegisterMenuOpen, setModalCancelRegisterMenu] = useState(false);
+
+    // 메뉴삭제 모달창 상태값 생성 -> 이 코드 메뉴수정.js에 옮기기
+    const [ModalDeleteMenuOpen, setDeleteMenu] = useState(false);
 
     const handleButton1Click = () => {
       setButton1Clicked(true);
@@ -141,7 +146,12 @@ export default function AddMenu() {
         
         { isButton1Clicked ? (
           <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Button6 style={{marginLeft: "533px"}}> 테스트 </Button6> 
+
+          {/* 버튼11부분 코드 메뉴수정.js에 옮기기 */}
+          <Button11 onClick={() => setDeleteMenu(true)}> 메뉴삭제</Button11>
+          {ModalDeleteMenuOpen && <ModalDeleteMenu closeModal={setDeleteMenu}/>}
+
+          <Button6 style={{marginLeft: "416px"}}> 테스트 </Button6> 
           <Button6 style={{marginLeft: "10px"}}> 테스트 </Button6> 
           <Button6 style={{marginLeft: "10px"}}> 테스트 </Button6> 
           </div>
@@ -174,3 +184,17 @@ export default function AddMenu() {
       );
   }
 
+  // 버튼11 스타일 코드 메뉴수정.js에 옮기기
+  export const Button11 = styled.button`
+  font-family: Pretendard;
+  font-Size: 20px;
+  background: none;
+  color: black;
+  border:none ;
+  margin: 0px 0 0 25px;
+  text-decoration: underline;
+
+  &:hover {
+    cursor:pointer; 
+   }
+  `;
