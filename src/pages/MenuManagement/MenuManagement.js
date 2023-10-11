@@ -122,6 +122,7 @@ const handleButton3Click = () => {
           <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>티&라떼</Button2>
           <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>아이스크림</Button3>
           <Button4 onClick={() => navigate('/addmenu')}>메뉴추가</Button4>
+          <MenuGrid></MenuGrid>
       </Container>
       </div>
       );

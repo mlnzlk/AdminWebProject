@@ -1,5 +1,8 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
+import CheckboxGroup from "../Checkbox/CheckboxGroup";
+import Checkbox from "../Checkbox/Checkbox";
 
 import Close from '../../assets/close.png';
 
@@ -18,6 +21,7 @@ const ModalIngredient = ({ closeModal }) => {
     }};
   
   const handleButton2Click = () => {
+
     if (!isButton2Clicked) {
       setButton1Clicked(false);
       setButton2Clicked(true);
@@ -31,6 +35,7 @@ const ModalIngredient = ({ closeModal }) => {
       setButton3Clicked(true);
   }};
   
+  const [Ingredients, setIngredients] = useState([""]);
 
     return (
       <>
@@ -46,10 +51,22 @@ const ModalIngredient = ({ closeModal }) => {
          
             <Box2></Box2>
 
-            <Container2></Container2>    {/* Container2 : 체크박스 들어있는 컨테이너, 여기에 체크박스부분 구현 */}
+            <Container2>     {/* Container2 : 체크박스 들어있는 컨테이너, 여기에 체크박스부분 구현 */}
+              <CheckboxGroup
+                values={Ingredients}
+                onChange={setIngredients}
+              >
+                <Checkbox value="choco">초코</Checkbox> <br/>
+                <Checkbox value="vanilla">바닐라</Checkbox> <br/>
+                <Checkbox value="mint">민트</Checkbox> <br/>
+
+              </CheckboxGroup>
+            </Container2>    
                 
             <Container3>    {/*  Container3 : 체크박스 박스들, 확인버튼 들어가는 컨테이너*/} 
-                <Container4></Container4>   {/*  Container4 : 체크박스 체크시 하단에 뜨는 박스들 들어가는 컨테이너*/} 
+                <Container4>
+                [{Ingredients.join(" ")}]을 좋아하시군요!
+                </Container4>   {/*  Container4 : 체크박스 체크시 하단에 뜨는 박스들 들어가는 컨테이너*/} 
                 <Button5 onClick={() => closeModal(false)} >확인</Button5>       {/* 체크박스 선택 하나라도 하면 버튼,글씨색상 변화되도록 */} 
             </Container3>
           
