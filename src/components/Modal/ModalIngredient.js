@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import styled from 'styled-components';
+import axios from "axios";
 
 import CheckboxGroup from "../Checkbox/CheckboxGroup";
 import Checkbox from "../Checkbox/Checkbox";
@@ -35,7 +36,29 @@ const ModalIngredient = ({ closeModal }) => {
       setButton3Clicked(true);
   }};
   
-  const [Ingredients, setIngredients] = useState([""]);
+  const [Ingredients, setIngredients] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]); // 선택된 항목을 저장할 배열
+
+  useEffect(() => {
+    // 서버에서 데이터를 가져오는 Axios 요청
+    axios.get('https://api.example.com/ingredients')
+      .then((response) => {
+        // 서버 응답에서 데이터를 추출하고 Ingredients 배열 업데이트
+        setIngredients(response.data);
+      })
+      .catch((error) => {
+        console.error(`Error fetching data: ${error}`);
+      });
+  }, []);
+
+  // Checkbox가 선택될 때 실행되는 함수
+  const handleCheckboxChange = (value) => {
+    if (selectedIngredients.includes(value)) {
+      setSelectedIngredients(selectedIngredients.filter((item) => item !== value));
+    } else {
+      setSelectedIngredients([...selectedIngredients, value]);
+    }
+  };
 
     return (
       <>
@@ -51,17 +74,20 @@ const ModalIngredient = ({ closeModal }) => {
          
             <Box2></Box2>
 
-            <Container2>     {/* Container2 : 체크박스 들어있는 컨테이너, 여기에 체크박스부분 구현 */}
-              <CheckboxGroup
-                values={Ingredients}
-                onChange={setIngredients}
-              >
-                <Checkbox value="choco">초코</Checkbox> <br/>
-                <Checkbox value="vanilla">바닐라</Checkbox> <br/>
-                <Checkbox value="mint">민트</Checkbox> <br/>
+            <Container2>
+  {Ingredients.map((item, index) => (
+    <Checkbox
+      key={index}
+      value={item}
+      checked={selectedIngredients.includes(item)}
+      onChange={handleCheckboxChange}
+    >
+      {item}
+    </Checkbox>
+  ))}
+</Container2>
 
-              </CheckboxGroup>
-            </Container2>    
+
                 
             <Container3>    {/*  Container3 : 체크박스 박스들, 확인버튼 들어가는 컨테이너*/} 
                 <Container4>
