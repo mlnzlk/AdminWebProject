@@ -48,6 +48,18 @@ export default function AddMenu() {
       navigate('/menumanagement');
     };
 
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileInputChange = (event) => {
+      const selectedFile = event.target.files[0];
+      if (selectedFile) {
+        
+        // 선택한 파일을 처리하는 로직 추후에 추가하기
+        
+        console.log("선택한 파일:", selectedFile);
+        setSelectedFile(selectedFile); // 파일 선택 시 selectedFile 상태 업데이트
+      }
+    };
 
     return (
       <div>
@@ -62,11 +74,36 @@ export default function AddMenu() {
                 <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>아이스</Button1>
                 <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>핫</Button2>  
             </Container2>
-            <Button3 style={{ display: 'flex', alignItems: 'center', fontSize: '20px' }}> 메뉴사진등록 
-            <div style={{marginTop: "5px", marginLeft: "52px"}}>
-              <img src={Photoupload} /> 
-            </div>
-            </Button3>
+            <div>
+      {/* 파일 입력 필드 */}
+      <input
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        id="fileInput"
+        onChange={handleFileInputChange}
+      />
+
+      {/* 라벨 */}
+      <label
+        htmlFor="fileInput"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: '20px',
+          cursor: 'pointer',
+          background: 'lightgray', // 배경색
+          padding: '10px', // 여백
+        }}
+      >
+        {selectedFile ? selectedFile.name : '메뉴사진등록'}
+        <div style={{ marginTop: '5px', marginLeft: '52px' }}>
+          <img src={Photoupload} alt="Upload Icon" />
+        </div>
+      </label>
+    </div>
+
+
         </Container1>
         { isButton1Clicked ? (<ContainerI>
             <label style={{margin: "0px 0px 0 25px", fontSize: '20px' }}> 추가 항목</label>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const ModalNumber_Won = ({ closeModal, setValue }) => {
 
-  const handleOutsideClick = (e) => {  // 모달창 외부 누르면 모달창 닫히게 해주는 이벤트
+  const handleOutsideClick = (e) => {  // 모달창 외부 누르면 모달창 닫히게 해주는 로직
     if (e.target.id === 'background') {
       closeModal(false);
     }
