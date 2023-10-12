@@ -119,6 +119,22 @@ padding-left: 24px;
 text-align:left;
 font-size: 20px ;
 font-family: 'Pretendard';
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Input = styled.div`
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+
 `;
 
 export const Button4 = styled.button`

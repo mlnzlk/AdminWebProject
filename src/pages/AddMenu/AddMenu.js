@@ -44,6 +44,10 @@ export default function AddMenu() {
       setButton2Clicked(true);
     };
 
+    const handleClick = () => {
+      navigate('/menumanagement');
+    };
+
 
     return (
       <div>
@@ -170,11 +174,11 @@ export default function AddMenu() {
         {ModalCancelRegisterMenuOpen && <ModalCancelRegisterMenu closeModal={setModalCancelRegisterMenu} />}
 
         { isButton1Clicked ? (
-          <Button9 > 테스트 </Button9> 
+          <Button9 onClick={handleClick}> 저장하기 </Button9> 
         ) : null }       
         
         { isButton2Clicked ? (
-          <Button10> 테스트 </Button10> 
+          <Button10 onClick={handleClick}> 저장하기 </Button10> 
         ) : null }
 
         </div>
