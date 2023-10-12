@@ -11,6 +11,7 @@ import ModalNumber_Won from '../../components/Modal/ModalNumber_Won';
 import ModalNumber_ml from '../../components/Modal/ModalNumber_ml';
 import ModalCancelRegisterMenu from '../../components/Modal/ModalCancelRegisterMenu';
 import ModalDeleteMenu from '../../components/Modal/ModalDeleteMenu';
+import axios from 'axios';
 
 export default function AddMenu() {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ export default function AddMenu() {
     const handleFileInputChange = (event) => {
       const selectedFile = event.target.files[0];
       if (selectedFile) {
-        
+
         // 선택한 파일을 처리하는 로직 추후에 추가하기
         
         console.log("선택한 파일:", selectedFile);
@@ -92,12 +93,16 @@ export default function AddMenu() {
           alignItems: 'center',
           fontSize: '20px',
           cursor: 'pointer',
-          background: 'lightgray', // 배경색
-          padding: '10px', // 여백
+          background: '#D9D9D9', 
+          padding: '15px',
+          borderRadius: '16px',
+          width: '230px',
+          height: '34px',
+          marginLeft: '5px',
         }}
       >
         {selectedFile ? selectedFile.name : '메뉴사진등록'}
-        <div style={{ marginTop: '5px', marginLeft: '52px' }}>
+        <div style={{ marginTop: '5px', marginLeft: '94px' }}>
           <img src={Photoupload} alt="Upload Icon" />
         </div>
       </label>
