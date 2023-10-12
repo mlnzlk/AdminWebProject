@@ -102,7 +102,7 @@ export default function AddMenu() {
         }}
       >
         {selectedFile ? selectedFile.name : '메뉴사진등록'}
-        <div style={{ marginTop: '5px', marginLeft: '94px' }}>
+        <div style={{ marginTop: '5px', marginLeft: '74px' }}>
           <img src={Photoupload} alt="Upload Icon" />
         </div>
       </label>
@@ -130,9 +130,14 @@ export default function AddMenu() {
             <label style={{margin: "5px 0px 0px 0px", fontSize: '14px' }}> 600ml</label>
           </ContainerH>) : null }
 
-        <ContainerList>
-        
-        </ContainerList>
+          <ContainerList style={{ overflowY: 'auto', maxHeight: '444px' }}>
+            {/* 이 안에 스크롤 가능한 내용을 넣으세요 */}
+            <div>내용 1</div>
+            <div>내용 2</div>
+            <div>내용 3</div>
+            {/* ... */}
+            </ContainerList>
+
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div>
           <Button4 onClick={() => setIngredientModalOpen(true)}> 
