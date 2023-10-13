@@ -32,6 +32,28 @@ export const ContainerList = styled.div`
   background-color: #F6F6F6; 
   width: 1200px;
   height: 444px;
+
+  &::-webkit-scrollbar {
+    width: 4px; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #D9D9D9; 
+    border-radius: 6px; 
+    margin-right: 10px;   /* 으잉 왜 적용 안 돼잉 */
+  }
+
+`;
+
+export const ListContent = styled.div`
+display:flex; 
+align-items:center; 
+margin: 12px 20px 12px 20px;
+width:1146px;
+height:74px;
+background: #EFEFEF;
+border-Radius: 20px;
+fontsize: 
 `;
 
 export const Input1 = styled.input`
@@ -119,6 +141,22 @@ padding-left: 24px;
 text-align:left;
 font-size: 20px ;
 font-family: 'Pretendard';
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Input = styled.div`
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+
 `;
 
 export const Button4 = styled.button`
@@ -248,6 +286,37 @@ transition:.5s;
 border-radius: 21px;
 border:none ;
 margin: 16px 0 0 24px;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Button11 = styled.button`
+height: 56px;
+width: 192px;
+transition:.5s;
+margin: 0 0 0 10px;
+background-color: #FFFFFF; 
+border-radius: 8px;
+border: none;
+display:flex; 
+align-items:center; 
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+  // 버튼D 스타일 코드 메뉴수정.js에 옮기기
+export const ButtonD = styled.button`
+font-family: Pretendard;
+font-Size: 20px;
+background: none;
+color: black;
+border:none ;
+margin: 0px 0 0 25px;
+text-decoration: underline;
 
 &:hover {
   cursor:pointer; 
