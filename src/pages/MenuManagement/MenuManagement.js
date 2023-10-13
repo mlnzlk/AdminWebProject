@@ -9,6 +9,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+
 const Button1 = styled.button`
 background-color: ${props => props.clicked ? '#CCCCCC' : '#E6E6E6'};
 font-size: 24px;
@@ -123,6 +125,16 @@ const handleButton3Click = () => {
           <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>아이스크림</Button3>
           <Button4 onClick={() => navigate('/addmenu')}>메뉴추가</Button4>
           <MenuGrid></MenuGrid>
+      </Container>
+
+      <Container
+      style={{
+        overflowY: 'auto',
+        width: '1268px',
+        maxHeight: '760px',
+        scrollbarWidth: 'thin',
+      }}
+      >
       </Container>
       </div>
       );

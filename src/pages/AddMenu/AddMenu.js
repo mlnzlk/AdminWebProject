@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container1, ContainerI, ContainerH, ContainerList, Input1, Select, Container2, Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10 } from './AddMenuStyles';
+import { Container1, ContainerI, ContainerH, ContainerList,ListContent, Input1, Select, Container2, Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10 } from './AddMenuStyles';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
@@ -121,7 +121,7 @@ export default function AddMenu() {
         </ContainerI>) : null }
 
           { isButton2Clicked ? (<ContainerH>
-            <label style={{margin: "0px 0px 0 25px", fontSize: '20px' }}> 추가 항목</label>
+            <label style={{margin: "0px 0px 0px 25px", fontSize: '20px' }}> 추가 항목</label>
             <label style={{margin: "0px 8px 0px 461px", fontSize: '20px', fontWeight: "bold" }}> 4oz</label>
             <label style={{margin: "5px 110px 0px 0px", fontSize: '14px' }}> 233ml</label>
             <label style={{margin: "0px 8px 0px 0px", fontSize: '20px', fontWeight: "bold" }}> 10oz</label>
@@ -130,11 +130,21 @@ export default function AddMenu() {
             <label style={{margin: "5px 0px 0px 0px", fontSize: '14px' }}> 600ml</label>
           </ContainerH>) : null }
 
-          <ContainerList style={{ overflowY: 'auto', maxHeight: '444px' }}>
-            {/* 이 안에 스크롤 가능한 내용을 넣으세요 */}
-            <div>내용 1</div>
-            <div>내용 2</div>
-            <div>내용 3</div>
+      <ContainerList
+        style={{
+          overflowY: 'auto',
+          width: '1200px',
+          maxHeight: '444px',
+          scrollbarWidth: 'thin',
+        }}
+      >            {/* 이 안에 스크롤 가능한 내용을 넣으세요 */}
+            <ListContent>내용 1</ListContent>
+            <ListContent>내용 2</ListContent>
+            <ListContent>내용 3</ListContent>
+            <ListContent>내용 3</ListContent>
+            <ListContent>내용 3</ListContent>
+            <ListContent>내용 3</ListContent>
+
             {/* ... */}
             </ContainerList>
 

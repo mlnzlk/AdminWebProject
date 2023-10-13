@@ -32,6 +32,28 @@ export const ContainerList = styled.div`
   background-color: #F6F6F6; 
   width: 1200px;
   height: 444px;
+
+  &::-webkit-scrollbar {
+    width: 4px; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #D9D9D9; 
+    border-radius: 6px; 
+    margin-right: 10px;
+  }
+
+`;
+
+export const ListContent = styled.div`
+display:flex; 
+align-items:center; 
+margin: 12px 20px 12px 20px;
+width:1146px;
+height:74px;
+background: #EFEFEF;
+border-Radius: 20px;
+fontsize: 
 `;
 
 export const Input1 = styled.input`
