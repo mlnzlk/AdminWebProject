@@ -40,7 +40,7 @@ export const ContainerList = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: #D9D9D9; 
     border-radius: 6px; 
-    margin-right: 10px;
+    margin-right: 10px;   /* 으잉 왜 적용 안 돼잉 */
   }
 
 `;
@@ -286,6 +286,22 @@ transition:.5s;
 border-radius: 21px;
 border:none ;
 margin: 16px 0 0 24px;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const Button11 = styled.button`
+height: 56px;
+width: 192px;
+transition:.5s;
+margin: 0 0 0 10px;
+background-color: #FFFFFF; 
+border-radius: 8px;
+border: none;
+display:flex; 
+align-items:center; 
 
 &:hover {
   cursor:pointer; 

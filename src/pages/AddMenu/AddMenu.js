@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Container1, ContainerI, ContainerH, ContainerList,ListContent, Input1, Select, Container2, Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10 } from './AddMenuStyles';
+import { Container1, ContainerI, ContainerH, ContainerList,ListContent, Input1, Select, Container2, Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11 } from './AddMenuStyles';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
 import Photoupload from '../../assets/photoupload.png';
 import Plus from '../../assets/plus.png';
+import Drag from '../../assets/Drag.png';
+import Del from '../../assets/close.png';
 
 import ModalIngredient from '../../components/Modal/ModalIngredient';
 import ModalNumber_Won from '../../components/Modal/ModalNumber_Won';
@@ -138,12 +140,20 @@ export default function AddMenu() {
           scrollbarWidth: 'thin',
         }}
       >            {/* 이 안에 스크롤 가능한 내용을 넣으세요 */}
-            <ListContent>내용 1</ListContent>
-            <ListContent>내용 2</ListContent>
-            <ListContent>내용 3</ListContent>
-            <ListContent>내용 3</ListContent>
-            <ListContent>내용 3</ListContent>
-            <ListContent>내용 3</ListContent>
+            <ListContent>
+              <img style={{margin: "0 0 0 15px"}} src={Drag}/>  {/* 버튼으로? 수정하기 눌러서 드래그앤드롭 하도록 */}
+              <label style={{marginLeft: "14px", fontFamily: "Pretendard", fontSize: '20px', width: "418px", height:"56px", background: "#FFFFFF", borderRadius: "8px", }}>  </label>
+              <Button11> </Button11>
+              <Button11> </Button11>
+              <Button11> </Button11>
+              <img style={{margin: "0 0 0 15px"}} src={Del}/> {/* 버튼으로 수정하기 : 눌러서 해당 컨텐츠 행 삭제해주도록 */}
+              </ListContent>
+              
+            <ListContent> </ListContent>
+            <ListContent> </ListContent>
+            <ListContent> </ListContent>
+            <ListContent> </ListContent>
+            <ListContent> </ListContent>
 
             {/* ... */}
             </ContainerList>
@@ -208,8 +218,8 @@ export default function AddMenu() {
         { isButton1Clicked ? (
           <div style={{ display: 'flex', alignItems: 'center' }}>
 
-          {/* 버튼11부분 코드 메뉴수정.js에 옮기기 */}
-          <Button11 onClick={() => setDeleteMenu(true)}> 메뉴삭제</Button11>
+          {/* 버튼D부분 코드 메뉴수정.js에 옮기기 */}
+          <ButtonD onClick={() => setDeleteMenu(true)}> 메뉴삭제</ButtonD>
           {ModalDeleteMenuOpen && <ModalDeleteMenu closeModal={setDeleteMenu}/>}
 
           <Button6 style={{marginLeft: "416px"}}> 테스트 </Button6> 
@@ -246,7 +256,7 @@ export default function AddMenu() {
   }
 
   // 버튼11 스타일 코드 메뉴수정.js에 옮기기
-  export const Button11 = styled.button`
+  export const ButtonD = styled.button`
   font-family: Pretendard;
   font-Size: 20px;
   background: none;
