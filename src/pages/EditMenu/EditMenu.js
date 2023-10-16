@@ -19,6 +19,7 @@ import ModalDeleteMenu from '../../components/Modal_edit/ModalDeleteMenu_edit';
 import axios from 'axios';
 
 export default function EditMenu() {
+  const [menuName, setMenuName] = useState('');
 
     const navigate = useNavigate();
     const [isButton1Clicked, setButton1Clicked] = useState(true);

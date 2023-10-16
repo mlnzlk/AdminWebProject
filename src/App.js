@@ -8,6 +8,7 @@ import LogIn from "./pages/LogIn/LogIn";
 import CleaningMode from "./pages/CleaningMode/CleaningMode";
 import MenuManagement from "./pages/MenuManagement/MenuManagement";
 import AddMenu from "./pages/AddMenu/AddMenu";
+import EditMenu from "./pages/EditMenu/EditMenu";
 
 import Sidebar from "./components/Sidebar/Sidebar";
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/cleaningmode" element={<CleaningMode />} />
             <Route path="/menumanagement" element={<MenuManagement />} />
             <Route path="/addmenu" element={<AddMenu />} />
+            <Route path="/editmenu" element={<EditMenu />} />
 
           </Routes>
         </Content>
