@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Container1, Container2, ContainerI, ContainerH, 
   Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11, ButtonD, 
   Input1, Select, 
-  ContainerList,ListContent, } from './AddMenuStyles';
+  ContainerList,ListContent, } from './EditMenuStyles';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
@@ -11,27 +11,14 @@ import Plus from '../../assets/plus.png';
 import Drag from '../../assets/Drag.png';
 import Del from '../../assets/close.png';
 
-import ModalIngredient from '../../components/Modal/ModalIngredient';
-import ModalNumber_Won from '../../components/Modal/ModalNumber_Won';
-import ModalNumber_ml from '../../components/Modal/ModalNumber_ml';
-import ModalCancelRegisterMenu from '../../components/Modal/ModalCancelRegisterMenu';
-import ModalDeleteMenu from '../../components/Modal/ModalDeleteMenu';
+import ModalIngredient from '../../components/Modal_edit/ModalIngredient_edit';
+import ModalNumber_Won from '../../components/Modal_edit/ModalNumber_Won_edit';
+import ModalNumber_ml from '../../components/Modal_edit/ModalNumber_ml_edit';
+import ModalCancelRegisterMenu from '../../components/Modal_edit/ModalCancelRegisterMenu_edit';
+import ModalDeleteMenu from '../../components/Modal_edit/ModalDeleteMenu_edit';
 import axios from 'axios';
 
 export default function EditMenu() {
-  const [menuName, setMenuName] = useState(''); // 메뉴 이름을 저장하는 상태
-
-  useEffect(() => {
-    // Axios를 사용하여 데이터를 가져오는 GET 요청을 보냅니다.
-    axios.get('여기에_귀하의_API_엔드포인트_주소를_입력')
-      .then((response) => {
-        // 데이터가 response.data에 있다고 가정합니다.
-        setMenuName(response.data.name);
-      })
-      .catch((error) => {
-        console.error('데이터를 가져오는 중 오류 발생:', error);
-      });
-  }, []); // 빈 종속성 배열은 컴포넌트가 마운트될 때 한 번만 실행됨을 의미합니다.
 
     const navigate = useNavigate();
     const [isButton1Clicked, setButton1Clicked] = useState(true);
@@ -57,6 +44,7 @@ export default function EditMenu() {
     const handleButton1Click = () => {
       setButton1Clicked(true);
       setButton2Clicked(false);
+    
     };
 
     const handleButton2Click = () => {
@@ -71,7 +59,7 @@ export default function EditMenu() {
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileInputChange = (event) => {
-      const selectedFile = event.target.files[0];
+      const selectedFile = event.target.files[0];  // 파일 선택 후 selectedFile 상태를 업데이트하고, 라벨의 내용을 파일 이름으로 변경하도록 조건부 렌더링을 사용
       if (selectedFile) {
 
         // 선택한 파일을 처리하는 로직 추후에 추가하기
