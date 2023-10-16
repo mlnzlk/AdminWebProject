@@ -11,11 +11,12 @@ import Plus from '../../assets/plus.png';
 import Drag from '../../assets/Drag.png';
 import Del from '../../assets/close.png';
 
-import ModalIngredient from '../../components/Modal_edit/ModalIngredient_edit';
-import ModalNumber_Won from '../../components/Modal_edit/ModalNumber_Won_edit';
-import ModalNumber_ml from '../../components/Modal_edit/ModalNumber_ml_edit';
-import ModalCancelRegisterMenu from '../../components/Modal_edit/ModalCancelRegisterMenu_edit';
-import ModalDeleteMenu from '../../components/Modal_edit/ModalDeleteMenu_edit';
+import ModalIngredient_edit from '../../components/Modal_edit/ModalIngredient_edit';
+import ModalNumber_Won_edit from '../../components/Modal_edit/ModalNumber_Won_edit';
+import ModalNumber_ml_edit from '../../components/Modal_edit/ModalNumber_ml_edit';
+import ModalCancelRegisterMenu_edit from '../../components/Modal_edit/ModalCancelRegisterMenu_edit';
+import ModalDeleteMenu_edit from '../../components/Modal_edit/ModalDeleteMenu_edit';
+
 import axios from 'axios';
 
 export default function EditMenu() {
@@ -177,7 +178,7 @@ export default function EditMenu() {
               <label style={{margin: "0px 0px 0px 0px", fontFamily: "Pretendard", fontSize: '20px', }}> 재료추가 </label>
             </div>
           </Button4>
-          {ingredientModalOpen && <ModalIngredient closeModal={setIngredientModalOpen} />}
+          {ingredientModalOpen && <ModalIngredient_edit closeModal={setIngredientModalOpen} />}
         </div>
 
         <label style={{margin: "10px 20px 0px 196px", fontSize: '20px', }}> 판매가 </label>
@@ -194,7 +195,7 @@ export default function EditMenu() {
               </label>
             </div>
         </Button5>
-          {numberWonModalOpen1 && <ModalNumber_Won closeModal={setNumberWonModalOpen1} setValue={setPrice1}/>}
+          {numberWonModalOpen1 && <ModalNumber_Won_edit closeModal={setNumberWonModalOpen1} setValue={setPrice1}/>}
 
         <Button5  style={{ marginRight: "10px"}} // 판매가2
           onClick={() => setNumberWonModalOpen2(true)}> 
@@ -207,7 +208,7 @@ export default function EditMenu() {
               </label>
             </div>
         </Button5>
-          {numberWonModalOpen2 && <ModalNumber_Won closeModal={setNumberWonModalOpen2} setValue={setPrice2}/>}
+          {numberWonModalOpen2 && <ModalNumber_Won_edit closeModal={setNumberWonModalOpen2} setValue={setPrice2}/>}
 
         <Button5  style={{ marginRight: "10px"}} // 판매가3.
           onClick={() => setNumberWonModalOpen3(true)}> 
@@ -220,7 +221,7 @@ export default function EditMenu() {
               </label>
             </div>
         </Button5>
-          {numberWonModalOpen3 && <ModalNumber_Won closeModal={setNumberWonModalOpen3} setValue={setPrice3}/>}
+          {numberWonModalOpen3 && <ModalNumber_Won_edit closeModal={setNumberWonModalOpen3} setValue={setPrice3}/>}
         </div>
       </div> 
 
@@ -231,7 +232,7 @@ export default function EditMenu() {
 
           {/* 버튼D부분 코드 메뉴수정.js에 옮기기 */}
           <ButtonD onClick={() => setDeleteMenu(true)}> 메뉴삭제</ButtonD>
-          {ModalDeleteMenuOpen && <ModalDeleteMenu closeModal={setDeleteMenu}/>}
+          {ModalDeleteMenuOpen && <ModalDeleteMenu_edit closeModal={setDeleteMenu}/>}
 
           <Button6 style={{marginLeft: "416px"}}> 테스트 </Button6> 
           <Button6 style={{marginLeft: "10px"}}> 테스트 </Button6> 
@@ -241,7 +242,12 @@ export default function EditMenu() {
 
         { isButton2Clicked ? (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Button7 style={{marginLeft: "533px"}}> 테스트 </Button7> 
+
+          {/* 버튼D부분 코드 메뉴수정.js에 옮기기 */}
+          <ButtonD onClick={() => setDeleteMenu(true)}> 메뉴삭제</ButtonD>
+          {ModalDeleteMenuOpen && <ModalDeleteMenu_edit closeModal={setDeleteMenu}/>}
+
+          <Button7 style={{marginLeft: "416px"}}> 테스트 </Button7> 
           <Button7 style={{marginLeft: "10px"}}> 테스트 </Button7>
           <Button7 style={{marginLeft: "10px"}}> 테스트 </Button7> 
         </div>
@@ -249,7 +255,7 @@ export default function EditMenu() {
         
         <div style={{ display: 'flex', alignItems: 'center' }}>
         <Button8 onClick={() => setModalCancelRegisterMenu(true)}> 취소하기 </Button8> 
-        {ModalCancelRegisterMenuOpen && <ModalCancelRegisterMenu closeModal={setModalCancelRegisterMenu} />}
+        {ModalCancelRegisterMenuOpen && <ModalCancelRegisterMenu_edit closeModal={setModalCancelRegisterMenu} />}
 
         { isButton1Clicked ? (
           <Button9 onClick={handleClick}> 저장하기 </Button9> 

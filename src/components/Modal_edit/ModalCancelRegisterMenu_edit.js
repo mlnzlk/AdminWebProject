@@ -9,7 +9,7 @@ const ModalIngredient = ({ closeModal }) => {
 
     const handleClick = () => {
       closeModal(false);
-      navigate('/editmenu');
+      navigate('/menumanagement');
     };
 
     return (
