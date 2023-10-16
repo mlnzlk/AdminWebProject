@@ -58,7 +58,7 @@ font-size: 24px;
 color: ${props => props.clicked ? 'black' : '#737373'};
 height: 48px;
 width: 160px;
-margin: 48px 0 0 0;
+margin: 48px 8px 0 0;
 border: none;
 transition: 0.5s;
 border-radius:8px;
@@ -74,11 +74,32 @@ font-weight: ${props => props.clicked ? 'bold' : 'normal'};
 `;
 
 const Button4 = styled.button`
+background-color: ${props => props.clicked ? '#CCCCCC' : '#E6E6E6'};
+font-size: 24px;
+color: ${props => props.clicked ? 'black' : '#737373'};
+height: 48px;
+width: 160px;
+margin: 48px 0 0 0;
+border: none;
+transition: 0.5s;
+border-radius:8px;
+font-weight: ${props => props.clicked ? 'bold' : 'normal'};
+
+&:focus {
+  outline:none; 
+ }
+ 
+ &:hover {
+  cursor:pointer; 
+ }
+`;
+
+const Button5 = styled.button`
 background-color: #E6E6E6; 
 font-size: 24px;
 color: black;
 height: 48px;
-width: 265px;
+width: 235px;
 margin: 48px 0 0 403px;
 border: none;
 transition: 0.5s;
@@ -93,12 +114,17 @@ export default function Menu() {
   const [isButton1Clicked, setButton1Clicked] = useState(true);
   const [isButton2Clicked, setButton2Clicked] = useState(false);
   const [isButton3Clicked, setButton3Clicked] = useState(false);
+  const [isButton4Clicked, setButton4Clicked] = useState(false);
+
+  const [apiUrl, setApiUrl] = useState("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/1"); // 초기값 설정
 
   const handleButton1Click = () => {
     if (!isButton1Clicked) {
       setButton1Clicked(true);
       setButton2Clicked(false);
       setButton3Clicked(false);
+      setButton4Clicked(false);
+      setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/1");
   }};
 
 const handleButton2Click = () => {
@@ -106,25 +132,39 @@ const handleButton2Click = () => {
     setButton1Clicked(false);
     setButton2Clicked(true);
     setButton3Clicked(false);
-}};
+    setButton4Clicked(false);
+    setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/2");
+  }};
 
 const handleButton3Click = () => {
   if (!isButton3Clicked) {
     setButton1Clicked(false);
     setButton2Clicked(false);
     setButton3Clicked(true);
-}};
+    setButton4Clicked(false);
+    setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/3");
+  }};
+
+const handleButton4Click = () => {
+  if (!isButton4Clicked) {
+    setButton1Clicked(false);
+    setButton2Clicked(false);
+    setButton3Clicked(false);
+    setButton4Clicked(true);
+    setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/4");
+  }};
 
   const navigate = useNavigate();
 
     return (
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Container>
           <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>커피</Button1>
           <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>티&라떼</Button2>
-          <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>아이스크림</Button3>
-          <Button4 onClick={() => navigate('/addmenu')}>메뉴추가</Button4>
-          <MenuGrid></MenuGrid>
+          <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>에이드</Button3>
+          <Button4 clicked={isButton4Clicked} onClick={handleButton4Click}>스파클링</Button4>
+          <Button5 onClick={() => navigate('/addmenu')}>메뉴추가</Button5>
+          
       </Container>
 
       <Container
@@ -133,8 +173,10 @@ const handleButton3Click = () => {
         width: '1268px',
         maxHeight: '760px',
         scrollbarWidth: 'thin',
+        marginTop: '25px',
       }}
       >
+        <MenuGrid apiUrl={apiUrl}></MenuGrid>
       </Container>
       </div>
       );
