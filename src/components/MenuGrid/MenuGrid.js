@@ -40,7 +40,7 @@ export default function MenuGrid({ apiUrl }) {
             border: 'none', 
             cursor: 'pointer' 
         }}
-        onClick={() => navigate(`/editmenu/${item.productId}`)}
+        onClick={() => navigate(`/editmenu/${item.productId}`)} // 레시피 데이터 불러올 때, 어떤 메뉴의 레시피인지 알기 위한 productId값 개별적으로 할당
     >
         <img src={item.url} alt={item.name} style={{ width: '100%' }} />
         <Box> <p style={{ fontSize: '24px' }}>{item.name}</p></Box>

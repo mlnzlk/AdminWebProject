@@ -76,7 +76,7 @@ export default function EditMenu() {
 
     useEffect(() => {
       if (productId) {
-        axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`)
+        axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`) // 메뉴수정 페이지 랜더링 할 때 해당 url의 데이터를 불러옴
           .then((response) => {
             console.log(response.data);
             setMenuData(response.data);
