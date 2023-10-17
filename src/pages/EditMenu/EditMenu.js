@@ -27,8 +27,10 @@ export default function EditMenu() {
   const [categoryId, setCategoryId] = useState('category1'); // 기본값을 'category1'로 설정
 
     const navigate = useNavigate();
-    const [isButton1Clicked, setButton1Clicked] = useState(true);
+    
+    const [isButton1Clicked, setButton1Clicked] = useState(false);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
+
     const [ingredientModalOpen, setIngredientModalOpen] = useState(false);
     
     // 각 판매가 버튼에 대해 별도의 모달 상태값 생성
@@ -83,7 +85,8 @@ export default function EditMenu() {
             
             setMenuData(response.data);  // setMenuData로 데이터 설정
             setMenuName(response.data.name); // name 값을 menuName 상태 변수에 설정 -> <Input1> 컴포넌트가 렌더링될 때 초기값으로 해당 이름이 표시
-          // categoryId 값을 설정
+          
+            // categoryId 값을 설정
           if (response.data.categoryId === 1) {
             setCategoryId('category1');
           } else if (response.data.categoryId === 2) {
@@ -93,10 +96,28 @@ export default function EditMenu() {
           } else if (response.data.categoryId === 4) {
             setCategoryId('category4');
           }
-        })
-          .catch((error) => console.error(`Error!!!: ${error}`));
-      }
-    }, [productId]);
+
+                  // 첫 번째 레시피의 크기를 확인하고 초기 버튼 상태를 설정
+                  if (response.data.recipes && response.data.recipes.length > 0) {
+                    // Set prices based on recipe data
+                    if (response.data.recipes[0].size === '8oz') {
+                      setButton1Clicked(true);
+                      setButton2Clicked(false);
+                      setPrice1(response.data.recipes[0].price.toString());
+                      setPrice2(response.data.recipes[1].price.toString());
+                      setPrice3(response.data.recipes[2].price.toString());
+                    } else if (response.data.recipes[0].size === '4oz') {
+                      setButton1Clicked(false);
+                      setButton2Clicked(true);
+                      setPrice1(response.data.recipes[0].price.toString());
+                      setPrice2(response.data.recipes[1].price.toString());
+                      setPrice3(response.data.recipes[2].price.toString());
+                    }
+                  }
+                })
+                .catch((error) => console.error(`Error!!!: ${error}`));
+            }
+          }, [productId]);
 
     return (
       <div>
