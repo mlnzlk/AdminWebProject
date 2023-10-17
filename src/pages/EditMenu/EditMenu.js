@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container1, Container2, ContainerI, ContainerH, 
   Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11, ButtonD, 
   Input1, Select, 
   ContainerList,ListContent, } from './EditMenuStyles';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from "styled-components";
 
 import Photoupload from '../../assets/photoupload.png';
@@ -21,7 +22,9 @@ import axios from 'axios';
 
 export default function EditMenu() {
   const [menuName, setMenuName] = useState('');
-
+  const { productId } = useParams();
+  const [menuData, setMenuData] = useState(null);
+  
     const navigate = useNavigate();
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
@@ -70,6 +73,17 @@ export default function EditMenu() {
         setSelectedFile(selectedFile); // 파일 선택 시 selectedFile 상태 업데이트
       }
     };
+
+    useEffect(() => {
+      if (productId) {
+        axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`)
+          .then((response) => {
+            console.log(response.data);
+            setMenuData(response.data);
+          })
+          .catch((error) => console.error(`Error!!!: ${error}`));
+      }
+    }, [productId]);
 
     return (
       <div>

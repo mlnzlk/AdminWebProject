@@ -33,7 +33,7 @@ function App() {
             <Route path="/cleaningmode" element={<CleaningMode />} />
             <Route path="/menumanagement" element={<MenuManagement />} />
             <Route path="/addmenu" element={<AddMenu />} />
-            <Route path="/editmenu" element={<EditMenu />} />
+            <Route path="/editmenu/:productId" element={<EditMenu />} />
 
           </Routes>
         </Content>
