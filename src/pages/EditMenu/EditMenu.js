@@ -24,7 +24,8 @@ export default function EditMenu() {
   const [menuName, setMenuName] = useState('');
   const { productId } = useParams();
   const [menuData, setMenuData] = useState(null);
-  
+  const [categoryId, setCategoryId] = useState('category1'); // 기본값을 'category1'로 설정
+
     const navigate = useNavigate();
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
@@ -74,13 +75,25 @@ export default function EditMenu() {
       }
     };
 
-    useEffect(() => {
+    useEffect(() => { // useEffect 훅 사용해 데이터를 받아옴
       if (productId) {
         axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`) // 메뉴수정 페이지 랜더링 할 때 해당 url의 데이터를 불러옴
           .then((response) => {
-            console.log(response.data);
-            setMenuData(response.data);
-          })
+            console.log(response.data); // 받아온 데이터 확인용 로그
+            
+            setMenuData(response.data);  // setMenuData로 데이터 설정
+            setMenuName(response.data.name); // name 값을 menuName 상태 변수에 설정 -> <Input1> 컴포넌트가 렌더링될 때 초기값으로 해당 이름이 표시
+          // categoryId 값을 설정
+          if (response.data.categoryId === 1) {
+            setCategoryId('category1');
+          } else if (response.data.categoryId === 2) {
+            setCategoryId('category2');
+          } else if (response.data.categoryId === 3) {
+            setCategoryId('category3');
+          } else if (response.data.categoryId === 4) {
+            setCategoryId('category4');
+          }
+        })
           .catch((error) => console.error(`Error!!!: ${error}`));
       }
     }, [productId]);
@@ -94,11 +107,12 @@ export default function EditMenu() {
           value={menuName} // Input1의 값은 menuName 상태로 설정
           onChange={(e) => setMenuName(e.target.value)} // 선택 사항: 입력 변경 처리
         />
-            <Select>
-            <option value="category1">커피ㅤ</option>
-            <option value="category2">티&라떼ㅤ</option>
-            <option value="category3">아이스크림ㅤ</option>
-            </Select> 
+        <Select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
+          <option value="category1">커피</option>
+          <option value="category2">티&라떼</option>
+          <option value="category3">에이드</option>
+          <option value="category4">스파클링</option>
+        </Select>
             <Container2>
                 <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>아이스</Button1>
                 <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>핫</Button2>  
