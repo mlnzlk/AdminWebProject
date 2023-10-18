@@ -201,22 +201,28 @@ export default function EditMenu() {
     scrollbarWidth: 'thin',
   }}
 >           
-  {menuData &&
-    menuData.recipes &&
-    menuData.recipes.length > 0 &&
-    menuData.recipes.map((recipe, index) => (
-      <ListContent key={index}>
-        <img style={{ margin: "0 0 0 15px" }} src={Drag} />
-        <label style={{ marginLeft: "14px", fontFamily: "Pretendard", fontSize: '20px', width: "418px", height: "40px", background: "#FFFFFF", borderRadius: "8px", paddingLeft: '24px', paddingTop:'16px'}}>
-          {recipe.ingredient[index].ingredientName}
-        </label>
-        <Button11>{recipe.ingredient.find(ing => ing.seq === 1).quantity}</Button11>
-        <Button12>{recipe.ingredient.find(ing => ing.seq === 2).quantity}</Button12>
-        <Button13>{recipe.ingredient.find(ing => ing.seq === 3).quantity}</Button13> 
-        <img style={{ margin: "0 0 0 15px" }} src={Del} />
-      </ListContent>
-    ))}
+{menuData &&
+  menuData.recipes &&  
+  menuData.recipes[0].ingredient.map((ing, index) => (
+    <ListContent key={index}>
+      <img style={{ margin: "0 0 0 15px" }} src={Drag} />
+      <label style={{ marginLeft: "14px", fontFamily: "Pretendard", fontSize: '20px', width: "418px", height: "40px", background: "#FFFFFF", borderRadius: "8px", paddingLeft:'24px', paddingTop:'16px'}}>
+        {ing.ingredientName}
+      </label>
+      {menuData.recipes.map(recipe => {
+        const ingredient = recipe.ingredient.find(i => i.seq === ing.seq);
+        return (
+          <Button11 key={recipe.cupId}>
+            {ingredient ? ingredient.quantity : '0'}
+          </Button11>
+        );
+      })}
+      <img style={{ margin:"10" }} src={Del} />
+    </ListContent>
+))}
+
 </ContainerList>
+
 
 
 
