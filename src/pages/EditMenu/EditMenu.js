@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container1, Container2, ContainerI, ContainerH, 
-  Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11, ButtonD, 
+  Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11,Button12,Button13, ButtonD, 
   Input1, Select, 
   ContainerList,ListContent, } from './EditMenuStyles';
 import { useNavigate } from 'react-router-dom';
@@ -193,31 +193,32 @@ export default function EditMenu() {
             <label style={{margin: "5px 0px 0px 0px", fontSize: '14px' }}> 600ml</label>
           </ContainerH>) : null }
 
-      <ContainerList
-        style={{
-          overflowY: 'auto',
-          width: '1200px',
-          maxHeight: '444px',
-          scrollbarWidth: 'thin',
-        }}
-      >            {/* 이 안에 스크롤 가능한 내용을 넣으세요 */}
-            <ListContent>
-              <img style={{margin: "0 0 0 15px"}} src={Drag}/>  {/* 버튼으로? 수정하기 눌러서 드래그앤드롭 하도록 */}
-              <label style={{marginLeft: "14px", fontFamily: "Pretendard", fontSize: '20px', width: "418px", height:"56px", background: "#FFFFFF", borderRadius: "8px", }}>  </label>
-              <Button11> </Button11>
-              <Button11> </Button11>
-              <Button11> </Button11>
-              <img style={{margin: "0 0 0 15px"}} src={Del}/> {/* 버튼으로 수정하기 : 눌러서 해당 컨텐츠 행 삭제해주도록 */}
-              </ListContent>
-              
-            <ListContent> </ListContent>
-            <ListContent> </ListContent>
-            <ListContent> </ListContent>
-            <ListContent> </ListContent>
-            <ListContent> </ListContent>
+          <ContainerList
+  style={{
+    overflowY: 'auto',
+    width: '1200px',
+    maxHeight: '444px',
+    scrollbarWidth: 'thin',
+  }}
+>           
+  {menuData &&
+    menuData.recipes &&
+    menuData.recipes.length > 0 &&
+    menuData.recipes.map((recipe, index) => (
+      <ListContent key={index}>
+        <img style={{ margin: "0 0 0 15px" }} src={Drag} />
+        <label style={{ marginLeft: "14px", fontFamily: "Pretendard", fontSize: '20px', width: "418px", height: "40px", background: "#FFFFFF", borderRadius: "8px", paddingLeft: '24px', paddingTop:'16px'}}>
+          {recipe.ingredient[index].ingredientName}
+        </label>
+        <Button11>{recipe.ingredient.find(ing => ing.seq === 1).quantity}</Button11>
+        <Button12>{recipe.ingredient.find(ing => ing.seq === 2).quantity}</Button12>
+        <Button13>{recipe.ingredient.find(ing => ing.seq === 3).quantity}</Button13> 
+        <img style={{ margin: "0 0 0 15px" }} src={Del} />
+      </ListContent>
+    ))}
+</ContainerList>
 
-            {/* ... */}
-            </ContainerList>
+
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div>
