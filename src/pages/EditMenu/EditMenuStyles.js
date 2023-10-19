@@ -102,6 +102,7 @@ margin-left :10px;
 border :1.0px solid #CCCCCC;
 `;
 
+
 export const Button1 = styled.button`
 font-size :20px;
 font-family: 'Pretendard';

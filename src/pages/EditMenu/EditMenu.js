@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container1, Container2, ContainerI, ContainerH, 
-  Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11,ButtonD, ButtonX,
+  Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11,ButtonD, ButtonX, 
   Input1, Select, 
   ContainerList,ListContent, } from './EditMenuStyles';
 import { useNavigate } from 'react-router-dom';
@@ -67,6 +67,8 @@ export default function EditMenu() {
       navigate('/menumanagement');
     };
 
+    const url = menuData && menuData.url;
+    const fileName = url ? url.substring(url.lastIndexOf("/") + 1) : "";  
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleFileInputChange = (event) => {
@@ -195,12 +197,12 @@ export default function EditMenu() {
           marginLeft: '5px',
         }}
       >
-        {selectedFile ? selectedFile.name : '메뉴사진등록'}
-        <div style={{ marginTop: '5px', marginLeft: '74px' }}>
-          <img src={Photoupload} alt="Upload Icon" />
-        </div>
-      </label>
-    </div>
+  {selectedFile ? selectedFile.name : fileName}
+  <div style={{ marginTop: '5px', marginLeft: '30px' }}>
+    <img src={Photoupload} alt="Upload Icon" />
+  </div>
+</label>
+</div>
 
 
         </Container1>
