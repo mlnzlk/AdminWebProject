@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container1, Container2, ContainerI, ContainerH, 
-  Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11,Button12,Button13, ButtonD, 
+  Button1, Button2, Button3, Button4, Button5, Button6,Button7,Button8,Button9,Button10, Button11,ButtonD, ButtonX,
   Input1, Select, 
   ContainerList,ListContent, } from './EditMenuStyles';
 import { useNavigate } from 'react-router-dom';
@@ -21,6 +21,9 @@ import ModalDeleteMenu_edit from '../../components/Modal_edit/ModalDeleteMenu_ed
 import axios from 'axios';
 
 export default function EditMenu() {
+  const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
+
+
   const [menuName, setMenuName] = useState('');
   const { productId } = useParams();
   const [menuData, setMenuData] = useState(null);
@@ -77,9 +80,11 @@ export default function EditMenu() {
       }
     };
 
-    useEffect(() => { // useEffect 훅 사용해 데이터를 받아옴
+    useEffect(() => {
+
+      
       if (productId) {
-        axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`) // 메뉴수정 페이지 랜더링 할 때 해당 url의 데이터를 불러옴
+        axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`)
           .then((response) => {
             console.log(response.data); // 받아온 데이터 확인용 로그
             
@@ -115,8 +120,34 @@ export default function EditMenu() {
                     }
                   }
                 })
+                
                 .catch((error) => console.error(`Error!!!: ${error}`));
             }
+
+            
+
+            const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+
+            // 연결이 열릴 때 실행될 이벤트 리스너
+            socketInstance.onopen = function (event) {
+              console.log('WebSocket 연결 성공');
+                setSocket(socketInstance); // socket 상태 업데이트
+        
+            };
+        
+            // 메시지 수신 이벤트 리스너
+            socketInstance.onmessage = function (event) {
+              console.log(`Received message from server : ${event.data}`);
+            };
+        
+            return () => {
+              if (socketInstance) {
+                  socketInstance.close();
+              }
+              
+              setSocket(null); // 컴포넌트 unmount 시에는 소켓 인스턴스 제거
+          };
+
           }, [productId]);
 
     return (
@@ -212,15 +243,19 @@ export default function EditMenu() {
       {menuData.recipes.map(recipe => {
         const ingredient = recipe.ingredient.find(i => i.seq === ing.seq);
         return (
-          <Button11 key={recipe.cupId}>
-            {ingredient ? ingredient.quantity : '0'}
-          </Button11>
+<Button11 key={recipe.cupId} zeroQuantity={ingredient && ingredient.quantity === 0}>
+  {ingredient ? ingredient.quantity : '0'}
+</Button11>
+
+
+
         );
       })}
-      <img style={{ margin:"10" }} src={Del} />
+    <ButtonX >
+      <img style={{ margin:"10" }} src={Del} /> 
+    </ButtonX> 
     </ListContent>
 ))}
-
 </ContainerList>
 
 
@@ -306,7 +341,7 @@ export default function EditMenu() {
           <Button7 style={{marginLeft: "416px"}}> 테스트 </Button7> 
           <Button7 style={{marginLeft: "10px"}}> 테스트 </Button7>
           <Button7 style={{marginLeft: "10px"}}> 테스트 </Button7> 
-        </div>
+        </div>   
         ) : null }
         
         <div style={{ display: 'flex', alignItems: 'center' }}>

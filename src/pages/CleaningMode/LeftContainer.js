@@ -89,7 +89,7 @@ export default function LeftContainer() {
   const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
 
   useEffect(() => {
-    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
 
     // 연결이 열릴 때 실행될 이벤트 리스너
     socketInstance.onopen = function (event) {

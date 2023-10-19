@@ -297,49 +297,19 @@ height: 56px;
 width: 192px;
 transition:.5s;
 margin: 0 0 0 10px;
-background-color: #FFFFFF; 
-border-radius: 8px;
-border: none;
+background-color: ${props => props.zeroQuantity ? '#F6F6F6' : '#FFFFFF'};
+border-radius:8px;
+border:none ;
 display:flex; 
 align-items:center; 
 justify-content:center ;
 
 &:hover {
-  cursor:pointer; 
+   cursor:pointer; 
  }
 `;
-export const Button12 = styled.button`
-height: 56px;
-width: 192px;
-transition:.5s;
-margin: 0 0 0 10px;
-background-color: #FFFFFF; 
-border-radius: 8px;
-border: none;
-display:flex; 
-align-items:center; 
-justify-content:center ;
 
-&:hover {
-  cursor:pointer; 
- }
-`;
-export const Button13 = styled.button`
-height: 56px;
-width: 192px;
-transition:.5s;
-margin: 0 0 0 10px;
-background-color: #FFFFFF; 
-border-radius: 8px;
-border: none;
-display:flex; 
-align-items:center; 
-justify-content:center ;
 
-&:hover {
-  cursor:pointer; 
- }
-`;
   // 버튼D 스타일 코드 메뉴수정.js에 옮기기
 export const ButtonD = styled.button`
 font-family: Pretendard;
@@ -349,6 +319,15 @@ color: black;
 border:none ;
 margin: 0px 0 0 25px;
 text-decoration: underline;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
+
+export const ButtonX = styled.button`
+background: none;
+border:none ;
 
 &:hover {
   cursor:pointer; 

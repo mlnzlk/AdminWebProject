@@ -170,13 +170,15 @@ const handleButton4Click = () => {
       <Container
       style={{
         overflowY: 'auto',
-        width: '1268px',
+        width: '1303px',
         maxHeight: '760px',
         scrollbarWidth: 'thin',
-        marginTop: '25px',
+        margin: '25px 0 0 54px',
       }}
       >
-        <MenuGrid apiUrl={apiUrl}></MenuGrid>
+        <MenuGrid style={{
+
+      }}apiUrl={apiUrl}></MenuGrid>
       </Container>
       </div>
       );

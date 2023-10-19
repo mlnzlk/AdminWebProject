@@ -37,8 +37,10 @@ export default function MenuGrid({ apiUrl }) {
             flexDirection: "column", 
             alignItems: "center",
             background: 'none', 
-            border: 'none', 
-            cursor: 'pointer' 
+            border: '1px solid #D9D9D9',
+            cursor: 'pointer', 
+            padding: '8px',
+            borderRadius: '8px',
         }}
         onClick={() => navigate(`/editmenu/${item.productId}`)} // 레시피 데이터 불러올 때, 어떤 메뉴의 레시피인지 알기 위한 productId값 개별적으로 할당
     >
@@ -55,7 +57,7 @@ export default function MenuGrid({ apiUrl }) {
 export const Box = styled.div`
   background: #D9D9D9;
   fontSize: 24px;
-  width: 264px;
+  width: 294px;
   height: 44px;
   padding: 0;
   margin-top: 10px;  
