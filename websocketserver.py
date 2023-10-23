@@ -14,7 +14,8 @@ async def echo(websocket, path):
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    server = websockets.serve(echo, "208.205.1.7", 7090)
+    server = websockets.serve(echo, "ws://192.168.0.19", 12345)
     print("run server....")
     loop.run_until_complete(server)
     loop.run_forever()
+    

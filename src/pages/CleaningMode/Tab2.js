@@ -134,7 +134,7 @@ function MyComponent() {
     const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
 
     useEffect(() => {
-      const socketInstance = new WebSocket('ws://208.205.1.13:7090');
+      const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   
       socketInstance.onopen = function (event) {
         console.log('WebSocket 연결 성공');

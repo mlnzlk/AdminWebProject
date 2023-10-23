@@ -156,6 +156,9 @@ export default function EditMenu() {
           }, [productId]);
 
           const handleSave = () => {
+
+
+            
             // 수정된 데이터를 서버에 보내기
             axios.patch(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe`, menuData)
               .then((response) => {
@@ -265,19 +268,20 @@ export default function EditMenu() {
       {menuData.recipes.map(recipe => {
         const ingredient = recipe.ingredient.find(i => i.seq === ing.seq);
         return (
-<Button11 key={recipe.cupId} zeroQuantity={ingredient && ingredient.quantity === 0}>
-  {ingredient ? ingredient.quantity : '0'}ml
-</Button11>
-
-
-
+          <Button11 key={recipe.cupId} zeroQuantity={ingredient && ingredient.quantity === 0}>
+            {ing.ingredientName === '샷' ? ingredient.quantity + '샷' : (ingredient ? ingredient.quantity + 'ml' : '0')}
+          </Button11>
         );
       })}
-    <ButtonX >
-      <img style={{ margin:"10" }} src={Del} /> 
-    </ButtonX> 
+      <ButtonX >
+        <img style={{ margin:"10" }} src={Del} /> 
+      </ButtonX> 
     </ListContent>
 ))}
+
+
+
+
 </ContainerList>
 
 

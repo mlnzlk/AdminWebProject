@@ -142,7 +142,7 @@ const [message, setMessage] = useState('');
 const [inputValue, setInputValue] = useState(0);
 
 useEffect(() => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
+    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
 
     socketInstance.onopen = function (event) {
         console.log('WebSocket 연결 성공');
