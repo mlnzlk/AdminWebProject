@@ -51,16 +51,18 @@ export default function EditMenu() {
 
     // 메뉴삭제 모달창 상태값 생성 -> 이 코드 메뉴수정.js에 옮기기
     const [ModalDeleteMenuOpen, setDeleteMenu] = useState(false);
-
     const handleButton1Click = () => {
-      setButton1Clicked(true);
-      setButton2Clicked(false);
-    
+      if (!isButton1Clicked) {
+        setButton1Clicked(true);
+        setButton2Clicked(false);
+      }
     };
-
+  
     const handleButton2Click = () => {
-      setButton1Clicked(false);
-      setButton2Clicked(true);
+      if (!isButton2Clicked) {
+        setButton1Clicked(false);
+        setButton2Clicked(true);
+      }
     };
 
     const handleClick = () => {
@@ -150,17 +152,31 @@ export default function EditMenu() {
               setSocket(null); // 컴포넌트 unmount 시에는 소켓 인스턴스 제거
           };
 
+
           }, [productId]);
+
+          const handleSave = () => {
+            // 수정된 데이터를 서버에 보내기
+            axios.patch(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe`, menuData)
+              .then((response) => {
+                console.log('데이터 수정 성공:', response);
+                // 필요한 처리 작업 수행
+              })
+              .catch((error) => {
+                console.error('데이터 수정 실패:', error);
+              });
+          };
 
     return (
       <div>
         <Container1>
         <Input1
-          type="text"
-          placeholder="메뉴명 입력"
-          value={menuName} // Input1의 값은 menuName 상태로 설정
-          onChange={(e) => setMenuName(e.target.value)} // 선택 사항: 입력 변경 처리
-        />
+  type="text"
+  placeholder="메뉴명 입력"
+  value={menuName || (menuData && menuData.name)} // Input1의 값은 menuName 상태 또는 menuData.name으로 설정
+  onChange={(e) => setMenuName(e.target.value)} // 선택 사항: 입력 변경 처리
+/>
+
         <Select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
           <option value="category1">커피</option>
           <option value="category2">티&라떼</option>
@@ -168,8 +184,12 @@ export default function EditMenu() {
           <option value="category4">스파클링</option>
         </Select>
             <Container2>
-                <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>아이스</Button1>
-                <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>핫</Button2>  
+            <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>
+          아이스
+        </Button1>
+        <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>
+          핫
+        </Button2>
             </Container2>
             <div>
       {/* 파일 입력 필드 */}
@@ -246,7 +266,7 @@ export default function EditMenu() {
         const ingredient = recipe.ingredient.find(i => i.seq === ing.seq);
         return (
 <Button11 key={recipe.cupId} zeroQuantity={ingredient && ingredient.quantity === 0}>
-  {ingredient ? ingredient.quantity : '0'}
+  {ingredient ? ingredient.quantity : '0'}ml
 </Button11>
 
 
@@ -324,8 +344,10 @@ export default function EditMenu() {
           <div style={{ display: 'flex', alignItems: 'center' }}>
 
           {/* 버튼D부분 코드 메뉴수정.js에 옮기기 */}
-          <ButtonD onClick={() => setDeleteMenu(true)}> 메뉴삭제</ButtonD>
-          {ModalDeleteMenuOpen && <ModalDeleteMenu_edit closeModal={setDeleteMenu}/>}
+          <ButtonD onClick={() => setDeleteMenu(true)}>메뉴삭제</ButtonD>
+          {ModalDeleteMenuOpen && (
+            <ModalDeleteMenu_edit closeModal={() => setDeleteMenu(false)} productId={menuData.productId} />
+          )}
 
           <Button6 style={{marginLeft: "416px"}}> 테스트 </Button6> 
           <Button6 style={{marginLeft: "10px"}}> 테스트 </Button6> 
@@ -336,9 +358,10 @@ export default function EditMenu() {
         { isButton2Clicked ? (
         <div style={{ display: 'flex', alignItems: 'center' }}>
 
-          {/* 버튼D부분 코드 메뉴수정.js에 옮기기 */}
-          <ButtonD onClick={() => setDeleteMenu(true)}> 메뉴삭제</ButtonD>
-          {ModalDeleteMenuOpen && <ModalDeleteMenu_edit closeModal={setDeleteMenu}/>}
+          <ButtonD onClick={() => setDeleteMenu(true)}>메뉴삭제</ButtonD>
+          {ModalDeleteMenuOpen && (
+            <ModalDeleteMenu_edit closeModal={() => setDeleteMenu(false)} productId={menuData.productId} />
+          )}
 
           <Button7 style={{marginLeft: "416px"}}> 테스트 </Button7> 
           <Button7 style={{marginLeft: "10px"}}> 테스트 </Button7>
@@ -351,12 +374,12 @@ export default function EditMenu() {
         {ModalCancelRegisterMenuOpen && <ModalCancelRegisterMenu_edit closeModal={setModalCancelRegisterMenu} />}
 
         { isButton1Clicked ? (
-          <Button9 onClick={handleClick}> 저장하기 </Button9> 
-        ) : null }       
+      <Button9 onClick={handleSave}>저장하기</Button9>
+      ) : null }       
         
         { isButton2Clicked ? (
-          <Button10 onClick={handleClick}> 저장하기 </Button10> 
-        ) : null }
+      <Button9 onClick={handleSave}>저장하기</Button9>
+      ) : null }
 
         </div>
 

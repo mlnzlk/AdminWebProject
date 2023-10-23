@@ -1,15 +1,26 @@
 import { React, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
-const ModalIngredient = ({ closeModal }) => {
+const ModalIngredient = ({ closeModal, productId }) => {
     
     const navigate = useNavigate();
 
     const handleClick = () => {
       closeModal(false);
-      navigate('/menumanagement');
+  
+      // 서버에 delete 요청 보내기
+      const url = `http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/${productId}`;
+      axios.delete(url)
+        .then(response => {
+          console.log('메뉴 삭제 성공!!:', response);
+          navigate('/menumanagement');
+        })
+        .catch(error => {
+          console.error('메뉴 삭제 실패ㅠㅠ:', error);
+        });
     };
 
     return (
