@@ -83,6 +83,7 @@ export default function EditMenu() {
         setSelectedFile(selectedFile); // 파일 선택 시 selectedFile 상태 업데이트
       }
     };
+    const [prices, setPrices] = useState([]);
 
     useEffect(() => {
 

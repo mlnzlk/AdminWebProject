@@ -133,96 +133,103 @@ function MyComponent() {
     const [message, setMessage] = useState('');
     const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
 
-    useEffect(() => {
-      const socketInstance = new WebSocket('ws://192.168.0.19:12345');
-  
-      socketInstance.onopen = function (event) {
-        console.log('WebSocket 연결 성공');
-        setSocket(socketInstance); // socket 상태 업데이트
-      };
-    
-      // 메시지 수신 이벤트 리스너
-      socketInstance.onmessage = function (event) {
-        console.log(`Received message from server : ${event.data}`);
-      };
-    
-      return () => {
-        if (socketInstance) {
-          socketInstance.close();
-        }
-        
-        setSocket(null); // 컴포넌트 unmount 시에는 소켓 인스턴스 제거
-      };
-    }, []);
-
-   const handleButtonClick = (valueObject) => {
-    if (!socket || socket.readyState !== WebSocket.OPEN) return;
-    
-    socket.send(JSON.stringify(valueObject.data));
-    setMessage(valueObject.message);
-   };
-
-   const handleICEClick = () => {
-    const data1 = { "Icecream" : 1 }; // 클릭시 보내줄 json
-    
-    if (socket && socket.readyState === WebSocket.OPEN) { 
-      socket.send(JSON.stringify(data1));
-        setMessage("아이스크림 추출중..."); // 클릭시 전송할 메시지 업데이트
-      }
-};
-
-const handleOPENClick = () => {
-  const data1 = { "OPEN" : 1 }; // 클릭시 보내줄 json
-  
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
-      setMessage("OPEN..."); // 클릭시 전송할 메시지 업데이트
-    }
-};
-
-const handleCLOSEClick = () => {
-  const data1 = { "CLOSE" : 1 }; // 클릭시 보내줄 json
-  
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
-      setMessage("CLOSE..."); // 클릭시 전송할 메시지 업데이트
-    }
-};
-
 const handleOREOClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "Oreo" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("오레오 추출중..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
 
 const handleROTUSClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "Rotus" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("로투스 추출중..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
 
-const createGrid = (buttonValues) =>
-    buttonValues.map((rowValueArray, rowIndex) => 
-        <div key={rowIndex}>
-            {rowValueArray.map((valueObject, colIndex) => 
-                <GridButton
-                    key={colIndex}
-                    value={valueObject.image}
-                    valueObject={valueObject}
-                    onClick={handleButtonClick}
-                />
-            )}
-        </div>
-    );
+
+const handleToOrigin = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const data1 = { "ToOrigin" : 1 }; // 클릭시 보내줄 json
+  
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
+      setMessage("원점으로..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    }
+};
+
+const handleKeepPicking = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const data1 = { "KeepPicking" : 1 }; // 클릭시 보내줄 json
+  
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
+      setMessage("로투스 추출중..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    }
+};
 
 
-      
+const handleFstDraw = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const data1 = { "FstDraw" : 1 }; // 클릭시 보내줄 json
+  
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
+      setMessage("1회 뽑기..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    }
+};
+
+const handleDrizzleStop = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const data1 = { "handleDrizzleStop" : 1 }; // 클릭시 보내줄 json
+  
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
+      setMessage("멈추기..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    }
+};
     
  return (
    <Box1>
@@ -241,10 +248,10 @@ const createGrid = (buttonValues) =>
     </div>
     <Box2 style={{marginTop:"20px", marginBottom:"6px"}}> DRIZZLE </Box2>
     <div>
-          <Button3 style={{margin:"0px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleOREOClick} >원점으로</Button3>
-          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleOREOClick}>계속 뽑기</Button3>
-          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleOREOClick}>1회 뽑기</Button3>
-          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleOREOClick}>멈추기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleToOrigin} >원점으로</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleKeepPicking}>계속 뽑기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleFstDraw}>1회 뽑기</Button3>
+          <Button3 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton3} onClick={handleDrizzleStop}>멈추기</Button3>
 
     </div>
     <Box2 style={{marginTop:"26px"}}> </Box2>

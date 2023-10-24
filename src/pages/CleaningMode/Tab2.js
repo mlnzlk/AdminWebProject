@@ -133,97 +133,135 @@ function MyComponent() {
     const [message, setMessage] = useState('');
     const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
 
-    useEffect(() => {
+
+
+    const handleButtonClick = (valueObject) => {
       const socketInstance = new WebSocket('ws://192.168.0.19:12345');
-  
+      
       socketInstance.onopen = function (event) {
         console.log('WebSocket 연결 성공');
-        setSocket(socketInstance); // socket 상태 업데이트
-      };
-    
-      // 메시지 수신 이벤트 리스너
-      socketInstance.onmessage = function (event) {
-        console.log(`Received message from server : ${event.data}`);
-      };
-    
-      return () => {
-        if (socketInstance) {
-          socketInstance.close();
-        }
+        socketInstance.send(JSON.stringify(valueObject.data));
+        setMessage(valueObject.message);
         
-        setSocket(null); // 컴포넌트 unmount 시에는 소켓 인스턴스 제거
+        setTimeout(() => {
+          socketInstance.close();
+          console.log('WebSocket 연결 종료');
+        }, 1000); // Adjust the timeout as needed
       };
-    }, []);
-
-   const handleButtonClick = (valueObject) => {
-    if (!socket || socket.readyState !== WebSocket.OPEN) return;
-    
-    socket.send(JSON.stringify(valueObject.data));
-    setMessage(valueObject.message);
-   };
+    };
 
    const handleICEClick = () => {
+    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
     const data1 = { "Icecream" : 1 }; // 클릭시 보내줄 json
     
-    if (socket && socket.readyState === WebSocket.OPEN) { 
-      socket.send(JSON.stringify(data1));
+    socketInstance.onopen = function (event) {
+      console.log('WebSocket 연결 성공');
+      socketInstance.send(JSON.stringify(data1));
         setMessage("아이스크림 추출중..."); // 클릭시 전송할 메시지 업데이트
+
+        setTimeout(function() {
+          socketInstance.close();
+          console.log('WebSocket 연결 닫힘');
+        }, 3000); // 3초 후에 웹소켓 연결 닫기
       }
 };
 
 const handleOPENClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "OPEN" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("OPEN..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
 
 const handleCLOSEClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "CLOSE" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("CLOSE..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
 
 const handleMixieGripperOpenClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "MixieGripperOpen" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("Mixie Gripper Open..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
 
 const handleMixieGripperCloseClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "MixieGripperClose" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("Mixie Gripper Close..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
 
 const handlePortyGripperOpenClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "PortyGripperOpen" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("Porty Gripper Open..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
 
 const handlePortyGripperCloseClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
   const data1 = { "PortyGripperClose" : 1 }; // 클릭시 보내줄 json
   
-  if (socket && socket.readyState === WebSocket.OPEN) { 
-    socket.send(JSON.stringify(data1));
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
       setMessage("Porty Gripper Close..."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
     }
 };
+
 const createGrid = (buttonValues) =>
     buttonValues.map((rowValueArray, rowIndex) => 
         <div key={rowIndex}>

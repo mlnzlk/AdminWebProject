@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
-const Box = styled.div`;
+const Box = styled.div`
 display: flex;   
 justify-content:center;   
 align-items:center;   
@@ -101,7 +101,7 @@ const Input = styled.input`
 function GridButton({ onClick, valueObject }) {
     return (
       <Button1
-          imageUrl={valueObject.image} // Add this line
+          imageUrl={valueObject.image}
           onClick={() => onClick(valueObject)}
       >
           {valueObject.name}
@@ -141,56 +141,60 @@ const [socket, setSocket] = useState(null);
 const [message, setMessage] = useState('');
 const [inputValue, setInputValue] = useState(0);
 
-useEffect(() => {
-    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
-
-    socketInstance.onopen = function (event) {
-        console.log('WebSocket 연결 성공');
-        setSocket(socketInstance);
-    };
-
-    socketInstance.onmessage = function (event) {
-        console.log(`Received message from server : ${event.data}`);
-    };
-
-    return () => {
-        if (socketInstance) {
-            socketInstance.close();
-        }
-        
-        setSocket(null);
-    };
-}, []);
 
 const handleButtonClick = (valueObject) => {
-    if (!socket || socket.readyState !== WebSocket.OPEN) return;
-    
-    const dataToSend = { ...valueObject.data }; 
-    for (let key in dataToSend) { 
-        dataToSend[key] = parseInt(inputValue);
-    }
-    
-    socket.send(JSON.stringify(dataToSend));
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+
+  const dataToSend = { ...valueObject.data }; 
+  for (let key in dataToSend) { 
+      dataToSend[key] = parseInt(inputValue);
+  }
+  
+  socketInstance.send(JSON.stringify(dataToSend));
+
+  setTimeout(function() {
+    socketInstance.close();
+    console.log('WebSocket 연결 닫힘');
+  }, 3000); // 3초 후에 웹소켓 연결 닫기
+}
 };
 
 
-const handleHotWaterClick = () => {
-    const data1 = { "HotWater" : 1 }; // 클릭시 보내줄 json
-    
-    if (socket && socket.readyState === WebSocket.OPEN) { 
-      socket.send(JSON.stringify(data1));
-        setMessage("온수 추출중..."); // 클릭시 전송할 메시지 업데이트
-      }
-  };
 
-  const handlePauseSyrupClick = () => {
-    const data1 = { "PauseSyrup" : 1 }; // 클릭시 보내줄 json
+const handleHotWaterClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const data1 = { "HotWater" : 1 }; // 클릭시 보내줄 json
+  
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
+      setMessage("온수 추출중..."); // 클릭시 전송할 메시지 업데이트
     
-    if (socket && socket.readyState === WebSocket.OPEN) { 
-      socket.send(JSON.stringify(data1));
-        setMessage("시럽 멈추기 버튼이 클릭되었습니다."); // 클릭시 전송할 메시지 업데이트
-      }
-  };
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    }
+};
+
+const handlePauseSyrupClick = () => {
+  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const data1 = { "PauseSyrup" : 1 }; // 클릭시 보내줄 json
+  
+  socketInstance.onopen = function (event) {
+    console.log('WebSocket 연결 성공');
+    socketInstance.send(JSON.stringify(data1));
+      setMessage("시럽 멈추기 버튼이 클릭되었습니다."); // 클릭시 전송할 메시지 업데이트
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    }
+};
 
 const createGrid = (buttonValues) =>
   buttonValues.map((rowValueArray, rowIndex) =>
@@ -207,34 +211,36 @@ const createGrid = (buttonValues) =>
 
 
   
-return (
-<Box>
-<div style={{display:"flex", marginTop:"38px"}}>
-<div style={{marginLeft:"8px", marginRight:"20px"}}>{createGrid(buttonValues1)}</div>
-<div>{createGrid(buttonValues2)}</div>
-</div>
+  
+  return (
+    <Box>
+      <div style={{display:"flex", marginTop:"38px"}}>
+        <div style={{marginLeft:"8px", marginRight:"20px"}}>{createGrid(buttonValues1)}</div>
+        <div>{createGrid(buttonValues2)}</div>
+      </div>
 
-<div >
-<Button2 onClick={handleHotWaterClick} >온수</Button2>
-<Label1> 추출시간 </Label1>
-<Input type="number" min="1" max="15"
-    onChange={e => {
-        const value = parseInt(e.target.value);
-        if (value < 1 || value > 15) {
-            alert("1~15 사이의 정수만 입력해 주세요..! ( •̀ω•́ )و✧");
-            e.target.value = '';
-            return;
-        }
-        setInputValue(value);
-    }}
-/>
-<Label2> 초 </Label2>
-<Button3 onClick={handlePauseSyrupClick}>시럽 멈추기</Button3>
-</div>
+      <div >
+        <Button2 onClick={handleHotWaterClick} >온수</Button2>
+        <Label1> 추출시간 </Label1>
+        <Input type="number" min="1" max="15"
+            onChange={e => {
+                const value = parseInt(e.target.value);
+                if (value < 1 || value > 15) {
+                    alert("1~15 사이의 정수만 입력해 주세요..! ( •̀ω•́ )و✧");
+                    e.target.value = '';
+                    return;
+                }
+                setInputValue(value);
+            }}
+        />
+        <Label2> 초 </Label2>
+        <Button3 onClick={handlePauseSyrupClick}>시럽 멈추기</Button3>
+      </div>
 
-</Box>
+    </Box>
 
-);
+  );
 }
 
 export default MyComponent;
+
