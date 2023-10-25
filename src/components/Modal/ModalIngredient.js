@@ -2,9 +2,6 @@ import React, { useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from "axios";
 
-import CheckboxGroup from "../Checkbox/CheckboxGroup";
-import Checkbox from "../Checkbox/Checkbox";
-
 import Close from '../../assets/close.png';
 
 const ModalIngredient = ({ closeModal }) => {
@@ -12,7 +9,8 @@ const ModalIngredient = ({ closeModal }) => {
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
     const [isButton3Clicked, setButton3Clicked] = useState(false);
-
+    const [ingredients, setIngredients] = useState([]);
+    const [selectedIngredients, setSelectedIngredients] = useState([]);
 
     const handleButton1Click = () => {
       if (!isButton1Clicked) {
@@ -36,73 +34,79 @@ const ModalIngredient = ({ closeModal }) => {
       setButton3Clicked(true);
   }};
   
-  const [Ingredients, setIngredients] = useState([]);
-  const [selectedIngredients, setSelectedIngredients] = useState([]); // 선택된 항목을 저장할 배열
+
 
   useEffect(() => {
-    // 서버에서 데이터를 가져오는 Axios 요청
-    axios.get('https://api.example.com/ingredients')
-      .then((response) => {
-        // 서버 응답에서 데이터를 추출하고 Ingredients 배열 업데이트
-        setIngredients(response.data);
-      })
-      .catch((error) => {
-        console.error(`Error fetching data: ${error}`);
-      });
+// 서버에서 데이터를 가져오는 Axios 요청
+axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/1')
+  .then((response) => {
+    // 서버 응답에서 데이터를 추출하고 Ingredients 배열 업데이트
+    console.log(response.data)
+    setIngredients(response.data.data); 
+  })
+  .catch((error) => {
+    console.error(`Error fetching data: ${error}`);
+  });
+
   }, []);
 
-  // Checkbox가 선택될 때 실행되는 함수
-  const handleCheckboxChange = (value) => {
-    if (selectedIngredients.includes(value)) {
-      setSelectedIngredients(selectedIngredients.filter((item) => item !== value));
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      setSelectedIngredients((prevSelectedIngredients) => [...prevSelectedIngredients, value]);
     } else {
-      setSelectedIngredients([...selectedIngredients, value]);
+      setSelectedIngredients((prevSelectedIngredients) =>
+        prevSelectedIngredients.filter((ingredient) => ingredient !== value)
+      );
     }
   };
 
-    return (
-      <>
-        
-        <Container1>
-          <ModalBlock>
-            <Button4 onClick={() => closeModal(false)}> 
-                <img style={{width: "36px", height: "36px", margin: "-10px 0px 0px 690px"}} src={Close} />
-            </Button4> 
-            <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>베이스 {isButton1Clicked && <Box1/>} </Button1>
-            <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}> 시럽 {isButton2Clicked && <Box1/>} </Button2>          
-            <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>토핑 {isButton3Clicked && <Box1/>} </Button3>          
-         
-            <Box2></Box2>
-
-            <Container2>
-  {Ingredients.map((item, index) => (
-    <Checkbox
-      key={index}
-      value={item}
-      checked={selectedIngredients.includes(item)}
-      onChange={handleCheckboxChange}
-    >
-      {item}
-    </Checkbox>
-  ))}
-</Container2>
-
-
-                
-            <Container3>    {/*  Container3 : 체크박스 박스들, 확인버튼 들어가는 컨테이너*/} 
-                <Container4>
-                [{Ingredients.join(" ")}]을 좋아하시군요!
-                </Container4>   {/*  Container4 : 체크박스 체크시 하단에 뜨는 박스들 들어가는 컨테이너*/} 
-                <Button5 onClick={() => closeModal(false)} >확인</Button5>       {/* 체크박스 선택 하나라도 하면 버튼,글씨색상 변화되도록 */} 
-            </Container3>
+  return (
+    <>
+      <Container1>
+        <ModalBlock>
+          <Button4 onClick={() => closeModal(false)}>
+            <img style={{ width: "36px", height: "36px", margin: "-10px 0px 0px 690px" }} src={Close} />
+          </Button4>
+          <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>
+            베이스 {isButton1Clicked && <Box1 />}
+          </Button1>
+          <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>
+            시럽 {isButton2Clicked && <Box1 />}
+          </Button2>
+          <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>
+            토핑 {isButton3Clicked && <Box1 />}
+          </Button3>
+          <Box2></Box2>
           
-          </ModalBlock>
+            <Container2>
+              {ingredients.map((ingredient) => (
+                <label key={ingredient.menuCode}>
+                  <input
+                    type="checkbox"
+                    value={ingredient.name}
+                    checked={selectedIngredients.includes(ingredient.name)}
+                    onChange={handleCheckboxChange}
+                  />
+                  {ingredient.name}
+                </label>
+              ))}
+            </Container2>
 
-
-          <Background />
-        </Container1>
-      </>
-    );
+            <Container4>
+              {selectedIngredients.map((ingredient) => (
+                <div key={ingredient}>{ingredient}</div>
+              ))}
+            </Container4>
+            <Container3>
+            <Button5 onClick={() => closeModal(false)}>확인</Button5>
+          </Container3>
+        </ModalBlock>
+        <Background />
+      </Container1>
+    </>
+  );
   }
 
 const Container1 = styled.div`
@@ -230,7 +234,6 @@ margin: -7px 0 0 -24px;
 
   width: 778px;
   height: 190px;
-  margin: -2px 0 0 -24px;
   background: #F6F6F6;
   border-radius: 0 0 20px 20px;
   `;
@@ -240,7 +243,7 @@ margin: -7px 0 0 -24px;
   justify-content:center;
   align-items:center;
   width: 778px;
-  height: 93px;
+  height: 390px;
   `;
 
   const Button5 = styled.button`

@@ -11,7 +11,7 @@ import Photoupload from '../../assets/photoupload.png';
 import Plus from '../../assets/plus.png';
 import Drag from '../../assets/Drag.png';
 import Del from '../../assets/close.png';
-
+ 
 import ModalIngredient_edit from '../../components/Modal_edit/ModalIngredient_edit';
 import ModalNumber_Won_edit from '../../components/Modal_edit/ModalNumber_Won_edit';
 import ModalNumber_ml_edit from '../../components/Modal_edit/ModalNumber_ml_edit';
@@ -40,11 +40,14 @@ export default function EditMenu() {
     const [numberWonModalOpen1, setNumberWonModalOpen1] = useState(false);
     const [numberWonModalOpen2, setNumberWonModalOpen2] = useState(false);
     const [numberWonModalOpen3, setNumberWonModalOpen3] = useState(false);
+    const [numberWonModalOpen4, setNumberWonModalOpen4] = useState(false);
+
 
     // 각 가격에 대한 상태값을 생성
     const [price1, setPrice1] = useState("");
     const [price2, setPrice2] = useState("");
     const [price3, setPrice3] = useState("");
+    const [price4, setPrice4] = useState("");
     
     // 재료추가 모달창 상태값 생성
     const [ModalCancelRegisterMenuOpen, setModalCancelRegisterMenu] = useState(false);
@@ -116,12 +119,14 @@ export default function EditMenu() {
                       setPrice1(response.data.recipes[0].price.toString());
                       setPrice2(response.data.recipes[1].price.toString());
                       setPrice3(response.data.recipes[2].price.toString());
+
                     } else if (response.data.recipes[0].size === '4oz') {
                       setButton1Clicked(false);
                       setButton2Clicked(true);
                       setPrice1(response.data.recipes[0].price.toString());
                       setPrice2(response.data.recipes[1].price.toString());
                       setPrice3(response.data.recipes[2].price.toString());
+
                     }
                   }
                 })
@@ -269,9 +274,27 @@ export default function EditMenu() {
       {menuData.recipes.map(recipe => {
         const ingredient = recipe.ingredient.find(i => i.seq === ing.seq);
         return (
-          <Button11 key={recipe.cupId} zeroQuantity={ingredient && ingredient.quantity === 0}>
-            {ing.ingredientName === '샷' ? ingredient.quantity + '샷' : (ingredient ? ingredient.quantity + 'ml' : '0')}
-          </Button11>
+          <>
+<Button11
+  key={recipe.cupId}
+  zeroQuantity={ingredient && ingredient.quantity === 0}
+  onClick={() => setNumberWonModalOpen4(true)}
+>
+  {ing.ingredientName === '샷' ? (numberWonModalOpen4 ? price4 + '샷' : ingredient.quantity + '샷') : (numberWonModalOpen4 ? price4 + 'ml' : (ingredient ? ingredient.quantity + 'ml' : '0'))}
+</Button11>
+
+{numberWonModalOpen4 && (
+  <ModalNumber_Won_edit
+    closeModal={setNumberWonModalOpen4}
+    setValue={value => {
+      setPrice4(value.toString()); // Update the price4 with the new value entered in the modal
+      setNumberWonModalOpen4(false); // Close the modal
+    }}
+  />
+)}
+
+
+          </>
         );
       })}
       <ButtonX >
@@ -279,8 +302,6 @@ export default function EditMenu() {
       </ButtonX> 
     </ListContent>
 ))}
-
-
 
 
 </ContainerList>
@@ -297,7 +318,7 @@ export default function EditMenu() {
             </div>
           </Button4>
           {ingredientModalOpen && <ModalIngredient_edit closeModal={setIngredientModalOpen} />}
-        </div>
+         </div>
 
         <label style={{margin: "10px 20px 0px 196px", fontSize: '20px', }}> 판매가 </label>
         {/* 사용자가 모달창에서 숫자 입력 후 확인 누르면 해당 숫자가 price3에 표시되도록 */}

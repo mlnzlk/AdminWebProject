@@ -54,7 +54,7 @@ const Side = styled.div`
     `;
 
   const Menu = styled.div`
-  color: black;
+  color: black;    
   width: 172px;
   height: 40px;
   display: flex;
@@ -67,6 +67,8 @@ const Side = styled.div`
   font-size:20px; 
   color: #B9B9B9;
   text-decoration: none;
+
+
   display: block; // 항목 전체에 배경색이 적용되도록 block으로 설정
   align-items: center; // 세로 방향 중앙 정렬
   justify-content : flex-end;	
@@ -93,6 +95,7 @@ const StyledImage = styled.img`
 
   function Sidebar() {
 
+    // 이 부분에서 알바생 로그인시 Menu 랑 Add Menu 메뉴 안 보이게 하기
     const menus = [
         { name: "Cleaning Mode", path: "/cleaningmode" },
         { name: "Menuㅤ", path: "/menumanagement" },
