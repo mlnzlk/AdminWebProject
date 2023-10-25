@@ -9,6 +9,8 @@ const ModalIngredient = ({ closeModal }) => {
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
     const [isButton3Clicked, setButton3Clicked] = useState(false);
+    const [isButton4Clicked, setButton4Clicked] = useState(false);
+
     const [ingredients, setIngredients] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([]);
 
@@ -17,6 +19,7 @@ const ModalIngredient = ({ closeModal }) => {
         setButton1Clicked(true);
         setButton2Clicked(false);
         setButton3Clicked(false);
+        setButton4Clicked(false);
     }};
   
   const handleButton2Click = () => {
@@ -25,6 +28,7 @@ const ModalIngredient = ({ closeModal }) => {
       setButton1Clicked(false);
       setButton2Clicked(true);
       setButton3Clicked(false);
+      setButton4Clicked(false);
   }};
   
   const handleButton3Click = () => {
@@ -32,9 +36,17 @@ const ModalIngredient = ({ closeModal }) => {
       setButton1Clicked(false);
       setButton2Clicked(false);
       setButton3Clicked(true);
+      setButton4Clicked(false);
   }};
   
-
+  const handleButton4Click = () => {
+    if (!isButton4Clicked) {
+      setButton1Clicked(false);
+      setButton2Clicked(false);
+      setButton3Clicked(false);
+      setButton4Clicked(true);
+  }};
+  
 
   useEffect(() => {
 // 서버에서 데이터를 가져오는 Axios 요청
@@ -66,9 +78,9 @@ axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/i
     <>
       <Container1>
         <ModalBlock>
-          <Button4 onClick={() => closeModal(false)}>
+          <Button5 onClick={() => closeModal(false)}>
             <img style={{ width: "36px", height: "36px", margin: "-10px 0px 0px 690px" }} src={Close} />
-          </Button4>
+          </Button5>
           <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>
             베이스 {isButton1Clicked && <Box1 />}
           </Button1>
@@ -78,6 +90,9 @@ axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/i
           <Button3 clicked={isButton3Clicked} onClick={handleButton3Click}>
             토핑 {isButton3Clicked && <Box1 />}
           </Button3>
+          <Button4 clicked={isButton4Clicked} onClick={handleButton4Click}>
+            드리즐 {isButton4Clicked && <Box1 />}
+          </Button4>
           <Box2></Box2>
           
             <Container2>
@@ -100,11 +115,14 @@ axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/i
  
               <SelectedIngredientsList>
                 {selectedIngredients.map((ingredient) => (
-                  <SelectedIngredient key={ingredient}>{ingredient}</SelectedIngredient>
+                  <SelectedIngredientButton key={ingredient}>
+                    <img style={{ width: "15px", height: "15px", margin: "0px 5px 0px 0px" }} src={Close} />
+                    {ingredient}
+                    </SelectedIngredientButton>
                 ))}
               </SelectedIngredientsList>
 
-              <Button5 onClick={() => closeModal(false)}>확인</Button5>
+              <Button6 onClick={() => closeModal(false)}>확인</Button6>
             </Container3>
 
         </ModalBlock>
@@ -188,6 +206,17 @@ border: none;
   cursor:pointer; 
  }
 `;
+const Button4 = styled.button`
+font-size: 24px;
+background: none;
+height: 65px;
+width: 123px;
+margin: -8px 0 0 11px;
+border: none;
+ &:hover {
+  cursor:pointer; 
+ }
+`;
 
 const Box1 = styled.div`
 display:flex; 
@@ -199,7 +228,7 @@ background: #808080;
 margin: 10px 0 0 -5px;
   `;
 
-  const Button4 = styled.button`
+  const Button5 = styled.button`
   background: none;
 
   margin: 0px 0 0 11px;
@@ -251,7 +280,7 @@ margin: -7px 0 0 -24px;
   align-items:center;
   `;
 
-  const Button5 = styled.button`
+  const Button6 = styled.button`
   font-size: 24px;
   background: #D9D9D9;
   height: 82px;
@@ -271,8 +300,21 @@ justify-content: center;
 align-items: center;
 `;
 
-const SelectedIngredient = styled.div`
-    // ... 이하 스타일 생략 ...
+const SelectedIngredientButton = styled.button`
+padding: 10px;
+background: #D9D9D9;
+border: 1.37915px solid #959595;
+border-radius: 11.0332px;
+margin-right: 11px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 400;
+font-size: 19.3081px;
+
+&:hover {
+  cursor:pointer; 
+ }
 `;
 
 export default ModalIngredient
