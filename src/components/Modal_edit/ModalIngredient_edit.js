@@ -49,30 +49,51 @@ const ModalIngredient = ({ closeModal }) => {
   
 
   useEffect(() => {
+
+    let url = '';
+    if (isButton1Clicked) {
+      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/1';
+    } else if (isButton2Clicked) {
+      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/2';
+    } else if (isButton3Clicked) {
+      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/3';
+    } else if (isButton4Clicked) {
+      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/4';
+    }
+
 // 서버에서 데이터를 가져오는 Axios 요청
-axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/1')
-  .then((response) => {
+  axios
+      .get(url)
+      .then((response) => {
     // 서버 응답에서 데이터를 추출하고 Ingredients 배열 업데이트
     console.log(response.data)
     setIngredients(response.data.data); 
-  })
+  }) 
   .catch((error) => {
     console.error(`Error fetching data: ${error}`);
   });
 
-  }, []);
+}, [isButton1Clicked, isButton2Clicked, isButton3Clicked, isButton4Clicked]);
 
 
-  const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      setSelectedIngredients((prevSelectedIngredients) => [...prevSelectedIngredients, value]);
-    } else {
-      setSelectedIngredients((prevSelectedIngredients) =>
-        prevSelectedIngredients.filter((ingredient) => ingredient !== value)
-      );
-    }
-  };
+const handleCheckboxChange = (event) => {
+  const { value, checked } = event.target;
+  if (checked) {
+    setSelectedIngredients((prevSelectedIngredients) => [...prevSelectedIngredients, value]);
+  } else {
+    setSelectedIngredients((prevSelectedIngredients) =>
+      prevSelectedIngredients.filter((ingredient) => ingredient !== value)
+    );
+  }
+};
+
+const isButton6Enabled = selectedIngredients.length > 0;
+
+const handleButton7Click = (ingredient) => {
+  setSelectedIngredients((prevSelectedIngredients) =>
+    prevSelectedIngredients.filter((selectedIngredient) => selectedIngredient !== ingredient)
+  );
+};
 
   return (
     <>
@@ -95,34 +116,42 @@ axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/i
           </Button4>
           <Box2></Box2>
           
-            <Container2>
+          <Container2>
+            <div style={{ margin: "34px 0 0 46px" }}>
               {ingredients.map((ingredient) => (
-                <label key={ingredient.menuCode}>
-                  <input
+                <CheckboxLabel key={ingredient.menuCode}>
+                  <CheckboxInput
                     type="checkbox"
                     value={ingredient.name}
                     checked={selectedIngredients.includes(ingredient.name)}
                     onChange={handleCheckboxChange}
                   />
+                  <CheckboxCustom checked={selectedIngredients.includes(ingredient.name)} />
                   {ingredient.name}
-                </label>
+
+                </CheckboxLabel>
               ))}
-            </Container2>
+            </div>
+          </Container2>
 
 
 
             <Container3>
  
-              <SelectedIngredientsList>
-                {selectedIngredients.map((ingredient) => (
-                  <SelectedIngredientButton key={ingredient}>
-                    <img style={{ width: "15px", height: "15px", margin: "0px 5px 0px 0px" }} src={Close} />
-                    {ingredient}
-                    </SelectedIngredientButton>
-                ))}
-              </SelectedIngredientsList>
+            <SelectedIngredientsList>
+              {selectedIngredients.map((ingredient) => (
+                <SelectedIngredient key={ingredient}>
+                  <Button7 onClick={() => handleButton7Click(ingredient)}>
+                    <img style={{ width: "15px", height: "15px" }} src={Close} />
+                  </Button7>
+                  {ingredient}
+                </SelectedIngredient>
+              ))}
+            </SelectedIngredientsList>
 
-              <Button6 onClick={() => closeModal(false)}>확인</Button6>
+              <Button6 enabled={isButton6Enabled} onClick={() => closeModal(false)}>
+              확인
+            </Button6>
             </Container3>
 
         </ModalBlock>
@@ -131,6 +160,7 @@ axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/i
     </>
   );
   }
+
 
 const Container1 = styled.div`
     position: fixed;
@@ -252,18 +282,17 @@ margin: -7px 0 0 -24px;
 
   export const Container2 = styled.div`
   display:flex;
-  justify-content:center;
-  align-items:center;
+  justify-content:left;
+  align-items:left;
   flex-direction: column; 
   width: 778px;
   height: 390px;
   margin: -2px 0 0 -24px;
-  
   `;
 
   export const Container3 = styled.div`
   display:flex;
-  justify-content:center;
+  justify-content: flex-end;
   align-items:center;
   flex-direction: column; 
 
@@ -282,17 +311,30 @@ margin: -7px 0 0 -24px;
 
   const Button6 = styled.button`
   font-size: 24px;
-  background: #D9D9D9;
+  background-color: ${(props) => (props.enabled ? 'black' : '#D9D9D9')};
+  color: ${(props) => (props.enabled ? 'white' : 'black')};  
   height: 82px;
   width: 720px;
-  margin: 20px 0 0 0;
+  margin-top: auto;
+  margin-bottom: 15px;
   border: none;
   border-radius: 16px;
+
    &:hover {
     cursor:pointer; 
    }
   `;
 
+  const Button7 = styled.button`
+  background: none;
+  height: 40px;
+  width: 40px;
+  border: none;
+  
+   &:hover {
+    cursor:pointer; 
+   }
+  `;
 
 const SelectedIngredientsList = styled.div`
 display: flex;
@@ -300,21 +342,43 @@ justify-content: center;
 align-items: center;
 `;
 
-const SelectedIngredientButton = styled.button`
-padding: 10px;
+const SelectedIngredient = styled.div`
+padding: 5px 10px 5px 0;
 background: #D9D9D9;
 border: 1.37915px solid #959595;
 border-radius: 11.0332px;
-margin-right: 11px;
+margin: 24px 11px 0 0;
+display:flex;
+justify-content:center;
+align-items:center;
 
 font-family: 'Pretendard';
 font-style: normal;
 font-weight: 400;
 font-size: 19.3081px;
 
-&:hover {
-  cursor:pointer; 
- }
+
 `;
 
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: left;
+  margin-bottom: 28px;
+  font-size: 20px;
+  font-family: 'Pretendard';
+
+`;
+
+const CheckboxInput = styled.input`
+display: none;
+
+`;
+const CheckboxCustom = styled.div`
+width: 28px;
+height: 28px;
+  border: 2px solid #000;
+  background-color: ${(props) => (props.checked ? '#000' : 'transparent')};
+  margin-right: 20px;
+  cursor: pointer;
+`;
 export default ModalIngredient

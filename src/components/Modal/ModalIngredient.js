@@ -80,19 +80,19 @@ axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/i
           </Button3>
           <Box2></Box2>
           
-            <Container2>
-              {ingredients.map((ingredient) => (
-                <label key={ingredient.menuCode}>
-                  <input
-                    type="checkbox"
-                    value={ingredient.name}
-                    checked={selectedIngredients.includes(ingredient.name)}
-                    onChange={handleCheckboxChange}
-                  />
-                  {ingredient.name}
-                </label>
-              ))}
-            </Container2>
+          <Container2>
+            {ingredients.map((ingredient) => (
+              <CheckboxLabel key={ingredient.menuCode}>
+                <CheckboxInput
+                  type="checkbox"
+                  value={ingredient.name}
+                  checked={selectedIngredients.includes(ingredient.name)}
+                  onChange={handleCheckboxChange}
+                />
+                {ingredient.name}
+              </CheckboxLabel>
+            ))}
+          </Container2>
 
             <Container4>
               {selectedIngredients.map((ingredient) => (
@@ -258,5 +258,19 @@ margin: -7px 0 0 -24px;
     cursor:pointer; 
    }
   `;
+
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 20px;
+`;
+
+const CheckboxInput = styled.input`
+  width: 200px;
+  height: 20px;
+  margin-right: 10px;
+ 
+`;
 
 export default ModalIngredient
