@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Close from '../../assets/close.png';
 
-const ModalIngredient = ({ closeModal }) => {
+const ModalIngredient = ({ closeModal, onConfirm }) => {
 
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
@@ -95,6 +95,30 @@ const handleButton7Click = (ingredient) => {
   );
 };
 
+const handleButton6Click = () => {
+  const selectedData = ingredients.filter((item) => selectedIngredients.includes(item.ingredientName));
+  closeModal(); // 모달 닫기
+  onConfirm(selectedData); // 선택한 데이터 전송
+};
+
+const handleModalClose = (selectedData) => {
+  console.log("Selected data from modal:", selectedData);
+  
+  const updatedMenuData = {
+    ...menuData,
+    recipes: menuData.recipes.map((recipe, index) => {
+      const updatedIngredients = [...recipe.ingredients, ...selectedData];
+      return {
+        ...recipe,
+        ingredients: updatedIngredients
+      };
+    })
+  };
+
+  // 부모 컴포넌트의 상태를 업데이트합니다.
+  setMenuData(updatedMenuData);
+};
+
   return (
     <>
       <Container1>
@@ -117,21 +141,21 @@ const handleButton7Click = (ingredient) => {
           <Box2></Box2>
           
           <Container2>
-            <div style={{ margin: "34px 0 0 46px" }}>
-              {ingredients.map((ingredient) => (
-                <CheckboxLabel key={ingredient.menuCode}>
-                  <CheckboxInput
-                    type="checkbox"
-                    value={ingredient.name}
-                    checked={selectedIngredients.includes(ingredient.name)}
-                    onChange={handleCheckboxChange}
-                  />
-                  <CheckboxCustom checked={selectedIngredients.includes(ingredient.name)} />
-                  {ingredient.name}
+          <div style={{ margin: "34px 0 0 46px" }}>
+  {ingredients.map((ingredient) => (
+    <CheckboxLabel key={ingredient.ingredientCode}>
+      <CheckboxInput
+        type="checkbox"
+        value={ingredient.ingredientName}
+        checked={selectedIngredients.includes(ingredient.ingredientName)}
+        onChange={handleCheckboxChange}
+      />
+      <CheckboxCustom checked={selectedIngredients.includes(ingredient.ingredientName)} />
+      {ingredient.ingredientName}
+    </CheckboxLabel>
+  ))}
+</div>
 
-                </CheckboxLabel>
-              ))}
-            </div>
           </Container2>
 
 
@@ -149,9 +173,10 @@ const handleButton7Click = (ingredient) => {
               ))}
             </SelectedIngredientsList>
 
-              <Button6 enabled={isButton6Enabled} onClick={() => closeModal(false)}>
-              확인
-            </Button6>
+            <Button6 enabled={isButton6Enabled} onClick={handleButton6Click}> 확인 </Button6>
+
+
+
             </Container3>
 
         </ModalBlock>
@@ -344,7 +369,7 @@ align-items: center;
 
 const SelectedIngredient = styled.div`
 padding: 5px 10px 5px 0;
-background: #D9D9D9;
+background: #D9D9D9;   
 border: 1.37915px solid #959595;
 border-radius: 11.0332px;
 margin: 24px 11px 0 0;

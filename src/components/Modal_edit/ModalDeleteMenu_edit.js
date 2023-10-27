@@ -134,4 +134,5 @@ color: #000000;
     cursor:pointer; 
    }
   `;
+  
 export default ModalIngredient

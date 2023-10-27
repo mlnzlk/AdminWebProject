@@ -86,7 +86,15 @@ export default function EditMenu() {
         setSelectedFile(selectedFile); // 파일 선택 시 selectedFile 상태 업데이트
       }
     };
+
     const [prices, setPrices] = useState([]);
+
+
+    const handleSelectedIngredients = (selectedIngredients) => {
+      console.log("Selected ingredients: ", selectedIngredients);
+      // 여기서 selectedIngredients를 이용한 로직을 추가할 수 있습니다.
+    };
+    
 
     useEffect(() => {
 
@@ -176,8 +184,12 @@ export default function EditMenu() {
               });
           };
 
+          
+
     return (
-      <div>
+      
+      <div> 
+
         <Container1>
         <Input1
   type="text"
@@ -305,8 +317,6 @@ export default function EditMenu() {
 
 
 </ContainerList>
-
-
 
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
