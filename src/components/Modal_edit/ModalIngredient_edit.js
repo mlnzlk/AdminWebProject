@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Close from '../../assets/close.png';
 
-const ModalIngredient = ({ closeModal, onConfirm }) => {
+const ModalIngredient = ({ closeModal, onConfirm: handleParentConfirm, menuData, setMenuData }) => {
 
     const [isButton1Clicked, setButton1Clicked] = useState(true);
     const [isButton2Clicked, setButton2Clicked] = useState(false);
@@ -95,29 +95,14 @@ const handleButton7Click = (ingredient) => {
   );
 };
 
+
 const handleButton6Click = () => {
   const selectedData = ingredients.filter((item) => selectedIngredients.includes(item.ingredientName));
+  console.log("Selected data to send to parent component:", selectedData); // selectedData 로그 출력
+  handleParentConfirm(selectedData); // 선택한 데이터 전송
   closeModal(); // 모달 닫기
-  onConfirm(selectedData); // 선택한 데이터 전송
 };
 
-const handleModalClose = (selectedData) => {
-  console.log("Selected data from modal:", selectedData);
-  
-  const updatedMenuData = {
-    ...menuData,
-    recipes: menuData.recipes.map((recipe, index) => {
-      const updatedIngredients = [...recipe.ingredients, ...selectedData];
-      return {
-        ...recipe,
-        ingredients: updatedIngredients
-      };
-    })
-  };
-
-  // 부모 컴포넌트의 상태를 업데이트합니다.
-  setMenuData(updatedMenuData);
-};
 
   return (
     <>

@@ -121,14 +121,14 @@ export default function EditMenu() {
                   // 첫 번째 레시피의 크기를 확인하고 초기 버튼 상태를 설정
                   if (response.data.recipes && response.data.recipes.length > 0) {
                     // Set prices based on recipe data
-                    if (response.data.recipes[0].size === '8oz') {
+                    if (response.data.recipes[0].size === '8') {
                       setButton1Clicked(true);
                       setButton2Clicked(false);
                       setPrice1(response.data.recipes[0].price.toString());
                       setPrice2(response.data.recipes[1].price.toString());
                       setPrice3(response.data.recipes[2].price.toString());
 
-                    } else if (response.data.recipes[0].size === '4oz') {
+                    } else if (response.data.recipes[0].size === '4') {
                       setButton1Clicked(false);
                       setButton2Clicked(true);
                       setPrice1(response.data.recipes[0].price.toString());
@@ -184,7 +184,23 @@ export default function EditMenu() {
               });
           };
 
+          const handleConfirm = (selectedData) => {
+            console.log("Selected data from modal:", selectedData);
+            
+            const updatedMenuData = {
+              ...menuData,
+              recipes: menuData.recipes.map((recipe) => {
+                const updatedIngredients = recipe.ingredient ? [...recipe.ingredient, ...selectedData] : [...selectedData];
+                return {
+                  ...recipe,
+                  ingredient: updatedIngredients
+                };
+              })
+            };
           
+            // 부모 컴포넌트의 상태를 업데이트합니다.
+            setMenuData(updatedMenuData); 
+          };
 
     return (
       
@@ -304,8 +320,6 @@ export default function EditMenu() {
     }}
   />
 )}
-
-
           </>
         );
       })}
@@ -327,7 +341,14 @@ export default function EditMenu() {
               <label style={{margin: "0px 0px 0px 0px", fontFamily: "Pretendard", fontSize: '20px', }}> 재료추가 </label>
             </div>
           </Button4>
-          {ingredientModalOpen && <ModalIngredient_edit closeModal={setIngredientModalOpen} />}
+          {ingredientModalOpen && (
+            <ModalIngredient_edit
+              closeModal={() => setIngredientModalOpen(false)}
+              onConfirm={handleConfirm}
+              menuData={menuData}
+              setMenuData={setMenuData}
+            />
+          )}
          </div>
 
         <label style={{margin: "10px 20px 0px 196px", fontSize: '20px', }}> 판매가 </label>
@@ -423,4 +444,3 @@ export default function EditMenu() {
         </div>
       );
   }
-
