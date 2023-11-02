@@ -29,6 +29,8 @@ export default function EditMenu() {
   const [menuData, setMenuData] = useState(null);
   const [categoryId, setCategoryId] = useState('category1'); // 기본값을 'category1'로 설정
 
+  const [updatedMenuData, setUpdatedMenuData] = useState(null); // 업데이트된 메뉴데이터 전역변수
+
     const navigate = useNavigate();
     
     const [isButton1Clicked, setButton1Clicked] = useState(false);
@@ -68,9 +70,6 @@ export default function EditMenu() {
       }
     };
 
-    const handleClick = () => {
-      navigate('/menumanagement');
-    };
 
     const url = menuData && menuData.url;
     const fileName = url ? url.substring(url.lastIndexOf("/") + 1) : "";  
@@ -88,13 +87,6 @@ export default function EditMenu() {
     };
 
     const [prices, setPrices] = useState([]);
-
-
-    const handleSelectedIngredients = (selectedIngredients) => {
-      console.log("Selected ingredients: ", selectedIngredients);
-      // 여기서 selectedIngredients를 이용한 로직을 추가할 수 있습니다.
-    };
-    
 
     useEffect(() => {
 
@@ -174,14 +166,20 @@ export default function EditMenu() {
 
             
             // 수정된 데이터를 서버에 보내기
-            axios.patch(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe`, menuData)
-              .then((response) => {
-                console.log('데이터 수정 성공:', response);
-                // 필요한 처리 작업 수행
-              })
-              .catch((error) => {
-                console.error('데이터 수정 실패:', error);
-              });
+            axios.patch('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe', updatedMenuData, {
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+.then(response => {
+  console.log(response.data);
+})
+.catch(error => {
+  console.error(`Error updating data: ${error}`);
+});
+
+            
+
           };
 
           const handleConfirm = (selectedData) => {
@@ -284,12 +282,12 @@ export default function EditMenu() {
           </ContainerH>) : null }
 
           <ContainerList
-  style={{
-    overflowY: 'auto',
-    width: '1200px',
-    maxHeight: '444px',
-    scrollbarWidth: 'thin',
-  }}
+        style={{
+          overflowY: 'auto',
+          width: '1200px',
+          maxHeight: '444px',
+          scrollbarWidth: 'thin',
+        }}
 >           
 {menuData &&
   menuData.recipes &&  
@@ -362,7 +360,7 @@ export default function EditMenu() {
               </div>  
               <label style={{fontFamily: "Pretendard", fontWeight: "600", fontSize: '20px', margin:"0 0 3px 20px" }}>
                 원 
-              </label>
+              </label>  
             </div>
         </Button5>
           {numberWonModalOpen1 && <ModalNumber_Won_edit closeModal={setNumberWonModalOpen1} setValue={setPrice1}/>}
