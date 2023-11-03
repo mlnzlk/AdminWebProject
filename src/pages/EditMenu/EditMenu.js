@@ -27,7 +27,7 @@ export default function EditMenu() {
   const [menuName, setMenuName] = useState('');
   const { productId } = useParams();
   const [menuData, setMenuData] = useState(null);
-  const [categoryId, setCategoryId] = useState('category1'); // 기본값을 'category1'로 설정
+  const [categoryId, setCategoryId] = useState('1'); // 기본값을 'category1'로 설정
   const [imageList, setImageList] = useState([]);
 
   const [updatedMenuData, setUpdatedMenuData] = useState(null); // 업데이트된 메뉴데이터 전역변수
@@ -98,13 +98,13 @@ export default function EditMenu() {
           
             // categoryId 값을 설정
           if (response.data.categoryId === 1) {
-            setCategoryId('category1');
+            setCategoryId('1');
           } else if (response.data.categoryId === 2) {
-            setCategoryId('category2');
+            setCategoryId('2');
           } else if (response.data.categoryId === 3) {
-            setCategoryId('category3');
+            setCategoryId('3');
           } else if (response.data.categoryId === 4) {
-            setCategoryId('category4');
+            setCategoryId('4');
           }
 
                   // 첫 번째 레시피의 크기를 확인하고 초기 버튼 상태를 설정
@@ -249,12 +249,23 @@ export default function EditMenu() {
 />
 
 
-        <Select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-          <option value="category1">커피</option>
-          <option value="category2">티&라떼</option>
-          <option value="category3">에이드</option>
-          <option value="category4">스파클링</option>
-        </Select>
+<Select
+  value={categoryId}
+  onChange={(e) => {
+    setCategoryId(e.target.value);
+    const updatedMenuData = {
+      ...menuData,
+      categoryId: e.target.value
+    };
+    setMenuData(updatedMenuData);
+  }}
+>
+  <option value="1">커피</option>
+  <option value="2">티&라떼</option>
+  <option value="3">에이드</option>
+  <option value="4">스파클링</option>
+</Select>
+
             <Container2>
             <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>
           아이스
