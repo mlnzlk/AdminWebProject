@@ -78,12 +78,10 @@ export default function EditMenu() {
 
     const handleFileInputChange = (event) => {
       const selectedFile = event.target.files[0];  // 파일 선택 후 selectedFile 상태를 업데이트하고, 라벨의 내용을 파일 이름으로 변경하도록 조건부 렌더링을 사용
-      if (selectedFile) {
-
-        // 선택한 파일을 처리하는 로직 추후에 추가하기
-        
+      if (selectedFile) {        
         console.log("선택한 파일:", selectedFile);
-        setSelectedFile(selectedFile); // 파일 선택 시 selectedFile 상태 업데이트
+        setSelectedFile(selectedFile); // 선택한 파일을 selectedFile 상태 변수에 저장
+        setImageList(prevImageList => [...prevImageList, selectedFile]); // 파일 선택 시 selectedFile 상태 업데이트
       }
     };
 
@@ -162,24 +160,33 @@ export default function EditMenu() {
 
           }, [productId]);
 
+
+          // 저장하기 버튼 클릭시 이미지 정송, 수정된 json 파일 전송
           const handleSave = async () => {
             const formData = new FormData(); 
           
             imageList.forEach(image => {
               formData.append('img', image);
             });
+            
           
             formData.append(
               'request',
-              JSON.stringify({updatedMenuData}),
+              // JSON.stringify({updatedMenuData}),
+              new Blob([JSON.stringify(menuData)], {type: 'application/json'})
             );
           
             try {
-              await axios.patch('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe', formData, {
+              await axios.patch(
+                'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe', 
+                formData, 
+                {
                 headers: {'Content-Type': 'multipart/form-data'}
-              })
+                })
               .then(response => {
                 console.log(response.data);
+
+                navigate('/menumanagement');
               })
               .catch(error => { 
                 console.error(`Error updating data: ${error}`);
@@ -187,10 +194,12 @@ export default function EditMenu() {
             } catch (error) {
               console.error(error);
             }
+            console.log("Updated menu data:", menuData);
+            console.log("Updated img file:", imageList);
           };
           
           
-
+    
           const handleConfirm = (selectedData) => {
             console.log("Selected data from modal:", selectedData);
             
@@ -205,9 +214,12 @@ export default function EditMenu() {
               })
             };
           
-            // 부모 컴포넌트의 상태를 업데이트합니다.
+            // 부모 컴포넌트의 상태를 업데이트
             setMenuData(updatedMenuData); 
-          };
+    
+            console.log("Updated menu data:", updatedMenuData);
+    
+          };    
 
     return (
       
