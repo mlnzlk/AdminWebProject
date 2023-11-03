@@ -28,6 +28,7 @@ export default function EditMenu() {
   const { productId } = useParams();
   const [menuData, setMenuData] = useState(null);
   const [categoryId, setCategoryId] = useState('category1'); // 기본값을 'category1'로 설정
+  const [imageList, setImageList] = useState([]);
 
   const [updatedMenuData, setUpdatedMenuData] = useState(null); // 업데이트된 메뉴데이터 전역변수
 
@@ -161,26 +162,34 @@ export default function EditMenu() {
 
           }, [productId]);
 
-          const handleSave = () => {
-
-
-            
-            // 수정된 데이터를 서버에 보내기
-            axios.patch('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe', updatedMenuData, {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-.then(response => {
-  console.log(response.data);
-})
-.catch(error => {
-  console.error(`Error updating data: ${error}`);
-});
-
-            
-
+          const handleSave = async () => {
+            const formData = new FormData(); 
+          
+            imageList.forEach(image => {
+              formData.append('img', image);
+            });
+          
+            formData.append(
+              'request',
+              JSON.stringify({updatedMenuData}),
+            );
+          
+            try {
+              await axios.patch('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe', formData, {
+                headers: {'Content-Type': 'multipart/form-data'}
+              })
+              .then(response => {
+                console.log(response.data);
+              })
+              .catch(error => { 
+                console.error(`Error updating data: ${error}`);
+              });
+            } catch (error) {
+              console.error(error);
+            }
           };
+          
+          
 
           const handleConfirm = (selectedData) => {
             console.log("Selected data from modal:", selectedData);
@@ -433,7 +442,7 @@ export default function EditMenu() {
       ) : null }       
         
         { isButton2Clicked ? (
-      <Button9 onClick={handleSave}>저장하기</Button9>
+      <Button10 onClick={handleSave}>저장하기</Button10>
       ) : null }
 
         </div>
