@@ -202,11 +202,13 @@ export default function EditMenu() {
     
           const handleConfirm = (selectedData) => {
             console.log("Selected data from modal:", selectedData);
-            
+          
             const updatedMenuData = {
               ...menuData,
               recipes: menuData.recipes.map((recipe) => {
-                const updatedIngredients = recipe.ingredient ? [...recipe.ingredient, ...selectedData] : [...selectedData];
+                const updatedIngredients = recipe.ingredient
+                  ? [...recipe.ingredient, ...selectedData.map((data, index) => ({ ...data, seq: index + recipe.ingredient.length }))]
+                  : [...selectedData];
                 return {
                   ...recipe,
                   ingredient: updatedIngredients
@@ -214,12 +216,10 @@ export default function EditMenu() {
               })
             };
           
-            // 부모 컴포넌트의 상태를 업데이트
-            setMenuData(updatedMenuData); 
-    
+            setMenuData(updatedMenuData);
             console.log("Updated menu data:", updatedMenuData);
-    
-          };    
+          };
+          
 
     return (
       
