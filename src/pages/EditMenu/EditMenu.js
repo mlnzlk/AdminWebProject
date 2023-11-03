@@ -85,8 +85,6 @@ export default function EditMenu() {
       }
     };
 
-    const [prices, setPrices] = useState([]);
-
     useEffect(() => {
 
       
@@ -229,9 +227,27 @@ export default function EditMenu() {
         <Input1
   type="text"
   placeholder="메뉴명 입력"
-  value={menuName || (menuData && menuData.name)} // Input1의 값은 menuName 상태 또는 menuData.name으로 설정
-  onChange={(e) => setMenuName(e.target.value)} // 선택 사항: 입력 변경 처리
+  value={menuName || (menuData && menuData.name)}
+  onChange={(e) => setMenuName(e.target.value)}
+  onBlur={() => {
+    const updatedMenuData = {
+      ...menuData,
+      name: menuName.trim() !== '' ? menuName : null
+    };
+    setMenuData(updatedMenuData);
+  }}
+  onKeyDown={(e) => {
+    if (e.key === 'Backspace' && menuName === '' && (menuData && menuData.name !== null)) {
+      e.preventDefault(); // 기본 backspace 동작 방지
+      const updatedMenuData = {
+        ...menuData,
+        name: null
+      };
+      setMenuData(updatedMenuData);
+    }
+  }}
 />
+
 
         <Select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
           <option value="category1">커피</option>
