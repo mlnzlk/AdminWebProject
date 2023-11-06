@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import styled from 'styled-components';
 
 
-const ModalNumber_Won = ({ closeModal, setValue }) => {
+const ModalNumber_Won = ({ closeModal, setValue}) => {
 
   const handleOutsideClick = (e) => {  // 모달창 외부 누르면 모달창 닫히게 해주는 로직
     if (e.target.id === 'background') {
@@ -27,9 +27,11 @@ const ModalNumber_Won = ({ closeModal, setValue }) => {
 
   //ModalNumber_Won으로부터 받은 값을 해당 상태값에 설정하는 함수
   const confirmAndClose = () => {
-    setValue(calc);
     closeModal(false);
- }
+    setValue(calc);
+  };
+  
+  
     return (
       <>
         

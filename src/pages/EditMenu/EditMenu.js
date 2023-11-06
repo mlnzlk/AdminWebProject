@@ -41,8 +41,8 @@ export default function EditMenu() {
   const [numberWonModalOpen2, setNumberWonModalOpen2] = useState(false);
   const [numberWonModalOpen3, setNumberWonModalOpen3] = useState(false);
   const [numberWonModalOpen4, setNumberWonModalOpen4] = useState(false);
-  
-  
+ 
+ 
   // 각 가격에 대한 상태값을 생성
   const [price1, setPrice1] = useState("");
   const [price2, setPrice2] = useState("");
@@ -110,18 +110,13 @@ export default function EditMenu() {
                   if (response.data.recipes[0].size === '8') {
                     setButton1Clicked(true);
                     setButton2Clicked(false);
-                    setPrice1(response.data.recipes[0].price.toString());
-                    setPrice2(response.data.recipes[1].price.toString());
-                    setPrice3(response.data.recipes[2].price.toString());
-  
                   } else if (response.data.recipes[0].size === '4') {
                     setButton1Clicked(false);
                     setButton2Clicked(true);
-                    setPrice1(response.data.recipes[0].price.toString());
-                    setPrice2(response.data.recipes[1].price.toString());
-                    setPrice3(response.data.recipes[2].price.toString());
-  
                   }
+                  setPrice1(response.data.recipes[0].price.toString());
+                  setPrice2(response.data.recipes[1].price.toString());
+                  setPrice3(response.data.recipes[2].price.toString());
                 }
               })
               
@@ -400,6 +395,7 @@ export default function EditMenu() {
 
 
 
+
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <div>
           <Button4 onClick={() => setIngredientModalOpen(true)}> 
@@ -432,8 +428,23 @@ export default function EditMenu() {
               </label>  
             </div>
         </Button5>
-          {numberWonModalOpen1 && <ModalNumber_Won_edit closeModal={setNumberWonModalOpen1} setValue={setPrice1}/>}
-
+        {numberWonModalOpen1 && (
+    <ModalNumber_Won_edit
+      closeModal={setNumberWonModalOpen1}
+      setValue={(value) => {
+        setPrice1(value);
+        setMenuData((prevMenuData) => ({
+          ...prevMenuData,
+          recipes: [
+            { ...prevMenuData.recipes[0], price: value },
+            prevMenuData.recipes[1],
+            prevMenuData.recipes[2]
+          ]
+        }));
+      }}
+    />
+  )}
+  
         <Button5  style={{ marginRight: "10px"}} // 판매가2
           onClick={() => setNumberWonModalOpen2(true)}> 
             <div style={{ display: 'flex', alignItems: 'center'}}>
@@ -445,7 +456,22 @@ export default function EditMenu() {
               </label>
             </div>
         </Button5>
-          {numberWonModalOpen2 && <ModalNumber_Won_edit closeModal={setNumberWonModalOpen2} setValue={setPrice2}/>}
+        {numberWonModalOpen2 && (
+  <ModalNumber_Won_edit
+    closeModal={setNumberWonModalOpen2}
+    setValue={(value) => {
+      setPrice2(value);
+      setMenuData((prevMenuData) => ({
+        ...prevMenuData,
+        recipes: [
+          prevMenuData.recipes[0],
+          { ...prevMenuData.recipes[1], price: value },
+          prevMenuData.recipes[2]
+        ]
+      }));
+    }}
+  />
+)}
 
         <Button5  style={{ marginRight: "10px"}} // 판매가3.
           onClick={() => setNumberWonModalOpen3(true)}> 
@@ -458,8 +484,22 @@ export default function EditMenu() {
               </label>
             </div>
         </Button5>
-          {numberWonModalOpen3 && <ModalNumber_Won_edit closeModal={setNumberWonModalOpen3} setValue={setPrice3}/>}
-        </div>
+        {numberWonModalOpen3 && (
+  <ModalNumber_Won_edit
+    closeModal={setNumberWonModalOpen3}
+    setValue={(value) => {
+      setPrice3(value);
+      setMenuData((prevMenuData) => ({
+        ...prevMenuData,
+        recipes: [
+          prevMenuData.recipes[0],
+          prevMenuData.recipes[1],
+          { ...prevMenuData.recipes[2], price: value }
+        ]
+      }));
+    }}
+  />
+)}        </div>
       </div> 
 
         {/* 웹소켓 테스트버튼 */}
