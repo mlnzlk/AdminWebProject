@@ -143,7 +143,7 @@ const [inputValue, setInputValue] = useState(0);
 
 
 const handleButtonClick = (valueObject) => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
 
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
@@ -165,7 +165,7 @@ const handleButtonClick = (valueObject) => {
 
 
 const handleHotWaterClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "HotWater" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -181,7 +181,7 @@ const handleHotWaterClick = () => {
 };
 
 const handlePauseSyrupClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "PauseSyrup" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {

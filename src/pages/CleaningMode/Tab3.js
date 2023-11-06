@@ -134,7 +134,7 @@ function MyComponent() {
     const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
 
 const handleOREOClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "Oreo" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -150,7 +150,7 @@ const handleOREOClick = () => {
 };
 
 const handleROTUSClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "Rotus" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -167,7 +167,7 @@ const handleROTUSClick = () => {
 
 
 const handleToOrigin = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "ToOrigin" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -183,7 +183,7 @@ const handleToOrigin = () => {
 };
 
 const handleKeepPicking = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "KeepPicking" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -200,7 +200,7 @@ const handleKeepPicking = () => {
 
 
 const handleFstDraw = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "FstDraw" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -216,7 +216,7 @@ const handleFstDraw = () => {
 };
 
 const handleDrizzleStop = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "handleDrizzleStop" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -235,14 +235,14 @@ const handleDrizzleStop = () => {
    <Box1>
      <Box2 style={{marginTop:"26px"}}> TOPPING </Box2>
      <div>
-          <Button3 style={{margin:"10px 10px 10px -10px"}} clicked={clickedButton3} onClick={handleOREOClick}>오레오</Button3>
+          <Button3 style={{margin:"10px 10px 10px 10px"}} clicked={clickedButton3} onClick={handleOREOClick}>오레오</Button3>
           <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>로투스</Button3>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 0 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button3 style={{margin:"10px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleOREOClick}>시리얼</Button3>
+          <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>초콜릿</Button3>
     </div>
     <div>
-          <Button4 style={{margin:"-10px 10px 10px 0px"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4}>ㅤ</Button4>
+    <Button3 style={{margin:"10px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleOREOClick}>코코볼</Button3>
+          <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>블링블링</Button3>
           <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
           <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
     </div>

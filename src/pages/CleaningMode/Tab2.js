@@ -136,7 +136,7 @@ function MyComponent() {
 
 
     const handleButtonClick = (valueObject) => {
-      const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+      const socketInstance = new WebSocket('ws://208.205.1.13:7090');
       
       socketInstance.onopen = function (event) {
         console.log('WebSocket 연결 성공');
@@ -151,7 +151,7 @@ function MyComponent() {
     };
 
    const handleICEClick = () => {
-    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
     const data1 = { "Icecream" : 1 }; // 클릭시 보내줄 json
     
     socketInstance.onopen = function (event) {
@@ -167,7 +167,7 @@ function MyComponent() {
 };
 
 const handleOPENClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "OPEN" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -183,7 +183,7 @@ const handleOPENClick = () => {
 };
 
 const handleCLOSEClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "CLOSE" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -199,7 +199,7 @@ const handleCLOSEClick = () => {
 };
 
 const handleMixieGripperOpenClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "MixieGripperOpen" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -215,7 +215,7 @@ const handleMixieGripperOpenClick = () => {
 };
 
 const handleMixieGripperCloseClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "MixieGripperClose" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -231,7 +231,7 @@ const handleMixieGripperCloseClick = () => {
 };
 
 const handlePortyGripperOpenClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "PortyGripperOpen" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
@@ -247,7 +247,7 @@ const handlePortyGripperOpenClick = () => {
 };
 
 const handlePortyGripperCloseClick = () => {
-  const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
   const data1 = { "PortyGripperClose" : 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {

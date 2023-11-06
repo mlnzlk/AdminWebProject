@@ -125,7 +125,7 @@ export default function EditMenu() {
   
           
   
-          const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+          const socketInstance = new WebSocket('ws://192.168.0.19:7090');
   
           // 연결이 열릴 때 실행될 이벤트 리스너
           socketInstance.onopen = function (event) {
@@ -431,12 +431,12 @@ export default function EditMenu() {
         {numberWonModalOpen1 && (
     <ModalNumber_Won_edit
       closeModal={setNumberWonModalOpen1}
-      setValue={(value) => {
-        setPrice1(value);
+      setValue={(value) => {   
+        setPrice1(value);     // value를 사용하여 price1 상태 변수를 업데이트
         setMenuData((prevMenuData) => ({
-          ...prevMenuData,
+          ...prevMenuData,    // 이전의 menuData 상태를 전개 연산자(...)를 사용하여 복사
           recipes: [
-            { ...prevMenuData.recipes[0], price: value },
+            { ...prevMenuData.recipes[0], price: value }, // recipes 배열에서 첫 번째 요소의 price 값을 value로 업데이트
             prevMenuData.recipes[1],
             prevMenuData.recipes[2]
           ]

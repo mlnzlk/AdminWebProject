@@ -88,7 +88,7 @@ export default function LeftContainer() {
   const [message, setMessage] = useState('');
 
   const handleButton1Click = () => {
-    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
     const data1 = { PauseRobot: 1 };
 
     socketInstance.onopen = function (event) {
@@ -104,7 +104,7 @@ export default function LeftContainer() {
   };
 
   const handleButton2Click = () => {
-    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
     const data2= { Reset: 1 };
 
     socketInstance.onopen = function (event) {
@@ -120,7 +120,7 @@ export default function LeftContainer() {
   };
 
   const handleButton3Click= () => {
-    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
     const data3= { EmergencyStop: 1 };
 
     socketInstance.onopen = function (event) {
