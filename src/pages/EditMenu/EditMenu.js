@@ -203,13 +203,24 @@ export default function EditMenu() {
         };
         
         const handleButton6Click = (data) => {
-          const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+          const parsedData = {
+            "productId": menuData.productId,
+            "name": menuData.name,
+            "menuCode": menuData.menuCode,
+            "categoryId": menuData.categoryId,
+            "locationId": menuData.locationId,
+            "url": menuData.url,
+            "seq": menuData.seq,
+            "recipes": [data] // 첫 번째 레시피 객체만 포함하도록 수정
+          };
+        
+          const socketInstance = new WebSocket('ws://208.205.0.2:7090');
         
           socketInstance.onopen = function (event) {
             console.log('WebSocket 연결 성공');
-            socketInstance.send(JSON.stringify(data));
+            socketInstance.send(JSON.stringify(parsedData));
         
-            setTimeout(function() {
+            setTimeout(function () {
               socketInstance.close();
               console.log('WebSocket 연결 닫힘');
             }, 3000); // 3초 후에 웹소켓 연결 닫기
