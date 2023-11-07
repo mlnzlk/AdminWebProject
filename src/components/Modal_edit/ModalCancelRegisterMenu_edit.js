@@ -18,7 +18,7 @@ const ModalIngredient = ({ closeModal }) => {
         <Container1>
           <ModalBlock>
 
-            <Label style={{marginTop: "91px", fontWeight: "600"}}>메뉴등록을 취소하시겠습니까?</Label>
+            <Label style={{marginTop: "91px", fontWeight: "600"}}>메뉴수정을 취소하시겠습니까?</Label>
             <Label style={{marginTop: "24px", fontWeight: "400"}}>저장하지 않고 취소할 경우 입력된 정보가 삭제됩니다.</Label>     
 
             <div style={{ display: 'flex', alignItems: 'center' }}>

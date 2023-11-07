@@ -307,3 +307,12 @@ align-items:center;
   cursor:pointer; 
  }
 `;
+
+export const ButtonX = styled.button`
+background: none;
+border:none ;
+
+&:hover {
+  cursor:pointer; 
+ }
+`;
