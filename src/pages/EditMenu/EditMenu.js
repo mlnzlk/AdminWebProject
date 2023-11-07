@@ -22,7 +22,7 @@ import axios from 'axios';
 
 export default function EditMenu() {
   const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
-  
+   
   const [menuName, setMenuName] = useState('');
   const { productId } = useParams();
   const [menuData, setMenuData] = useState(null);
@@ -123,31 +123,6 @@ export default function EditMenu() {
               .catch((error) => console.error(`Error!!!: ${error}`));
           }
   
-          
-  
-          const socketInstance = new WebSocket('ws://192.168.0.19:7090');
-  
-          // 연결이 열릴 때 실행될 이벤트 리스너
-          socketInstance.onopen = function (event) {
-            console.log('WebSocket 연결 성공');
-              setSocket(socketInstance); // socket 상태 업데이트
-      
-          };
-      
-          // 메시지 수신 이벤트 리스너
-          socketInstance.onmessage = function (event) {
-            console.log(`Received message from server : ${event.data}`);
-          };
-      
-          return () => {
-            if (socketInstance) {
-                socketInstance.close();
-            }
-            
-            setSocket(null); // 컴포넌트 unmount 시에는 소켓 인스턴스 제거
-        };
-  
-  
         }, [productId]);
   
   
@@ -227,8 +202,20 @@ export default function EditMenu() {
           });
         };
         
-          
-          
+        const handleButton6Click = (data) => {
+          const socketInstance = new WebSocket('ws://192.168.0.19:12345');
+        
+          socketInstance.onopen = function (event) {
+            console.log('WebSocket 연결 성공');
+            socketInstance.send(JSON.stringify(data));
+        
+            setTimeout(function() {
+              socketInstance.close();
+              console.log('WebSocket 연결 닫힘');
+            }, 3000); // 3초 후에 웹소켓 연결 닫기
+          };
+        };
+
     return (
       
       <div> 
@@ -513,9 +500,25 @@ export default function EditMenu() {
             <ModalDeleteMenu_edit closeModal={() => setDeleteMenu(false)} productId={menuData.productId} />
           )}
 
-          <Button6 style={{marginLeft: "416px"}}> 테스트 </Button6> 
-          <Button6 style={{marginLeft: "10px"}}> 테스트 </Button6> 
-          <Button6 style={{marginLeft: "10px"}}> 테스트 </Button6> 
+        <Button6
+          onClick={() => handleButton6Click(menuData.recipes[0])}
+          style={{ marginLeft: "416px" }}
+        >
+          테스트
+        </Button6>
+        <Button6
+          onClick={() => handleButton6Click(menuData.recipes[1])}
+          style={{ marginLeft: "10px" }}
+        >
+          테스트
+        </Button6>
+        <Button6
+          onClick={() => handleButton6Click(menuData.recipes[2])}
+          style={{ marginLeft: "10px" }}
+        >
+          테스트
+        </Button6>
+
           </div>
         ) : null }
 
@@ -527,9 +530,24 @@ export default function EditMenu() {
             <ModalDeleteMenu_edit closeModal={() => setDeleteMenu(false)} productId={menuData.productId} />
           )}
 
-          <Button7 style={{marginLeft: "416px"}}> 테스트 </Button7> 
-          <Button7 style={{marginLeft: "10px"}}> 테스트 </Button7>
-          <Button7 style={{marginLeft: "10px"}}> 테스트 </Button7> 
+        <Button7
+          onClick={() => handleButton6Click(menuData.recipes[0])}
+          style={{ marginLeft: "416px" }}
+        >
+          테스트
+        </Button7>
+        <Button7
+          onClick={() => handleButton6Click(menuData.recipes[1])}
+          style={{ marginLeft: "10px" }}
+        >
+          테스트
+        </Button7>
+        <Button7
+          onClick={() => handleButton6Click(menuData.recipes[2])}
+          style={{ marginLeft: "10px" }}
+        >
+          테스트
+        </Button7>
         </div>   
         ) : null }
         

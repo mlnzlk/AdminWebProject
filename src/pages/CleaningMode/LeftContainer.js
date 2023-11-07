@@ -1,6 +1,67 @@
 import React, { useState, useEffect } from 'react';// useEffect는 웹소켓 위해
 import styled from 'styled-components';
 
+export default function LeftContainer() {
+  const [message, setMessage] = useState('');
+
+  const handleButton1Click = () => {
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
+    const data1 = { PauseRobot: 1 };
+
+    socketInstance.onopen = function (event) {
+      console.log('WebSocket 연결 성공');
+      socketInstance.send(JSON.stringify(data1));
+      setMessage('일시정지 버튼이 클릭되었습니다.');
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 5초 후에 웹소켓 연결 닫기
+    };
+  };
+
+  const handleButton2Click = () => {
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
+    const data2= { Reset: 1 };
+
+    socketInstance.onopen = function (event) {
+      console.log('WebSocket 연결 성공');
+      socketInstance.send(JSON.stringify(data2));
+      setMessage('로봇리셋 버튼이 클릭되었습니다.');
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    };
+  };
+
+  const handleButton3Click= () => {
+    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
+    const data3= { EmergencyStop: 1 };
+
+    socketInstance.onopen = function (event) {
+      console.log('WebSocket 연결 성공');
+      socketInstance.send(JSON.stringify(data3));
+      setMessage('긴금정지 버튼이 클릭되었습니다.');
+
+      setTimeout(function() {
+        socketInstance.close();
+        console.log('WebSocket 연결 닫힘');
+      }, 3000); // 3초 후에 웹소켓 연결 닫기
+    };
+  };
+
+return (
+   <Container>
+     <Button1 onClick={handleButton1Click}>일시정지</Button1>
+     <Box>{message}</Box> {/* 받은 메시지 표시 */}
+     <Button2 onClick={handleButton2Click}>로봇리셋</Button2>
+     <Button3 onClick={handleButton3Click}>긴급정지</Button3>
+   </Container>
+ );
+}
+
 const Container = styled.div`
   width: 70%;
   display: flex;
@@ -82,64 +143,3 @@ const Button3 = styled.button`
     color: #FFFFFF;
   }
 `;
-
-
-export default function LeftContainer() {
-  const [message, setMessage] = useState('');
-
-  const handleButton1Click = () => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-    const data1 = { PauseRobot: 1 };
-
-    socketInstance.onopen = function (event) {
-      console.log('WebSocket 연결 성공');
-      socketInstance.send(JSON.stringify(data1));
-      setMessage('일시정지 버튼이 클릭되었습니다.');
-
-      setTimeout(function() {
-        socketInstance.close();
-        console.log('WebSocket 연결 닫힘');
-      }, 3000); // 5초 후에 웹소켓 연결 닫기
-    };
-  };
-
-  const handleButton2Click = () => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-    const data2= { Reset: 1 };
-
-    socketInstance.onopen = function (event) {
-      console.log('WebSocket 연결 성공');
-      socketInstance.send(JSON.stringify(data2));
-      setMessage('로봇리셋 버튼이 클릭되었습니다.');
-
-      setTimeout(function() {
-        socketInstance.close();
-        console.log('WebSocket 연결 닫힘');
-      }, 3000); // 3초 후에 웹소켓 연결 닫기
-    };
-  };
-
-  const handleButton3Click= () => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-    const data3= { EmergencyStop: 1 };
-
-    socketInstance.onopen = function (event) {
-      console.log('WebSocket 연결 성공');
-      socketInstance.send(JSON.stringify(data3));
-      setMessage('긴금정지 버튼이 클릭되었습니다.');
-
-      setTimeout(function() {
-        socketInstance.close();
-        console.log('WebSocket 연결 닫힘');
-      }, 3000); // 3초 후에 웹소켓 연결 닫기
-    };
-  };
-return (
-   <Container>
-     <Button1 onClick={handleButton1Click}>일시정지</Button1>
-     <Box>{message}</Box> {/* 받은 메시지 표시 */}
-     <Button2 onClick={handleButton2Click}>로봇리셋</Button2>
-     <Button3 onClick={handleButton3Click}>긴급정지</Button3>
-   </Container>
- );
-}
