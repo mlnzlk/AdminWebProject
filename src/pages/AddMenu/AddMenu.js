@@ -19,7 +19,7 @@ import ModalCancelRegisterMenu from '../../components/Modal/ModalCancelRegisterM
 
 import axios from 'axios';
 
-export default function EditMenu() {
+export default function AddMenu() {
    
   const [menuName, setMenuName] = useState('');
   const { productId } = useParams();
@@ -75,51 +75,55 @@ export default function EditMenu() {
       console.log("선택한 파일:", selectedFile);
       setSelectedFile(selectedFile); // 선택한 파일을 selectedFile 상태 변수에 저장
       setImageList(prevImageList => [...prevImageList, selectedFile]); // 파일 선택 시 selectedFile 상태 업데이트
+      
     }
   };
   
+
+ // menuData 상태가 변경될 때마다 해당 상태를 콘솔에 출력
   useEffect(() => {
-  
-    
-    if (productId) {
-      axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/test/template`)
+    if (menuData) {  // menuData가 null이 아닐 때만 콘솔에 출력
+      console.log("현재 menudata 상태",menuData);
+    }
+  }, [menuData]);  // menuData를 의존성 배열에 추가
+
+  useEffect(() => {
+    axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/test/template`)
       .then((response) => {
         console.log(response.data); // 받아온 데이터 확인용 로그
-
-        const responseData = response.data.data; // response.data.data를 변수에 할당
-        setMenuData(responseData); // setMenuData로 데이터 설정
         
-          // categoryId 값을 설정
-        if (response.data.data.categoryId === 1) {
+        setMenuData(response.data.data);  // setMenuData로 데이터 설정
+        setMenuName(response.data.name); // name 값을 menuName 상태 변수에 설정 -> <Input1> 컴포넌트가 렌더링될 때 초기값으로 해당 이름이 표시
+      
+        // categoryId 값을 설정
+        if (response.data.categoryId === 1) {
           setCategoryId('1');
-        } else if (response.data.data.categoryId === 2) {
+        } else if (response.data.categoryId === 2) {
           setCategoryId('2');
-        } else if (response.data.data.categoryId === 3) {
+        } else if (response.data.categoryId === 3) {
           setCategoryId('3');
-        } else if (response.data.data.categoryId === 4) {
+        } else if (response.data.categoryId === 4) {
           setCategoryId('4');
         }
-      
-                // 첫 번째 레시피의 크기를 확인하고 초기 버튼 상태를 설정
-                if (response.data.data.recipes && response.data.data.recipes.length > 0) {
-                  // Set prices based on recipe data
-                  if (response.data.data.recipes[0].size === '8') {
-                    setButton1Clicked(true);
-                    setButton2Clicked(false);
-                  } else if (response.data.data.recipes[0].size === '4') {
-                    setButton1Clicked(false);
-                    setButton2Clicked(true);
-                  }
-                  setPrice1(response.data.data.recipes[0].price.toString());
-                  setPrice2(response.data.data.recipes[1].price.toString());
-                  setPrice3(response.data.data.recipes[2].price.toString());
-                }
-              })
-              
-              .catch((error) => console.error(`Error!!!: ${error}`));
-          }
   
-        },);
+        // 첫 번째 레시피의 크기를 확인하고 초기 버튼 상태를 설정
+        if (response.data.recipes && response.data.recipes.length > 0) {
+          // Set prices based on recipe data
+          if (response.data.recipes[0].size === '8') {
+            setButton1Clicked(true);
+            setButton2Clicked(false);
+          } else if (response.data.recipes[0].size === '4') {
+            setButton1Clicked(false);
+            setButton2Clicked(true);
+          }
+          setPrice1(response.data.recipes[0].price.toString());
+          setPrice2(response.data.recipes[1].price.toString());
+          setPrice3(response.data.recipes[2].price.toString());
+        }
+      })
+      .catch((error) => console.error(`Error!!!: ${error}`));
+  }, []);
+  
   
   
         // 저장하기 버튼 클릭시 이미지 정송, 수정된 json 파일 전송

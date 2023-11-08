@@ -5,8 +5,11 @@ export default function LeftContainer() {
   const [message, setMessage] = useState('');
 
   const handleButton1Click = () => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-    const data1 = { PauseRobot: 1 };
+    const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+    const data1 = {
+      "button": "clean_mode_on",
+      "value": 1,
+    };
 
     socketInstance.onopen = function (event) {
       console.log('WebSocket 연결 성공');
@@ -21,9 +24,11 @@ export default function LeftContainer() {
   };
 
   const handleButton2Click = () => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-    const data2= { Reset: 1 };
-
+    const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+    const data2 = {     // 배포 테스트용 임시 데이터
+      "button": "clean_mode_off",  
+      "value": 1,
+    };
     socketInstance.onopen = function (event) {
       console.log('WebSocket 연결 성공');
       socketInstance.send(JSON.stringify(data2));
@@ -37,7 +42,7 @@ export default function LeftContainer() {
   };
 
   const handleButton3Click= () => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
+    const socketInstance = new WebSocket('ws://208.205.0.2:7090');
     const data3= { EmergencyStop: 1 };
 
     socketInstance.onopen = function (event) {
@@ -54,9 +59,9 @@ export default function LeftContainer() {
 
 return (
    <Container>
-     <Button1 onClick={handleButton1Click}>일시정지</Button1>
+     <Button1 onClick={handleButton1Click}>clean_on</Button1>
      <Box>{message}</Box> {/* 받은 메시지 표시 */}
-     <Button2 onClick={handleButton2Click}>로봇리셋</Button2>
+     <Button2 onClick={handleButton2Click}>clean_off</Button2>
      <Button3 onClick={handleButton3Click}>긴급정지</Button3>
    </Container>
  );

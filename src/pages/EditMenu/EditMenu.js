@@ -82,8 +82,16 @@ export default function EditMenu() {
     }
   };
   
+
+   // menuData 상태가 변경될 때마다 해당 상태를 콘솔에 출력
+   useEffect(() => {
+    if (menuData) {  // menuData가 null이 아닐 때만 콘솔에 출력
+      console.log("현재 menudata 상태",menuData);
+    }
+  }, [menuData]);  // menuData를 의존성 배열에 추가
+
+
   useEffect(() => {
-  
     
     if (productId) {
       axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`)
