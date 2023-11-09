@@ -112,37 +112,41 @@ export default function AddMenu() {
       .then((response) => {
         console.log(response.data); // 받아온 데이터 확인용 로그
         
-        setMenuData(response.data.data);  // setMenuData로 데이터 설정
-        setMenuName(response.data.name); // name 값을 menuName 상태 변수에 설정 -> <Input1> 컴포넌트가 렌더링될 때 초기값으로 해당 이름이 표시
-      
+        let responseData = response.data.data;  // 받아온 데이터를 별도의 변수에 저장합니다.
+  
         // categoryId 값을 설정
-        if (response.data.categoryId === 1) {
-          setCategoryId('1');
-        } else if (response.data.categoryId === 2) {
-          setCategoryId('2');
-        } else if (response.data.categoryId === 3) {
-          setCategoryId('3');
-        } else if (response.data.categoryId === 4) {
-          setCategoryId('4');
+        responseData.categoryId = '1';
+  
+        // recipes 배열의 각 객체의 size 값을 설정
+        if (responseData.recipes && responseData.recipes.length >= 3) {
+          responseData.recipes[0].size = "8";
+          responseData.recipes[1].size = "14";
+          responseData.recipes[2].size = "20";
         }
   
+        setMenuData(responseData);  // setMenuData로 데이터 설정
+        setMenuName(response.data.name); // name 값을 menuName 상태 변수에 설정 -> <Input1> 컴포넌트가 렌더링될 때 초기값으로 해당 이름이 표시
+      
+        setCategoryId('1');  // categoryId 값을 '1'로 설정
+  
         // 첫 번째 레시피의 크기를 확인하고 초기 버튼 상태를 설정
-        if (response.data.recipes && response.data.recipes.length > 0) {
+        if (responseData.recipes && responseData.recipes.length > 0) {
           // Set prices based on recipe data
-          if (response.data.recipes[0].size === '8') {
+          if (responseData.recipes[0].size === '8') {
             setButton1Clicked(true);
             setButton2Clicked(false);
-          } else if (response.data.recipes[0].size === '4') {
+          } else if (responseData.recipes[0].size === '4') {
             setButton1Clicked(false);
             setButton2Clicked(true);
           }
-          setPrice1(response.data.recipes[0].price.toString());
-          setPrice2(response.data.recipes[1].price.toString());
-          setPrice3(response.data.recipes[2].price.toString());
+          setPrice1(responseData.recipes[0].price.toString());
+          setPrice2(responseData.recipes[1].price.toString());
+          setPrice3(responseData.recipes[2].price.toString());
         }
       })
       .catch((error) => console.error(`Error!!!: ${error}`));
   }, []);
+  
   
   
   
