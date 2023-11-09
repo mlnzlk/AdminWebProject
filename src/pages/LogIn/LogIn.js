@@ -1,8 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Limage from '../../assets/Logo.png';
 import Bimage from '../../assets/Background.png';
+
+export default function LogIn() {
+    const navigate = useNavigate();
+    const [password, setPassword] = useState('');  // password 상태 선언
+
+    const handleLogin = () => {
+      if (password !== 'robros@@') {  // password가 '1303'이 아니라면 early return 
+        return;
+      }
+  
+      // 로그인 처리 로직
+      // ...
+  
+      // Main 페이지로 리디렉션
+      navigate('/CleaningMode');
+    };
+
+  const handlePasswordChange = (e) => {  // password 변경하는 함수 선언
+    setPassword(e.target.value);
+  };
+
+  return (
+    <Container>
+    <FormContainer>
+        <StyledInput type="text" placeholder="ID" />
+        <StyledInput type="password" placeholder="Password" onChange={handlePasswordChange} /> 
+        <StyledButton onClick={handleLogin}>
+            LOGIN
+        </StyledButton>
+    </FormContainer>
+    <StyledImage src={Limage} /> 
+    </Container>
+  );
+}
 
 const Container = styled.div`
   flex-direction: column;
@@ -63,28 +97,4 @@ const StyledImage = styled.img`
   margin: 234px 0 0 0px;
 `;
 
-export default function LogIn() {
-    const navigate = useNavigate();
-
-  const handleLogin = () => {
-    // 로그인 처리 로직
-    // ...
-
-    // Main 페이지로 리디렉션
-    navigate('/CleaningMode');
-  };
-
-  return (
-    <Container>
-    <FormContainer>
-        <StyledInput type="text" placeholder="ID" />
-        <StyledInput type="password" placeholder="Password" />
-        <StyledButton onClick={handleLogin}>
-            LOGIN
-        </StyledButton>
-    </FormContainer>
-    <StyledImage src={Limage} /> 
-    </Container>
-  );
-}
 

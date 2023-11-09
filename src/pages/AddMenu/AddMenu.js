@@ -50,20 +50,40 @@ export default function AddMenu() {
   // 재료추가 모달창 상태값 생성
   const [ModalCancelRegisterMenuOpen, setModalCancelRegisterMenu] = useState(false);
   
-  const handleButton1Click = () => {
+    const handleButton1Click = () => {
+
     if (!isButton1Clicked) {
       setButton1Clicked(true);
       setButton2Clicked(false);
-    }
-  };
+  
+      // menuData의 recipes 배열의 각 객체의 size 값을 변경
+      if (menuData && menuData.recipes && menuData.recipes.length >= 3) {
+        let updatedMenuData = { ...menuData };
+        updatedMenuData.recipes[0].size = "8";
+        updatedMenuData.recipes[1].size = "14";
+        updatedMenuData.recipes[2].size = "20";
+  
+        setMenuData(updatedMenuData);  // menuData를 업데이트
+      }
+    };
+  }
   
   const handleButton2Click = () => {
     if (!isButton2Clicked) {
       setButton1Clicked(false);
       setButton2Clicked(true);
+
+            // menuData의 recipes 배열의 각 객체의 size 값을 변경
+            if (menuData && menuData.recipes && menuData.recipes.length >= 3) {
+              let updatedMenuData = { ...menuData };
+              updatedMenuData.recipes[0].size = "4";
+            updatedMenuData.recipes[1].size = "10";
+              updatedMenuData.recipes[2].size = "16";
+        
+              setMenuData(updatedMenuData);  // menuData를 업데이트
     }
   };
-  
+}
   
   const url = menuData && menuData.url;
   const fileName = url ? url.substring(url.lastIndexOf("/") + 1) : "";  
