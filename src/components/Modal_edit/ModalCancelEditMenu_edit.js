@@ -18,8 +18,8 @@ const ModalIngredient = ({ closeModal }) => {
         <Container1>
           <ModalBlock>
 
-            <Label style={{marginTop: "91px", fontWeight: "600"}}>메뉴수정을 취소하시겠습니까?</Label>
-            <Label style={{marginTop: "24px", fontWeight: "400"}}>저장하지 않고 취소할 경우 수정된 정보가 반영되지 않습니다.</Label>     
+            <Label style={{marginTop: "91px", fontWeight: "600"}}>메뉴수정을 취소하시겠습니까?!!</Label>
+            <Label style={{marginTop: "24px", fontWeight: "400"}}>저장하지 않고 취소할 경우 수정된 정보가 반영되지 않습니다.. ˃̣̣̣̣̣̣︿˂̣̣̣̣̣̣</Label>     
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
             <Button1 style={{marginTop: "91px"}} onClick={handleClick}>네</Button1>

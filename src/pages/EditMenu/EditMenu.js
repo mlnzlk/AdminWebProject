@@ -17,6 +17,7 @@ import ModalNumber_Won_edit from '../../components/Modal_edit/ModalNumber_Won_ed
 import ModalNumber_ml_edit from '../../components/Modal_edit/ModalNumber_ml_edit';
 import ModalCancelRegisterMenu_edit from '../../components/Modal_edit/ModalCancelRegisterMenu_edit';
 import ModalDeleteMenu_edit from '../../components/Modal_edit/ModalDeleteMenu_edit';
+import ModalTest_edit from '../../components/Modal_edit/ModalTest_edit';
 
 import axios from 'axios';
 
@@ -51,7 +52,9 @@ export default function EditMenu() {
   
   // 재료추가 모달창 상태값 생성
   const [ModalCancelRegisterMenuOpen, setModalCancelRegisterMenu] = useState(false);
-  
+
+  const [ModalTestOpen, setModalTestOpen] = useState(false);
+
   // 메뉴삭제 모달창 상태값 생성 -> 이 코드 메뉴수정.js에 옮기기
   const [ModalDeleteMenuOpen, setDeleteMenu] = useState(false);
   const handleButton1Click = () => {
@@ -86,7 +89,7 @@ export default function EditMenu() {
    // menuData 상태가 변경될 때마다 해당 상태를 콘솔에 출력
    useEffect(() => {
     if (menuData) {  // menuData가 null이 아닐 때만 콘솔에 출력
-      console.log("현재 menudata 상태",menuData);
+      console.log("메뉴데이터 업데이트 됐어용ㅎㅎ",menuData);
     }
   }, [menuData]);  // menuData를 의존성 배열에 추가
 
@@ -283,10 +286,10 @@ export default function EditMenu() {
 </Select>
 
             <Container2>
-            <Button1 clicked={isButton1Clicked} onClick={handleButton1Click}>
+            <Button1 disabled={true} clicked={isButton1Clicked} onClick={handleButton1Click}>
           아이스
         </Button1>
-        <Button2 clicked={isButton2Clicked} onClick={handleButton2Click}>
+        <Button2 disabled={true} clicked={isButton2Clicked} onClick={handleButton2Click}>
           핫
         </Button2>
             </Container2>
@@ -519,12 +522,27 @@ export default function EditMenu() {
             <ModalDeleteMenu_edit closeModal={() => setDeleteMenu(false)} productId={menuData.productId} />
           )}
 
-        <Button6
-          onClick={() => handleButton6Click(menuData.recipes[0])}
-          style={{ marginLeft: "416px" }}
-        >
-          테스트
-        </Button6>
+<Button6
+  onClick={() => {
+    console.log("Button6 clicked");  // 버튼 클릭 이벤트 확인
+    setModalTestOpen(true);
+    console.log("ModalTestOpen state after click", ModalTestOpen);  // 상태 변경 확인
+  }}
+  style={{ marginLeft: "417px" }}
+>
+  테스트
+</Button6>
+
+
+{ModalTestOpen && (
+  <ModalTest_edit
+    closeModal={() => setModalTestOpen(false)}
+    handleButton6Click={() => handleButton6Click(menuData.recipes[0])}
+  />
+)}
+
+
+          
         <Button6
           onClick={() => handleButton6Click(menuData.recipes[1])}
           style={{ marginLeft: "10px" }}

@@ -29,13 +29,13 @@ const ModalIngredient = ({ closeModal, productId }) => {
         <Container1>
           <ModalBlock>
 
-            <Label style={{marginTop: "91px", fontWeight: "600"}}>메뉴를 삭제하시겠습니까?</Label>
+            <Label style={{marginTop: "91px", fontWeight: "600"}}>메뉴를.. 삭제하시겠습니까..?</Label>
             
             {/* 버튼11부분 코드 메뉴수정.js에 옮기기 + 이 부분 onclick 로직에 서버에 메뉴코드 보내는 로직 추가하기 */}
-            <Label style={{marginTop: "24px", fontWeight: "400"}}>메뉴를 삭제할 경우 모든 데이터가 삭제됩니다.</Label>     
+            <Label style={{marginTop: "24px", fontWeight: "400"}}>메뉴를 삭제할 경우 모든 데이터가 삭제됩니다.. ˃̣̣̣̣̣̣︿˂̣̣̣̣̣̣ </Label>     
 
             <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Button1 style={{marginTop: "91px"}} onClick={handleClick}>네</Button1>
+            <Button1 style={{marginTop: "91px"}} onClick={handleClick}>네..</Button1>
             <Button2 style={{marginTop: "91px"}} onClick={() => closeModal(false)}> 이전으로 돌아가기 </Button2> 
             </div>
 

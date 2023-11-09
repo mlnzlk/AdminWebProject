@@ -297,14 +297,17 @@ height: 56px;
 width: 192px;
 transition:.5s;
 margin: 0 0 0 10px;
-background-color: #FFFFFF; 
-border-radius: 8px;
-border: none;
+background-color: ${props => props.zeroQuantity ? '#F6F6F6' : '#FFFFFF'};
+color: ${props => props.zeroQuantity ? '#ADADAD' : '#000000'};
+border-radius:8px;
+border:none ;
 display:flex; 
 align-items:center; 
+justify-content:center ;
+font-size: 20px;
 
 &:hover {
-  cursor:pointer; 
+   cursor:pointer; 
  }
 `;
 

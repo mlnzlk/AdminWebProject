@@ -15,6 +15,8 @@ export const ContainerI= styled.div`
   display:flex; 
   align-items:center; 
   justify-content:flex-start; 
+
+  
 `;
 export const ContainerH = styled.div`
   margin: 8px 0 0 20px;
@@ -115,6 +117,11 @@ border:none;
 background-color:${props => props.clicked ? '#F0F2FB' : '#FFFFFF'} ;
 border-radius :16px ;
 transition:.5s;
+
+&:disabled {
+  color: black;
+  cursor: not-allowed;  
+}
 `;
 
 export const Button2 = styled.button`
@@ -128,6 +135,11 @@ border:none;
 background-color:${props => props.clicked ? '#FDE9E5' : '#FFFFFF'} ;
 border-radius :16px ;
 transition:.5s;
+
+&:disabled {
+  color: black;
+  cursor: not-allowed;  
+}
 `;
 
 export const Button3 = styled.button`
