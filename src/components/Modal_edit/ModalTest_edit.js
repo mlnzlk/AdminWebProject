@@ -2,38 +2,36 @@ import { React, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-
 const ModalTest_edit = ({ closeModal, handleButton6Click }) => {
+
+const navigate = useNavigate();
+
+const handleClick = () => {
+  closeModal(false);
+};
+
+return (
+  <>
     
-    const navigate = useNavigate();
+    <Container1>
+      <ModalBlock>
 
-    const handleClick = () => {
-      closeModal(false);
-    };
+        <Label style={{marginTop: "91px", fontWeight: "600"}}>진짜 진짜 테스트하시겠습니까?</Label>
+        <Label style={{marginTop: "24px", fontWeight: "400"}}>바로 추출됩니다...?</Label>     
 
-    return (
-      <>
-        
-        <Container1>
-          <ModalBlock>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Button1 style={{marginTop: "91px"}} onClick={handleButton6Click}>ㄱㄱ</Button1>
+        <Button2 style={{marginTop: "91px"}} onClick={() => closeModal(false)}> 안할래요 </Button2> 
+        </div>
 
-            <Label style={{marginTop: "91px", fontWeight: "600"}}>진짜 진짜 테스트하시겠습니까?</Label>
-            <Label style={{marginTop: "24px", fontWeight: "400"}}>바로 추출됩니다...?</Label>     
-
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Button1 style={{marginTop: "91px"}} onClick={handleButton6Click}>ㄱㄱ</Button1>
-            <Button2 style={{marginTop: "91px"}} onClick={() => closeModal(false)}> 안할래요 </Button2> 
-            </div>
-
-          </ModalBlock>
+      </ModalBlock>
 
 
-          <Background />
-        </Container1>
-      </>
-    );
-  }
-
+      <Background />
+    </Container1>
+  </>
+);
+}
 const Container1 = styled.div`
     position: fixed;
     width: 1440px;

@@ -225,7 +225,7 @@ export default function EditMenu() {
             "recipes": [data] // 첫 번째 레시피 객체만 포함하도록 수정
           };
         
-          const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+          const socketInstance = new WebSocket('ws://192.168.0.19:12345');
         
           socketInstance.onopen = function (event) {
             console.log('WebSocket 연결 성공');
@@ -528,7 +528,7 @@ export default function EditMenu() {
     setModalTestOpen(true);
     console.log("ModalTestOpen state after click", ModalTestOpen);  // 상태 변경 확인
   }}
-  style={{ marginLeft: "417px" }}
+  style={{ marginLeft: "416px" }}
 >
   테스트
 </Button6>
@@ -541,20 +541,43 @@ export default function EditMenu() {
   />
 )}
 
+<Button6
+  onClick={() => {
+    console.log("Button6 clicked");  // 버튼 클릭 이벤트 확인
+    setModalTestOpen(true);
+    console.log("ModalTestOpen state after click", ModalTestOpen);  // 상태 변경 확인
+  }}
+  style={{ marginLeft: "10px" }}
+>
+  테스트
+</Button6>
 
-          
-        <Button6
-          onClick={() => handleButton6Click(menuData.recipes[1])}
-          style={{ marginLeft: "10px" }}
-        >
-          테스트
-        </Button6>
-        <Button6
-          onClick={() => handleButton6Click(menuData.recipes[2])}
-          style={{ marginLeft: "10px" }}
-        >
-          테스트
-        </Button6>
+
+{ModalTestOpen && (
+  <ModalTest_edit
+    closeModal={() => setModalTestOpen(false)}
+    handleButton6Click={() => handleButton6Click(menuData.recipes[1])}
+  />
+)}
+
+<Button6
+  onClick={() => {
+    console.log("Button6 clicked");  // 버튼 클릭 이벤트 확인
+    setModalTestOpen(true);
+    console.log("ModalTestOpen state after click", ModalTestOpen);  // 상태 변경 확인
+  }}
+  style={{ marginLeft: "10px" }}
+>
+  테스트
+</Button6>
+
+
+{ModalTestOpen && (
+  <ModalTest_edit
+    closeModal={() => setModalTestOpen(false)}
+    handleButton6Click={() => handleButton6Click(menuData.recipes[2])}
+  />
+)}
 
           </div>
         ) : null }
