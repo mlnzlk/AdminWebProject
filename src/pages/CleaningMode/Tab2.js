@@ -23,15 +23,15 @@ function GridButton({ onClick, valueObject }) {
 
 function MyComponent() {
   const buttonValues1 = [
-    [{ id: 'Ice20_1', image: ice20, message: "20 온즈 아이스컵 추출중...", data: { "Ice20": 1 } }, 
-    { id: 'Ice20_2', image: ice20, message: "20 온즈 아이스컵 추출중...", data: { "Ice20": 1 } }, 
-    { id: 'Ice14', image: ice14, message: "14온즈 아이스컵 추출중...", data: { "Ice14": 1 } }, 
-    { id: 'Ice8', image: ice8, message: "8온즈 아이스컵 추출중...", data: { "Ice8": 1 } }],
+    [{ id: 'Ice20_1', image: ice20, message: "20 온즈 아이스컵 추출중...", data: {"button": "cup_20Left_on", "value": 1 } }, 
+    { id: 'Ice20_2', image: ice20, message: "20 온즈 아이스컵 추출중...", data: {"button": "cup_20Right_on", "value": 1 } }, 
+    { id: 'Ice14', image: ice14, message: "14온즈 아이스컵 추출중...", data: {"button": "cup_14_on", "value": 1 } }, 
+    { id: 'Ice8', image: ice8, message: "8온즈 아이스컵 추출중...", data:{"button": "cup_8_on", "value": 1 } }],
 
-    [{ id: 'Hot16_C', image: hot16_C, message: "16온즈 핫컵 컬러 추출중...", data: { "Hot16_C": 1 } }, 
-    { id: 'Hot16', image: hot16, message: "16온즈 핫컵 추출중...", data: { "Hot16": 1 } }, 
-    { id:'Hot12_C',image : hot12_C, message: "12온즈 핫컵 컬러 추출중...", data: { "Hot12_C": 1 } },
-    {id:'Hot12' ,image : hot12, message: "12온즈 핫컵 추출중...", data: { "Hot12": 1 } }]
+    [{ id: 'Hot16_C', image: hot16_C, message: "16온즈 핫컵 컬러 추출중...", data: {"button": "cup_16Left_on", "value": 1 } }, 
+    { id: 'Hot16', image: hot16, message: "16온즈 핫컵 추출중...", data: {"button": "cup_16Right_on", "value": 1 } }, 
+    { id:'Hot12_C',image : hot12_C, message: "12온즈 핫컵 컬러 추출중...", data: {"button": "cup_10Left_on", "value": 1 } },
+    {id:'Hot12' ,image : hot12, message: "12온즈 핫컵 추출중...", data: {"button": "cup_16Right_on", "value": 1 } }]
   ];
     
     const [clickedButton, setClickedButton] = useState(null);
@@ -44,7 +44,7 @@ function MyComponent() {
 
 
     const handleButtonClick = (valueObject) => {
-      const socketInstance = new WebSocket('ws://208.205.1.13:7090');
+      const socketInstance = new WebSocket('ws://208.205.0.2:7090');
       
       socketInstance.onopen = function (event) {
         console.log('WebSocket 연결 성공');
@@ -59,8 +59,8 @@ function MyComponent() {
     };
 
    const handleICEClick = () => {
-    const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-    const data1 = { "Icecream" : 1 }; // 클릭시 보내줄 json
+    const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+    const data1 = {"button": "icecream_1dose", "value": 1 }; // 클릭시 보내줄 json
     
     socketInstance.onopen = function (event) {
       console.log('WebSocket 연결 성공');
@@ -75,8 +75,8 @@ function MyComponent() {
 };
 
 const handleOPENClick = () => {
-  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "OPEN" : 1 }; // 클릭시 보내줄 json
+  const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+  const data1 = {"button": "icecream_on", "value": 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
@@ -91,8 +91,8 @@ const handleOPENClick = () => {
 };
 
 const handleCLOSEClick = () => {
-  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "CLOSE" : 1 }; // 클릭시 보내줄 json
+  const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+  const data1 = {"button": "icecream_off", "value": 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
@@ -107,8 +107,8 @@ const handleCLOSEClick = () => {
 };
 
 const handleMixieGripperOpenClick = () => {
-  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "MixieGripperOpen" : 1 }; // 클릭시 보내줄 json
+  const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+  const data1 = {"button": "mixie_gripper_open", "value": 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
@@ -123,8 +123,8 @@ const handleMixieGripperOpenClick = () => {
 };
 
 const handleMixieGripperCloseClick = () => {
-  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "MixieGripperClose" : 1 }; // 클릭시 보내줄 json
+  const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+  const data1 ={"button": "mixie_gripper_close", "value": 1 };// 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
@@ -139,8 +139,8 @@ const handleMixieGripperCloseClick = () => {
 };
 
 const handlePortyGripperOpenClick = () => {
-  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "PortyGripperOpen" : 1 }; // 클릭시 보내줄 json
+  const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+  const data1 ={"button": "porty_gripper_open", "value": 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
@@ -155,8 +155,8 @@ const handlePortyGripperOpenClick = () => {
 };
 
 const handlePortyGripperCloseClick = () => {
-  const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "PortyGripperClose" : 1 }; // 클릭시 보내줄 json
+  const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+  const data1 = {"button": "mixie_gripper_close", "value": 1 }; // 클릭시 보내줄 json
   
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');

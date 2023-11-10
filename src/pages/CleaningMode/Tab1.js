@@ -74,8 +74,10 @@ const handleButtonClick = (valueObject) => {
 
 const handleHotWaterClick = () => {
   const socketInstance = new WebSocket('ws://208.205.0.2:7090');
-  const data1 = { "HotWater" : 1 }; // 클릭시 보내줄 json
-  
+  const data1 = {
+    "button": "hot_water_on",
+    "value": 1,
+  }; // 클릭시 보내줄 json  
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
     socketInstance.send(JSON.stringify(data1));
@@ -120,7 +122,7 @@ const createGrid = (buttonValues) =>
     </div>
   );
 
-
+  
   
   
   return (

@@ -135,8 +135,11 @@ function MyComponent() {
 
 const handleOREOClick = () => {
   const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "Oreo" : 1 }; // 클릭시 보내줄 json
-  
+  const data1 = {
+    "button": "topping1_on",
+    "value": 1,
+  }; // 클릭시 보내줄 json
+
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
     socketInstance.send(JSON.stringify(data1));
@@ -151,8 +154,11 @@ const handleOREOClick = () => {
 
 const handleROTUSClick = () => {
   const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "Rotus" : 1 }; // 클릭시 보내줄 json
-  
+  const data1 = {
+    "button": "topping2_on",
+    "value": 1,
+  }; // 클릭시 보내줄 json
+
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
     socketInstance.send(JSON.stringify(data1));
@@ -168,8 +174,11 @@ const handleROTUSClick = () => {
 
 const handleToOrigin = () => {
   const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "ToOrigin" : 1 }; // 클릭시 보내줄 json
-  
+  const data1 = {
+    "button": "drizzle1_back",
+    "value": 1,
+  }; // 클릭시 보내줄 json
+
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
     socketInstance.send(JSON.stringify(data1));
@@ -184,12 +193,15 @@ const handleToOrigin = () => {
 
 const handleKeepPicking = () => {
   const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "KeepPicking" : 1 }; // 클릭시 보내줄 json
-  
+  const data1 = {
+    "button": "drizzle1_continue",
+    "value": 1,
+  }; // 클릭시 보내줄 json
+
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
     socketInstance.send(JSON.stringify(data1));
-      setMessage("로투스 추출중..."); // 클릭시 전송할 메시지 업데이트
+      setMessage("계속뽑기..."); // 클릭시 전송할 메시지 업데이트
 
       setTimeout(function() {
         socketInstance.close();
@@ -201,8 +213,11 @@ const handleKeepPicking = () => {
 
 const handleFstDraw = () => {
   const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "FstDraw" : 1 }; // 클릭시 보내줄 json
-  
+  const data1 = {
+    "button": "drizzle1_front",
+    "value": 1,
+  }; // 클릭시 보내줄 json
+
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
     socketInstance.send(JSON.stringify(data1));
@@ -217,8 +232,11 @@ const handleFstDraw = () => {
 
 const handleDrizzleStop = () => {
   const socketInstance = new WebSocket('ws://208.205.1.13:7090');
-  const data1 = { "handleDrizzleStop" : 1 }; // 클릭시 보내줄 json
-  
+  const data1 = {
+    "button": "drizzle1_stop",
+    "value": 1,
+  }; // 클릭시 보내줄 json
+
   socketInstance.onopen = function (event) {
     console.log('WebSocket 연결 성공');
     socketInstance.send(JSON.stringify(data1));
@@ -237,14 +255,14 @@ const handleDrizzleStop = () => {
      <div>
           <Button3 style={{margin:"10px 10px 10px 10px"}} clicked={clickedButton3} onClick={handleOREOClick}>오레오</Button3>
           <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>로투스</Button3>
-          <Button3 style={{margin:"10px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleOREOClick}>시리얼</Button3>
-          <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>초콜릿</Button3>
+          <Button4 style={{margin:"0px 10px 0px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 0px 0"}} clicked={clickedButton4} >ㅤ</Button4>
     </div>
     <div>
-    <Button3 style={{margin:"10px 10px 10px 0px"}} clicked={clickedButton3} onClick={handleOREOClick}>코코볼</Button3>
-          <Button3 style={{margin:"10px 10px 10px 0"}} clicked={clickedButton4} onClick={handleROTUSClick}>블링블링</Button3>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
-          <Button4 style={{margin:"-10px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+    <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+    <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
+          <Button4 style={{margin:"0px 10px 10px 0"}} clicked={clickedButton4} >ㅤ</Button4>
     </div>
     <Box2 style={{marginTop:"20px", marginBottom:"6px"}}> DRIZZLE </Box2>
     <div>
