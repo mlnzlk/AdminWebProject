@@ -12,7 +12,7 @@ const ModalIngredient = ({ closeModal, productId }) => {
       closeModal(false);
   
       // 서버에 delete 요청 보내기
-      const url = `http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/${productId}`;
+      const url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/product/${productId}`;
       axios.delete(url)
         .then(response => {
           console.log('메뉴 삭제 성공!!:', response);

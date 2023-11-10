@@ -38,7 +38,7 @@ const ModalIngredient = ({ closeModal }) => {
 
   useEffect(() => {
 // 서버에서 데이터를 가져오는 Axios 요청
-axios.get('http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/1')
+axios.get(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/1`)
   .then((response) => {
     // 서버 응답에서 데이터를 추출하고 Ingredients 배열 업데이트
     console.log(response.data)
@@ -267,7 +267,7 @@ const CheckboxLabel = styled.label`
 `;
 
 const CheckboxInput = styled.input`
-  width: 200px;
+  width: 20px;
   height: 20px;
   margin-right: 10px;
  

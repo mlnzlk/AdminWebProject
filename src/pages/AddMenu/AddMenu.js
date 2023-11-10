@@ -108,7 +108,7 @@ export default function AddMenu() {
   }, [menuData]);  // menuData를 의존성 배열에 추가
 
   useEffect(() => {
-    axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/test/template`)
+    axios.get(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/recipes/test/template`)
       .then((response) => {
         console.log(response.data); // 받아온 데이터 확인용 로그
         
@@ -165,7 +165,7 @@ export default function AddMenu() {
         
           try {
             await axios.post(
-              'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe',
+              `${process.env.REACT_APP_API_SERVER_URL}/api/v1/recipe`,
               formData,
               {
                 headers: { 'Content-Type': 'multipart/form-data' }

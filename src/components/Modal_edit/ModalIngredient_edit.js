@@ -52,13 +52,13 @@ const ModalIngredient = ({ closeModal, onConfirm: handleParentConfirm, menuData,
 
     let url = '';
     if (isButton1Clicked) {
-      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/1';
+      url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/1`;
     } else if (isButton2Clicked) {
-      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/2';
+      url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/2`;
     } else if (isButton3Clicked) {
-      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/3';
+      url =`${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/3`;
     } else if (isButton4Clicked) {
-      url = 'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/ingredient/model/category/4';
+      url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/4`;
     }
 
 // 서버에서 데이터를 가져오는 Axios 요청

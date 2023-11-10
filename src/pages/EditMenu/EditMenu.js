@@ -97,7 +97,7 @@ export default function EditMenu() {
   useEffect(() => {
     
     if (productId) {
-      axios.get(`http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipes/${productId}`)
+      axios.get(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/recipes/${productId}`)
         .then((response) => {
           console.log(response.data); // 받아온 데이터 확인용 로그
           
@@ -152,7 +152,7 @@ export default function EditMenu() {
         
           try {
             await axios.patch(
-              'http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/recipe',
+              `${process.env.REACT_APP_API_SERVER_URL}/api/v1/recipe`,
               formData,
               {
                 headers: { 'Content-Type': 'multipart/form-data' }
