@@ -9,16 +9,17 @@ export default function Menu() {
   const [isButton2Clicked, setButton2Clicked] = useState(false);
   const [isButton3Clicked, setButton3Clicked] = useState(false);
   const [isButton4Clicked, setButton4Clicked] = useState(false);
-
-  const [apiUrl, setApiUrl] = useState("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/1"); // 초기값 설정
+ 
+  const [apiUrl, setApiUrl] = useState(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/product/category/1`); // 초기값 설정
 
   const handleButton1Click = () => {
     if (!isButton1Clicked) {
+      console.log(process.env.REACT_APP_API_SERVER_URL)
       setButton1Clicked(true);
       setButton2Clicked(false);
       setButton3Clicked(false);
       setButton4Clicked(false);
-      setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/1");
+      setApiUrl(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/product/category/1`);
   }};
 
 const handleButton2Click = () => {
@@ -27,7 +28,7 @@ const handleButton2Click = () => {
     setButton2Clicked(true);
     setButton3Clicked(false);
     setButton4Clicked(false);
-    setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/2");
+    setApiUrl(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/product/category/2`);
   }};
 
 const handleButton3Click = () => {
@@ -36,7 +37,7 @@ const handleButton3Click = () => {
     setButton2Clicked(false);
     setButton3Clicked(true);
     setButton4Clicked(false);
-    setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/3");
+    setApiUrl(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/product/category/3`);
   }};
 
 const handleButton4Click = () => {
@@ -45,7 +46,7 @@ const handleButton4Click = () => {
     setButton2Clicked(false);
     setButton3Clicked(false);
     setButton4Clicked(true);
-    setApiUrl("http://robros-alb-590302301.ap-northeast-2.elb.amazonaws.com/api/v1/product/category/4");
+    setApiUrl(`${process.env.REACT_APP_API_SERVER_URL}/api/v1/product/category/4`);
   }};
 
   const navigate = useNavigate();
