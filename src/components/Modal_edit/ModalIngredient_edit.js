@@ -128,11 +128,11 @@ const handleButton6Click = () => {
           <Container2
                   style={{
                     overflowY: 'auto',
-                    width: '1200px',
-                    maxHeight: '444px',
+                    width: '760px',
                     scrollbarWidth: 'thin',
+                    marginTop: '40px',
                   }}>
-          <div style={{ margin: "34px 0 0 46px" }}>
+          <div style={{ margin: "0 0 0 46px" }}>
   {ingredients.map((ingredient) => (
     <CheckboxLabel key={ingredient.ingredientCode}>
       <CheckboxInput
