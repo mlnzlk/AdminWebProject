@@ -49,30 +49,34 @@ const ModalIngredient = ({ closeModal, onConfirm: handleParentConfirm, menuData,
   
 
   useEffect(() => {
-
     let url = '';
     if (isButton1Clicked) {
       url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/1`;
     } else if (isButton2Clicked) {
       url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/2`;
     } else if (isButton3Clicked) {
-      url =`${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/3`;
+      url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/3`;
     } else if (isButton4Clicked) {
       url = `${process.env.REACT_APP_API_SERVER_URL}/api/v1/ingredient/model/category/4`;
     }
-
+    
 // 서버에서 데이터를 가져오는 Axios 요청
   axios
-      .get(url)
-      .then((response) => {
-    // 서버 응답에서 데이터를 추출하고 Ingredients 배열 업데이트
-    console.log(response.data)
-    setIngredients(response.data.data); 
-  }) 
+  .get(url)
+  .then((response) => {
+    console.log(response.data);
+    // 데이터 형식이 예상과 같은지 확인
+    if (Array.isArray(response.data.data)) {
+      // "ingredientCode"가 20인 객체를 제외하고 checkbox에 표시
+      const filteredIngredients = response.data.data.filter((ingredient) => ingredient.ingredientCode !== 20);
+      setIngredients(filteredIngredients);
+    } else {
+      console.error('Invalid data format: expected an array');
+    }
+  })
   .catch((error) => {
     console.error(`Error fetching data: ${error}`);
   });
-
 }, [isButton1Clicked, isButton2Clicked, isButton3Clicked, isButton4Clicked]);
 
 
