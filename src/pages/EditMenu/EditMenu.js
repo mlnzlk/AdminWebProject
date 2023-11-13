@@ -222,7 +222,7 @@ export default function EditMenu() {
             "locationId": menuData.locationId,
             "url": menuData.url,
             "seq": menuData.seq,
-            "recipes": [data] // 첫 번째 레시피 객체만 포함하도록 수정
+            "recipes": [data]
           };
         
           const socketInstance = new WebSocket('ws://192.168.0.19:12345');

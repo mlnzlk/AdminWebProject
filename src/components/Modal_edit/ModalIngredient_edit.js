@@ -125,7 +125,13 @@ const handleButton6Click = () => {
           </Button4>
           <Box2></Box2>
           
-          <Container2>
+          <Container2
+                  style={{
+                    overflowY: 'auto',
+                    width: '1200px',
+                    maxHeight: '444px',
+                    scrollbarWidth: 'thin',
+                  }}>
           <div style={{ margin: "34px 0 0 46px" }}>
   {ingredients.map((ingredient) => (
     <CheckboxLabel key={ingredient.ingredientCode}>
@@ -298,6 +304,18 @@ margin: -7px 0 0 -24px;
   width: 778px;
   height: 390px;
   margin: -2px 0 0 -24px;
+
+  
+  &::-webkit-scrollbar {
+    width: 4px; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #D9D9D9; 
+    border-radius: 6px; 
+    margin-right: 10px;   /* 으잉 왜 적용 안 돼잉 */
+  }
+
   `;
 
   export const Container3 = styled.div`
