@@ -524,15 +524,14 @@ export default function EditMenu() {
 
 <Button6
   onClick={() => {
-    console.log("Button6 clicked");  // 버튼 클릭 이벤트 확인
+    console.log("Button6 clicked");
     setModalTestOpen(true);
-    console.log("ModalTestOpen state after click", ModalTestOpen);  // 상태 변경 확인
+    console.log("ModalTestOpen state after click", ModalTestOpen);
   }}
   style={{ marginLeft: "416px" }}
 >
   테스트
 </Button6>
-
 
 {ModalTestOpen && (
   <ModalTest_edit
@@ -543,15 +542,14 @@ export default function EditMenu() {
 
 <Button6
   onClick={() => {
-    console.log("Button6 clicked");  // 버튼 클릭 이벤트 확인
+    console.log("Button6 clicked");
     setModalTestOpen(true);
-    console.log("ModalTestOpen state after click", ModalTestOpen);  // 상태 변경 확인
+    console.log("ModalTestOpen state after click", ModalTestOpen);
   }}
   style={{ marginLeft: "10px" }}
 >
   테스트
 </Button6>
-
 
 {ModalTestOpen && (
   <ModalTest_edit
@@ -562,15 +560,14 @@ export default function EditMenu() {
 
 <Button6
   onClick={() => {
-    console.log("Button6 clicked");  // 버튼 클릭 이벤트 확인
+    console.log("Button6 clicked");
     setModalTestOpen(true);
-    console.log("ModalTestOpen state after click", ModalTestOpen);  // 상태 변경 확인
+    console.log("ModalTestOpen state after click", ModalTestOpen);
   }}
   style={{ marginLeft: "10px" }}
 >
   테스트
 </Button6>
-
 
 {ModalTestOpen && (
   <ModalTest_edit
@@ -578,6 +575,7 @@ export default function EditMenu() {
     handleButton6Click={() => handleButton6Click(menuData.recipes[2])}
   />
 )}
+
 
           </div>
         ) : null }
