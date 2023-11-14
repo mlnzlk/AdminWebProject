@@ -59,7 +59,7 @@ export default function LeftContainer() {
 
 return (
    <Container>
-     <Button1 onClick={handleButton1Click}>clean_on</Button1>
+     <Button1 onClick={handleButton1Click}>일시정지</Button1>
      <Box>{message}</Box> {/* 받은 메시지 표시 */}
      <Button2 onClick={handleButton2Click}>clean_off</Button2>
      <Button3 onClick={handleButton3Click}>긴급정지</Button3>

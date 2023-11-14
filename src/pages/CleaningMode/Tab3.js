@@ -9,99 +9,6 @@ import hot12_C from '../../assets/CIT_CUP/hot12_C.png';
 import hot16 from '../../assets/CIT_CUP/hot16.png';
 import hot16_C from '../../assets/CIT_CUP/hot16_C.png';
 
-
-const Box1 = styled.div`
-  display: flex;
-  justify-content:center;
-  align-items:center;
-  width:1046px;
-  height:811px;
-  background:#F0F0F0;
-  flex-direction: column;
-`;
-
-const Box2 = styled.div`
-width: 990px;
-height: 32px;
-background: linear-gradient(90deg, #D9D9D9 1.57%, rgba(217, 217, 217, 0) 100%);
-opacity: 0.8;
-border-radius: 7px;
-color : white;
-font-size : 22px;
-font-weight : bold;
-margin-top: 28px;
-padding-left: 10px ;
-`;
-
-const Button1 = styled.button`
-  font-size: 28px;
-  color: black;
-  margin: 0 10px 10px 0;
-  width: 240px;
-  height: 112px;
-  border-radius: 8px;
-  transition: 0.5s;
-  background-color: #FFFFFF;
-  border: none;
-  font-weight:normal;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-
-  background-image: url(${props => props.imageUrl});
-  background-size: cover;
-
-  &:hover {
-    cursor: pointer;
-    border:1px solid #F84D27;
-  }
-
-`;
-
-const Button2 = styled.button`
-width: 490px;
-height: 112px;
-background-color: #FFFFFF;
-border:none;
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-border-radius: 8px;
-font-size: 28px;
-color: black;
-transition: 0.5s;
-
-&:hover {
-  cursor: pointer;
-  font-weight: bold;
-  background-color:#FFF8F6;
-  border:1px solid #F84D27;
-}
-`;
-const Button3 = styled.button`
-width: 240px;
-height: 112px;
-background-color:#FFFFFF;
-border:none;
-
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-border-radius: 8px;
-font-size: 28px;
-color: black;
-transition: 0.5s;
-
-&:hover {
-  cursor: pointer;
-  font-weight: bold;
-  background-color:#FFF8F6;
-  border:1px solid #F84D27;
-}
-`;
-const Button4 = styled.button`
-width: 240px;
-height: 112px;
-background-color:#F3F3F3;
-border:none;
-
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-border-radius: 8px;
-`;
 function GridButton({ onClick, valueObject }) {
   return (
     <Button1
@@ -292,3 +199,97 @@ const handleDrizzleStop = () => {
 }
 
 export default MyComponent;
+
+
+const Box1 = styled.div`
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  width:1046px;
+  height:811px;
+  background:#F0F0F0;
+  flex-direction: column;
+`;
+
+const Box2 = styled.div`
+width: 990px;
+height: 32px;
+background: linear-gradient(90deg, #D9D9D9 1.57%, rgba(217, 217, 217, 0) 100%);
+opacity: 0.8;
+border-radius: 7px;
+color : white;
+font-size : 22px;
+font-weight : bold;
+margin-top: 28px;
+padding-left: 10px ;
+`;
+
+const Button1 = styled.button`
+  font-size: 28px;
+  color: black;
+  margin: 0 10px 10px 0;
+  width: 240px;
+  height: 112px;
+  border-radius: 8px;
+  transition: 0.5s;
+  background-color: #FFFFFF;
+  border: none;
+  font-weight:normal;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+
+  background-image: url(${props => props.imageUrl});
+  background-size: cover;
+
+  &:hover {
+    cursor: pointer;
+    border:1px solid #F84D27;
+  }
+
+`;
+
+const Button2 = styled.button`
+width: 490px;
+height: 112px;
+background-color: #FFFFFF;
+border:none;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+border-radius: 8px;
+font-size: 28px;
+color: black;
+transition: 0.5s;
+
+&:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color:#FFF8F6;
+  border:1px solid #F84D27;
+}
+`;
+const Button3 = styled.button`
+width: 240px;
+height: 112px;
+background-color:#FFFFFF;
+border:none;
+
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+border-radius: 8px;
+font-size: 28px;
+color: black;
+transition: 0.5s;
+
+&:hover {
+  cursor: pointer;
+  font-weight: bold;
+  background-color:#FFF8F6;
+  border:1px solid #F84D27;
+}
+`;
+const Button4 = styled.button`
+width: 240px;
+height: 112px;
+background-color:#F3F3F3;
+border:none;
+
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+border-radius: 8px;
+`;
