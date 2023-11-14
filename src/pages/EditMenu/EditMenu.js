@@ -68,32 +68,39 @@ export default function EditMenu() {
     setCurrentButtonIndex(index);
     setNumberWonModalOpen4(true);
   };
+
   const handleModalValueChange = (value) => {
     setEditState((prevEditStates) => {
       const newEditStates = [...prevEditStates];
       newEditStates[currentButtonIndex] = value;
       return newEditStates;
     });
+  
     setMenuData((prevMenuData) => {
-      const updatedMenuData = { ...prevMenuData };
-      const currentButtonIngredient = updatedMenuData.recipes[
-        currentButtonIndex
-      ]?.ingredient.find((i) => !i.isDeleted);
- 
-      updatedMenuData.recipes.forEach((recipe) => {
-        const ingredientToUpdate = recipe.ingredient.find(
-          (i) => i.seq === currentButtonIngredient
-        );
- 
-        if (ingredientToUpdate) {
-          ingredientToUpdate.quantity = value;
+      const newMenuData = { ...prevMenuData };
+      newMenuData.recipes = newMenuData.recipes.map((recipe, recipeIndex) => {
+        if (recipeIndex === index) {
+          const updatedIngredients = recipe.ingredients.map((ingredient, ingredientIndex) => {
+            if (ingredientIndex === currentButtonIndex) {
+              return {
+                ...ingredient,
+                quantity: value
+              };
+            }
+            return ingredient;
+          });
+          return {
+            ...recipe,
+            ingredients: updatedIngredients
+          };
         }
+        return recipe;
       });
- 
-      return updatedMenuData;
+      return newMenuData;
     });
-    setNumberWonModalOpen4(false);
   };
+  
+
   // 각 가격에 대한 상태값을 생성
   const [price1, setPrice1] = useState("");
   const [price2, setPrice2] = useState("");
@@ -525,7 +532,6 @@ export default function EditMenu() {
                 >
                   {ing.ingredientName}
                 </label>
-                
                 {menuData.recipes.map((recipe, recipeIndex) => {
                   const ingredient = recipe.ingredient.find(
                     (i) => i.seq === ing.seq
