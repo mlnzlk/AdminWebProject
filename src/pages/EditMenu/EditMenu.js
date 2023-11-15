@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import {
   Container1,
   Container2,
@@ -64,49 +65,70 @@ export default function EditMenu() {
  
   const [editState, setEditState] = useState([]);
   const [currentButtonIndex, setCurrentButtonIndex] = useState(null);
-  const handleButton11Clilck = (index) => {
-    setCurrentButtonIndex(index);
-    setNumberWonModalOpen4(true);
-  };
-
+ 
   const handleModalValueChange = (value) => {
     setEditState((prevEditStates) => {
       const newEditStates = [...prevEditStates];
       newEditStates[currentButtonIndex] = value;
       return newEditStates;
     });
-  
+ 
     setMenuData((prevMenuData) => {
-      const newMenuData = { ...prevMenuData };
-      newMenuData.recipes = newMenuData.recipes.map((recipe, recipeIndex) => {
-        if (recipeIndex === index) {
-          const updatedIngredients = recipe.ingredients.map((ingredient, ingredientIndex) => {
-            if (ingredientIndex === currentButtonIndex) {
-              return {
-                ...ingredient,
-                quantity: value
-              };
+      const updatedMenuData = { ...prevMenuData };
+      const buttonIndex = currentButtonIndex % updatedMenuData.recipes.length;
+      const ingredientIndex = Math.floor(
+        currentButtonIndex / updatedMenuData.recipes.length
+      );
+      const selectedIngredient =
+        updatedMenuData.recipes[buttonIndex].ingredient[ingredientIndex];
+      if (selectedIngredient) {
+        updatedMenuData.recipes[buttonIndex].ingredient.forEach(
+          (ingredient) => {
+            if (
+              ingredient.ingredientName === selectedIngredient.ingredientName
+            ) {
+              ingredient.quantity = value;
             }
-            return ingredient;
-          });
-          return {
-            ...recipe,
-            ingredients: updatedIngredients
-          };
-        }
-        return recipe;
-      });
-      return newMenuData;
+          }
+        );
+      }
+ 
+      return { ...updatedMenuData };
     });
+ 
+    setNumberWonModalOpen4(false);
   };
-  
-
   // 각 가격에 대한 상태값을 생성
   const [price1, setPrice1] = useState("");
   const [price2, setPrice2] = useState("");
   const [price3, setPrice3] = useState("");
   const [price4, setPrice4] = useState("");
  
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+ 
+    const { source, destination } = result;
+ 
+    const updatedRecipes = [...menuData.recipes];
+ 
+    updatedRecipes.forEach((recipe) => {
+      const sourceIngredient = { ...recipe.ingredient[source.index] };
+      const destinationIngredient = { ...recipe.ingredient[destination.index] };
+ 
+      // ingredient 교환
+      recipe.ingredient[source.index] = destinationIngredient;
+      recipe.ingredient[destination.index] = sourceIngredient;
+    });
+ 
+    const updatedMenuData = {
+      ...menuData,
+      recipes: updatedRecipes,
+    };
+ 
+    setMenuData(updatedMenuData);
+  };
   // 재료추가 모달창 상태값 생성
   const [ModalCancelRegisterMenuOpen, setModalCancelRegisterMenu] =
     useState(false);
@@ -498,81 +520,113 @@ export default function EditMenu() {
         </ContainerH>
       ) : null}
  
-      <ContainerList
-        style={{
-          overflowY: "auto",
-          width: "1200px",
-          maxHeight: "444px",
-          scrollbarWidth: "thin",
-        }}
-      >
-        {menuData &&
-          menuData.recipes &&
-          menuData.recipes[0].ingredient.map((ing, index) => {
-            // isDeleted 속성이 true인 경우 건너뛰기
-            if (ing.isDeleted) {
-              return null;
-            }
+      <DragDropContext onDragEnd={onDragEnd}>
+        <ContainerList
+          style={{
+            overflowY: "auto",
+            width: "1200px",
+            maxHeight: "444px",
+            scrollbarWidth: "thin",
+          }}
+        >
+          {menuData && menuData.recipes && (
+            <Droppable droppableId="droppable">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {menuData.recipes[0].ingredient.map((ing, index) => {
+                    // isDeleted 속성이 true인 경우 건너뛰기
+                    if (ing.isDeleted) {
+                      return null;
+                    }
  
-            return (
-              <ListContent key={index}>
-                <img style={{ margin: "0 0 0 15px" }} src={Drag} />
-                <label
-                  style={{
-                    marginLeft: "14px",
-                    fontFamily: "Pretendard",
-                    fontSize: "20px",
-                    width: "418px",
-                    height: "40px",
-                    background: "#FFFFFF",
-                    borderRadius: "8px",
-                    paddingLeft: "24px",
-                    paddingTop: "16px",
-                  }}
-                >
-                  {ing.ingredientName}
-                </label>
-                {menuData.recipes.map((recipe, recipeIndex) => {
-                  const ingredient = recipe.ingredient.find(
-                    (i) => i.seq === ing.seq
-                  );
-                  const buttonIndex =
-                    index * menuData.recipes.length + recipeIndex;
-                  return (
-                    <React.Fragment key={recipe.cupId}>
-                      <Button11
-                        zeroQuantity={ingredient && ingredient.quantity === 0}
-                        onClick={() => {
-                          setCurrentButtonIndex(buttonIndex);
-                          setNumberWonModalOpen4(true);
-                        }}
+                    return (
+                      <Draggable
+                        key={index}
+                        draggableId={`item-${index}`}
+                        index={index}
                       >
-                        {editState[buttonIndex] !== undefined
-                          ? editState[buttonIndex]
-                          : ing.ingredientName === "샷"
-                          ? ingredient.quantity + "샷"
-                          : ingredient
-                          ? ingredient.quantity + "ml"
-                          : "0"}
-                      </Button11>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <ListContent key={index}>
+                              <img
+                                style={{ margin: "0 0 0 15px" }}
+                                src={Drag}
+                              />
+                              <label
+                                style={{
+                                  marginLeft: "14px",
+                                  fontFamily: "Pretendard",
+                                  fontSize: "20px",
+                                  width: "418px",
+                                  height: "40px",
+                                  background: "#FFFFFF",
+                                  borderRadius: "8px",
+                                  paddingLeft: "24px",
+                                  paddingTop: "16px",
+                                }}
+                              >
+                                {ing.ingredientName}
+                              </label>
+                              {menuData.recipes.map((recipe, recipeIndex) => {
+                                const ingredient = recipe.ingredient.find(
+                                  (i) => i.seq === ing.seq
+                                );
+                                const buttonIndex =
+                                  index * menuData.recipes.length + recipeIndex;
+                                return (
+                                  <React.Fragment key={recipe.cupId}>
+                                    <Button11
+                                      zeroQuantity={
+                                        ingredient && ingredient.quantity === 0
+                                      }
+                                      onClick={() => {
+                                        setCurrentButtonIndex(buttonIndex);
+                                        setNumberWonModalOpen4(true);
+                                      }}
+                                    >
+                                      {editState[buttonIndex] !== undefined
+                                        ? editState[buttonIndex]
+                                        : ing.ingredientName === "샷"
+                                        ? ingredient.quantity + "샷"
+                                        : ingredient
+                                        ? ingredient.quantity + "ml"
+                                        : "0"}
+                                    </Button11>
  
-                      {numberWonModalOpen4 &&
-                        currentButtonIndex === buttonIndex && (
-                          <ModalNumber_Won_edit
-                            closeModal={() => setNumberWonModalOpen4(false)}
-                            setValue={handleModalValueChange}
-                          />
+                                    {numberWonModalOpen4 &&
+                                      currentButtonIndex === buttonIndex && (
+                                        <ModalNumber_Won_edit
+                                          closeModal={() =>
+                                            setNumberWonModalOpen4(false)
+                                          }
+                                          setValue={handleModalValueChange}
+                                        />
+                                      )}
+                                  </React.Fragment>
+                                );
+                              })}
+                              <ButtonX
+                                onClick={() => handleRemoveIngredient(index)}
+                              >
+                                <img style={{ margin: "10" }} src={Del} />
+                              </ButtonX>
+                            </ListContent>
+                          </div>
                         )}
-                    </React.Fragment>
-                  );
-                })}
-                <ButtonX onClick={() => handleRemoveIngredient(index)}>
-                  <img style={{ margin: "10" }} src={Del} />
-                </ButtonX>
-              </ListContent>
-            );
-          })}
-      </ContainerList>
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          )}
+        </ContainerList>
+      </DragDropContext>
  
       <div style={{ display: "flex", alignItems: "center" }}>
         <div>

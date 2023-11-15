@@ -4,29 +4,29 @@ import ModalCleanmode from "../../components/Modal/ModalCleanmode";
 
 export default function LeftContainer() {
   const [message, setMessage] = useState('');
-  const [ModalIngredientOpen, setModalIngredientOpen] = useState(false);
+  const [ModalCleanmodeOpen, seModalCleanmodeOpen] = useState(false);
+  const [buttonColor, setButtonColor] = useState('#5CAE4E');
 
-  const handleButton1Click = () => {
-    const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+  const handleSocket = () => {
+    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
     const data1 = {
-      "button": "clean_mode_on",
-      "value": 1,
+      button: 'clean_mode_on',
+      value: 1,
     };
 
     socketInstance.onopen = function (event) {
       console.log('WebSocket 연결 성공');
       socketInstance.send(JSON.stringify(data1));
       setMessage('일시정지 버튼이 클릭되었습니다.');
-
-      setTimeout(function() {
-        socketInstance.close();
-        console.log('WebSocket 연결 닫힘');
-      }, 3000); // 5초 후에 웹소켓 연결 닫기
     };
   };
 
+  const handleButton1Click = () => {
+    seModalCleanmodeOpen(true);
+  };
+
   const handleButton2Click = () => {
-    const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
     const data2 = {     // 배포 테스트용 임시 데이터
       "button": "clean_mode_off",  
       "value": 1,
@@ -44,7 +44,7 @@ export default function LeftContainer() {
   };
 
   const handleButton3Click= () => {
-    const socketInstance = new WebSocket('ws://208.205.0.2:7090');
+    const socketInstance = new WebSocket('ws://192.168.0.19:12345');
     const data3= { EmergencyStop: 1 };
 
     socketInstance.onopen = function (event) {
@@ -60,18 +60,18 @@ export default function LeftContainer() {
   };
 
 return (
-   <Container>
-     <Button1 onClick={() => setModalIngredientOpen(true)}>일시정지</Button1>
-     {ModalIngredientOpen && (
-            <ModalCleanmode
-              closeModal={() => setModalIngredientOpen(false)}
-            />
-          )}
-     <Box>{message}</Box> {/* 받은 메시지 표시 */}
-     <Button2 onClick={handleButton2Click}>clean_off</Button2>
-     <Button3 onClick={handleButton3Click}>긴급정지</Button3>
-   </Container>
- );
+    <Container>
+      <Button1 style={{ backgroundColor: buttonColor }} onClick={handleButton1Click}>
+        일시정지
+      </Button1>
+      {ModalCleanmodeOpen && (
+        <ModalCleanmode closeModal={() => seModalCleanmodeOpen(false)} handleSocket={handleSocket} />
+      )}
+      <Box>{message}</Box>
+      <Button2 onClick={handleButton2Click}>clean_off</Button2>
+      <Button3 onClick={handleButton3Click}>긴급정지</Button3>
+    </Container>
+  );
 }
 
 const Container = styled.div`
