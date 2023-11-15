@@ -78,10 +78,11 @@ const Container = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
+  width: 210px;
 `;
 
 const Button1 = styled.button`
-  background-color: #5CAE4E;
+  background-color: #5cae4e;
   font-size: 32px;
   font-weight: bold;
   color: black;
@@ -89,69 +90,66 @@ const Button1 = styled.button`
   border: none;
   margin: 0 5px 5px 5px;
   border-radius: 8px;
-  width:210px; 
-  height:185px; 
+  width: 200px;
+  height: 185px;
   transition: 0.5s;
 
   &:hover {
-    background-color: #71EF5C;
+    background-color: #71ef5c;
     cursor: pointer;
-    border:2px solid #000000;
+    border: 2px solid #000000;
   }
-
 `;
 
 const Box = styled.div`
-   width:170px; 
-   height:236px; 
-   background-color:#D9D9D9; 
-   margin: 0 5px 5px 5px;
-   border-radius: 8px;
-   transition: 0.5s;
-   padding: 20px;
-   font-size: 16px;
-
+  width: 160px;
+  height: 236px;
+  background-color: #d9d9d9;
+  margin: 0 5px 5px 5px;
+  border-radius: 8px;
+  transition: 0.5s;
+  padding: 20px;
+  font-size: 16px;
 `;
 
-
 const Button2 = styled.button`
-  background-color: #FDCABE;
+  background-color: #fdcabe;
   color: black;
   padding: 10px;
   border: none;
   border-radius: 8px;
-  width:210px; 
-  height:204px; 
+  width: 200px;
+  height: 204px;
   margin: 0 5px 5px 5px;
   font-size: 36px;
   font-weight: bold;
   transition: 0.5s;
 
   &:hover {
-    background-color: #FFE6E0;
+    background-color: #ffe6e0;
     cursor: pointer;
-    border:2px solid #F84D27;
-    color: #F84D27;
+    border: 2px solid #f84d27;
+    color: #f84d27;
   }
 `;
 
 const Button3 = styled.button`
-  background-color: #F84D27;
+  background-color: #f84d27;
   color: black;
   padding: 10px;
   border: none;
   border-radius: 8px;
   margin: 0 5px 5px 5px;
-  width:210px; 
-  height:202px; 
+  width: 200px;
+  height: 202px;
   transition: 0.5s;
   font-weight: bold;
   font-size: 36px;
 
   &:hover {
-    background-color: #D03310;
+    background-color: #d03310;
     cursor: pointer;
-    border:2px solid #000000;
-    color: #FFFFFF;
+    border: 2px solid #000000;
+    color: #ffffff;
   }
 `;

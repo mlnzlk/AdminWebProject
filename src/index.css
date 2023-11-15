@@ -1,28 +1,24 @@
 #root {
-  width: 1440px;
-  height: 882px;
+  height: 802px;
+  width: 1430px;
   background: white;
 
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 
-  @media all and (max-width: 1024px){
-
-  }
-  @media all and (max-width: 768px){
-
-  }
-  @media all and (min-width: 768px){
-
-  }
-  @media all and (min-width: 1024px){
-  }
-  
+@media all and (max-width: 1024px) {
+}
+@media all and (max-width: 768px) {
+}
+@media all and (min-width: 768px) {
+}
+@media all and (min-width: 1024px) {
+}
 
 #App {
   background: white;
   position: relative;
-  width: 1440px;
-  height: 882px;
+  height: 802px;
+  width: 1430px;
 }
