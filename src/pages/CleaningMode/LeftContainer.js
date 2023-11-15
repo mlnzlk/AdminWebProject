@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';// useEffect는 웹소켓 위해
 import styled from 'styled-components';
+import ModalCleanmode from "../../components/Modal/ModalCleanmode";
 
 export default function LeftContainer() {
   const [message, setMessage] = useState('');
+  const [ModalIngredientOpen, setModalIngredientOpen] = useState(false);
 
   const handleButton1Click = () => {
     const socketInstance = new WebSocket('ws://208.205.0.2:7090');
@@ -59,7 +61,12 @@ export default function LeftContainer() {
 
 return (
    <Container>
-     <Button1 onClick={handleButton1Click}>일시정지</Button1>
+     <Button1 onClick={() => setModalIngredientOpen(true)}>일시정지</Button1>
+     {ModalIngredientOpen && (
+            <ModalCleanmode
+              closeModal={() => setModalIngredientOpen(false)}
+            />
+          )}
      <Box>{message}</Box> {/* 받은 메시지 표시 */}
      <Button2 onClick={handleButton2Click}>clean_off</Button2>
      <Button3 onClick={handleButton3Click}>긴급정지</Button3>
