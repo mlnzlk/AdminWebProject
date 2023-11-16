@@ -26,53 +26,53 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
- 
+
 import Photoupload from "../../assets/photoupload.png";
 import Plus from "../../assets/plus.png";
 import Drag from "../../assets/Drag.png";
 import Del from "../../assets/close.png";
- 
+
 import ModalIngredient_edit from "../../components/Modal_edit/ModalIngredient_edit";
 import ModalNumber_Won_edit from "../../components/Modal_edit/ModalNumber_Won_edit";
 import ModalNumber_ml_edit from "../../components/Modal_edit/ModalNumber_ml_edit";
 import ModalCancelRegisterMenu_edit from "../../components/Modal_edit/ModalCancelRegisterMenu_edit";
 import ModalDeleteMenu_edit from "../../components/Modal_edit/ModalDeleteMenu_edit";
 import ModalTest_edit from "../../components/Modal_edit/ModalTest_edit";
- 
+
 import axios from "axios";
- 
+
 export default function EditMenu() {
   const [socket, setSocket] = useState(null); // 상태변수로 socket 외부에서도 관리
- 
+
   const [menuName, setMenuName] = useState("");
   const { productId } = useParams();
   const [menuData, setMenuData] = useState(null);
   const [categoryId, setCategoryId] = useState("1"); // 기본값을 'category1'로 설정
   const [imageList, setImageList] = useState([]);
- 
+
   const navigate = useNavigate();
- 
+
   const [isButton1Clicked, setButton1Clicked] = useState(false);
   const [isButton2Clicked, setButton2Clicked] = useState(false);
- 
+
   const [ingredientModalOpen, setIngredientModalOpen] = useState(false);
- 
+
   // 각 판매가 버튼에 대해 별도의 모달 상태값 생성
   const [numberWonModalOpen1, setNumberWonModalOpen1] = useState(false);
   const [numberWonModalOpen2, setNumberWonModalOpen2] = useState(false);
   const [numberWonModalOpen3, setNumberWonModalOpen3] = useState(false);
   const [numberWonModalOpen4, setNumberWonModalOpen4] = useState(false);
- 
+
   const [editState, setEditState] = useState([]);
   const [currentButtonIndex, setCurrentButtonIndex] = useState(null);
- 
+
   const handleModalValueChange = (value) => {
     setEditState((prevEditStates) => {
       const newEditStates = [...prevEditStates];
       newEditStates[currentButtonIndex] = value;
       return newEditStates;
     });
- 
+
     setMenuData((prevMenuData) => {
       const updatedMenuData = { ...prevMenuData };
       const buttonIndex = currentButtonIndex % updatedMenuData.recipes.length;
@@ -81,21 +81,26 @@ export default function EditMenu() {
       );
       const selectedIngredient =
         updatedMenuData.recipes[buttonIndex].ingredient[ingredientIndex];
+
       if (selectedIngredient) {
-        updatedMenuData.recipes[buttonIndex].ingredient.forEach(
-          (ingredient) => {
-            if (
-              ingredient.ingredientName === selectedIngredient.ingredientName
-            ) {
-              ingredient.quantity = value;
-            }
+        const updatedRecipes = [...updatedMenuData.recipes]; // 새로운 recipes 배열 생성
+
+        updatedRecipes[buttonIndex].ingredient = updatedRecipes[
+          buttonIndex
+        ].ingredient.map((ingredient) => {
+          if (ingredient.ingredientName === selectedIngredient.ingredientName) {
+            // 선택한 ingredient의 quantity 변경
+            return { ...ingredient, quantity: value };
           }
-        );
+          return ingredient;
+        });
+
+        return { ...updatedMenuData, recipes: updatedRecipes };
       }
- 
-      return { ...updatedMenuData };
+
+      return updatedMenuData; // 변경사항이 없는 경우 기존 상태 반환
     });
- 
+
     setNumberWonModalOpen4(false);
   };
   // 각 가격에 대한 상태값을 생성
@@ -103,38 +108,44 @@ export default function EditMenu() {
   const [price2, setPrice2] = useState("");
   const [price3, setPrice3] = useState("");
   const [price4, setPrice4] = useState("");
- 
+
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
     }
- 
+  
     const { source, destination } = result;
- 
+  
     const updatedRecipes = [...menuData.recipes];
- 
+  
     updatedRecipes.forEach((recipe) => {
-      const sourceIngredient = { ...recipe.ingredient[source.index] };
-      const destinationIngredient = { ...recipe.ingredient[destination.index] };
- 
-      // ingredient 교환
-      recipe.ingredient[source.index] = destinationIngredient;
-      recipe.ingredient[destination.index] = sourceIngredient;
+      const tempIngredients = [...recipe.ingredient];
+      const ingredientToMove = { ...tempIngredients[source.index] };
+      tempIngredients.splice(source.index, 1);
+      tempIngredients.splice(destination.index, 0, ingredientToMove);
+      recipe.ingredient = tempIngredients;
     });
- 
+  
     const updatedMenuData = {
       ...menuData,
       recipes: updatedRecipes,
     };
- 
+  
+    updatedMenuData.recipes.forEach((recipe) => {
+      recipe.ingredient.forEach((ingredient, index) => {
+        ingredient.seq = index;
+      });
+    });
+  
     setMenuData(updatedMenuData);
   };
+  
   // 재료추가 모달창 상태값 생성
   const [ModalCancelRegisterMenuOpen, setModalCancelRegisterMenu] =
     useState(false);
- 
+
   const [ModalTestOpen, setModalTestOpen] = useState(false);
- 
+
   // 메뉴삭제 모달창 상태값 생성 -> 이 코드 메뉴수정.js에 옮기기
   const [ModalDeleteMenuOpen, setDeleteMenu] = useState(false);
   const handleButton1Click = () => {
@@ -143,18 +154,18 @@ export default function EditMenu() {
       setButton2Clicked(false);
     }
   };
- 
+
   const handleButton2Click = () => {
     if (!isButton2Clicked) {
       setButton1Clicked(false);
       setButton2Clicked(true);
     }
   };
- 
+
   const url = menuData && menuData.url;
   const fileName = url ? url.substring(url.lastIndexOf("/") + 1) : "";
   const [selectedFile, setSelectedFile] = useState(null);
- 
+
   const handleFileInputChange = (event) => {
     const selectedFile = event.target.files[0]; // 파일 선택 후 selectedFile 상태를 업데이트하고, 라벨의 내용을 파일 이름으로 변경하도록 조건부 렌더링을 사용
     if (selectedFile) {
@@ -163,7 +174,7 @@ export default function EditMenu() {
       setImageList((prevImageList) => [...prevImageList, selectedFile]); // 파일 선택 시 selectedFile 상태 업데이트
     }
   };
- 
+
   // menuData 상태가 변경될 때마다 해당 상태를 콘솔에 출력
   useEffect(() => {
     if (menuData) {
@@ -171,7 +182,8 @@ export default function EditMenu() {
       console.log("메뉴데이터 업데이트 됐어용ㅎㅎ", menuData);
     }
   }, [menuData]); // menuData를 의존성 배열에 추가
- 
+
+  
   useEffect(() => {
     if (productId) {
       axios
@@ -180,10 +192,10 @@ export default function EditMenu() {
         )
         .then((response) => {
           console.log(response.data); // 받아온 데이터 확인용 로그
- 
+
           setMenuData(response.data); // setMenuData로 데이터 설정
           setMenuName(response.data.name); // name 값을 menuName 상태 변수에 설정 -> <Input1> 컴포넌트가 렌더링될 때 초기값으로 해당 이름이 표시
- 
+
           // categoryId 값을 설정
           if (response.data.categoryId === 1) {
             setCategoryId("1");
@@ -194,7 +206,7 @@ export default function EditMenu() {
           } else if (response.data.categoryId === 4) {
             setCategoryId("4");
           }
- 
+
           // 첫 번째 레시피의 크기를 확인하고 초기 버튼 상태를 설정
           if (response.data.recipes && response.data.recipes.length > 0) {
             // Set prices based on recipe data
@@ -210,24 +222,24 @@ export default function EditMenu() {
             setPrice3(response.data.recipes[2].price.toString());
           }
         })
- 
+
         .catch((error) => console.error(`Error!!!: ${error}`));
     }
   }, [productId]);
- 
+
   // 저장하기 버튼 클릭시 이미지 정송, 수정된 json 파일 전송
   const handleSave = async () => {
     const formData = new FormData();
- 
+
     imageList.forEach((image) => {
       formData.append("img", image);
     });
- 
+
     formData.append(
       "request",
       new Blob([JSON.stringify(menuData)], { type: "application/json" })
     );
- 
+
     try {
       await axios.patch(
         `${process.env.REACT_APP_API_SERVER_URL}/api/v1/recipe`,
@@ -241,10 +253,10 @@ export default function EditMenu() {
       console.error(`Error updating data: ${error}`);
     }
   };
- 
+
   const handleConfirm = (selectedData) => {
     console.log("Selected data from modal:", selectedData);
- 
+
     const updatedMenuData = {
       ...menuData,
       recipes: menuData.recipes.map((recipe) => {
@@ -263,11 +275,11 @@ export default function EditMenu() {
         };
       }),
     };
- 
+
     setMenuData(updatedMenuData);
     console.log("Updated menu data:", updatedMenuData);
   };
- 
+
   const handleRemoveIngredient = (index) => {
     setMenuData((prevData) => {
       const updatedRecipes = prevData.recipes.map((recipe) => {
@@ -285,7 +297,7 @@ export default function EditMenu() {
           ingredient: updatedIngredient,
         };
       });
- 
+
       const updatedMenuData = {
         ...prevData,
         recipes: updatedRecipes,
@@ -294,7 +306,7 @@ export default function EditMenu() {
       return updatedMenuData;
     });
   };
- 
+
   const handleButton6Click = (data) => {
     const parsedData = {
       productId: menuData.productId,
@@ -306,20 +318,20 @@ export default function EditMenu() {
       seq: menuData.seq,
       recipes: [data], // 첫 번째 레시피 객체만 포함하도록 수정
     };
- 
+
     const socketInstance = new WebSocket("ws://192.168.0.19:12345");
- 
+
     socketInstance.onopen = function (event) {
       console.log("WebSocket 연결 성공");
       socketInstance.send(JSON.stringify(parsedData));
- 
+
       setTimeout(function () {
         socketInstance.close();
         console.log("WebSocket 연결 닫힘");
       }, 3000); // 3초 후에 웹소켓 연결 닫기
     };
   };
- 
+
   return (
     <div>
       <Container1>
@@ -351,7 +363,7 @@ export default function EditMenu() {
             }
           }}
         />
- 
+
         <Select
           value={categoryId}
           onChange={(e) => {
@@ -368,7 +380,7 @@ export default function EditMenu() {
           <option value="3">에이드</option>
           <option value="4">스파클링</option>
         </Select>
- 
+
         <Container2>
           <Button1
             disabled={true}
@@ -394,7 +406,7 @@ export default function EditMenu() {
             id="fileInput"
             onChange={handleFileInputChange}
           />
- 
+
           {/* 라벨 */}
           <label
             htmlFor="fileInput"
@@ -468,7 +480,7 @@ export default function EditMenu() {
           </label>
         </ContainerI>
       ) : null}
- 
+
       {isButton2Clicked ? (
         <ContainerH>
           <label style={{ margin: "0px 0px 0px 25px", fontSize: "20px" }}>
@@ -519,7 +531,7 @@ export default function EditMenu() {
           </label>
         </ContainerH>
       ) : null}
- 
+
       <DragDropContext onDragEnd={onDragEnd}>
         <ContainerList
           style={{
@@ -538,7 +550,7 @@ export default function EditMenu() {
                     if (ing.isDeleted) {
                       return null;
                     }
- 
+
                     return (
                       <Draggable
                         key={index}
@@ -573,7 +585,7 @@ export default function EditMenu() {
                               </label>
                               {menuData.recipes.map((recipe, recipeIndex) => {
                                 const ingredient = recipe.ingredient.find(
-                                  (i) => i.seq === ing.seq
+                                  (i) => i.ingredientCode === ing.ingredientCode
                                 );
                                 const buttonIndex =
                                   index * menuData.recipes.length + recipeIndex;
@@ -588,15 +600,13 @@ export default function EditMenu() {
                                         setNumberWonModalOpen4(true);
                                       }}
                                     >
-                                      {editState[buttonIndex] !== undefined
-                                        ? editState[buttonIndex]
-                                        : ing.ingredientName === "샷"
+                                      {ing.ingredientName === "샷"
                                         ? ingredient.quantity + "샷"
                                         : ingredient
                                         ? ingredient.quantity + "ml"
                                         : "0"}
                                     </Button11>
- 
+
                                     {numberWonModalOpen4 &&
                                       currentButtonIndex === buttonIndex && (
                                         <ModalNumber_Won_edit
@@ -627,7 +637,7 @@ export default function EditMenu() {
           )}
         </ContainerList>
       </DragDropContext>
- 
+
       <div style={{ display: "flex", alignItems: "center" }}>
         <div>
           <Button4 onClick={() => setIngredientModalOpen(true)}>
@@ -654,7 +664,7 @@ export default function EditMenu() {
             />
           )}
         </div>
- 
+
         <label style={{ margin: "10px 20px 0px 196px", fontSize: "20px" }}>
           {" "}
           판매가{" "}
@@ -798,9 +808,9 @@ export default function EditMenu() {
           )}{" "}
         </div>
       </div>
- 
+
       {/* 웹소켓 테스트버튼 */}
- 
+
       {isButton1Clicked ? (
         <div style={{ display: "flex", alignItems: "center" }}>
           {/* 버튼D부분 코드 메뉴수정.js에 옮기기 */}
@@ -811,7 +821,7 @@ export default function EditMenu() {
               productId={menuData.productId}
             />
           )}
- 
+
           <Button6
             onClick={() => {
               console.log("Button6 clicked");
@@ -822,14 +832,14 @@ export default function EditMenu() {
           >
             테스트
           </Button6>
- 
+
           {ModalTestOpen && (
             <ModalTest_edit
               closeModal={() => setModalTestOpen(false)}
               handleButton6Click={() => handleButton6Click(menuData.recipes[0])}
             />
           )}
- 
+
           <Button6
             onClick={() => {
               console.log("Button6 clicked");
@@ -840,14 +850,14 @@ export default function EditMenu() {
           >
             테스트
           </Button6>
- 
+
           {ModalTestOpen && (
             <ModalTest_edit
               closeModal={() => setModalTestOpen(false)}
               handleButton6Click={() => handleButton6Click(menuData.recipes[1])}
             />
           )}
- 
+
           <Button6
             onClick={() => {
               console.log("Button6 clicked");
@@ -858,7 +868,7 @@ export default function EditMenu() {
           >
             테스트
           </Button6>
- 
+
           {ModalTestOpen && (
             <ModalTest_edit
               closeModal={() => setModalTestOpen(false)}
@@ -867,7 +877,7 @@ export default function EditMenu() {
           )}
         </div>
       ) : null}
- 
+
       {isButton2Clicked ? (
         <div style={{ display: "flex", alignItems: "center" }}>
           <ButtonD onClick={() => setDeleteMenu(true)}>메뉴삭제</ButtonD>
@@ -877,7 +887,7 @@ export default function EditMenu() {
               productId={menuData.productId}
             />
           )}
- 
+
           <Button7
             onClick={() => handleButton6Click(menuData.recipes[0])}
             style={{ marginLeft: "416px" }}
@@ -898,7 +908,7 @@ export default function EditMenu() {
           </Button7>
         </div>
       ) : null}
- 
+
       <div style={{ display: "flex", alignItems: "center" }}>
         <Button8 onClick={() => setModalCancelRegisterMenu(true)}>
           {" "}
@@ -909,11 +919,11 @@ export default function EditMenu() {
             closeModal={setModalCancelRegisterMenu}
           />
         )}
- 
+
         {isButton1Clicked ? (
           <Button9 onClick={handleSave}>저장하기</Button9>
         ) : null}
- 
+
         {isButton2Clicked ? (
           <Button10 onClick={handleSave}>저장하기</Button10>
         ) : null}
